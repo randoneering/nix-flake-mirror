@@ -3,7 +3,6 @@
   pkgs,
   lib,
   username,
-  nix-opcode,
   ...
 }: {
   imports = [
@@ -17,7 +16,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-6c7efb18-8b6a-4e45-ae5f-f5f35162f86b".device = "/dev/disk/by-uuid/6c7efb18-8b6a-4e45-ae5f-f5f35162f86b";
+  boot.initrd.luks.devices."luks-24151b73-5cda-4b95-a5b4-0be6cfc4fb42".device = "/dev/disk/by-uuid/24151b73-5cda-4b95-a5b4-0be6cfc4fb42";
   networking.hostName = "nix-l16";
   networking.networkmanager.enable = true;
 
@@ -44,10 +43,8 @@
     options = ["x-systemd.automount" "noauto" "x-systemd.after=network-online.target" "x-systemd.mount-timeout=5s"];
   };
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  environment.systemPackages = [
-    nix-opcode.packages.x86_64-linux.default  # Installs opcode binary
-  ];
+
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 }

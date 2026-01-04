@@ -14,7 +14,7 @@
       gpg.format = "ssh";
       user.name = "${username}";
       user.email = "justin@randoneering.tech";
-      user.signingkey = "~/.ssh/${hostname}.pub";
+      user.signingkey = "~/.ssh/randoneeringkey.pub";
     };
   };
 }

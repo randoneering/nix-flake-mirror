@@ -5,13 +5,12 @@
 }: {
   # https://alberand.com/nixos-wireguard-vpn.html for future edits
   networking.wg-quick.interfaces = let
-    server_ip = "69.4.234.131";
+    server_ip = "79.127.185.222";
   in {
     wg0 = {
       # IP address of this machine in the *tunnel network*
       address = [
-        "10.76.1.121/32"
-        "fc00:bbbb:bbbb:bb01::d:178/128"
+        "10.2.0.2/32"
       ];
 
       # To match firewall allowedUDPPorts (without this wg
@@ -19,11 +18,11 @@
       listenPort = 51820;
 
       # Path to the private key file.
-      privateKeyFile = "/etc/mullvad-vpn.key";
+      privateKeyFile = "/etc/proton-vpn.key";
 
       peers = [
         {
-          publicKey = "2yVEeOFScneJRCVTrqCjKlKHg3J2wwOwkY28iy47J1Q=";
+          publicKey = "xRu4XSIeCCNh4wQqit2w0PwAqzAs7JVA4zQqxGOhSSY=";
           allowedIPs = ["0.0.0.0/0"];
           endpoint = "${server_ip}:51820";
           persistentKeepalive = 25;
