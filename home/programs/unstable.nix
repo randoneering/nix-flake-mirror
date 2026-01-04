@@ -7,6 +7,7 @@
       dconf
       freshfetch
       gimp3
+      opencode
 
       # productivity
       obsidian

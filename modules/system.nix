@@ -51,7 +51,7 @@
       # nerdfonts
       nerd-fonts.symbols-only # symbols icon only
       nerd-fonts.fira-code
-      nerd-fonts.jetbrains-mono
+      nerd-fonts.hack
     ];
 
     # use fonts specified by user rather than default ones
