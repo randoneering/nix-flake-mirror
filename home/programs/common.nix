@@ -36,6 +36,13 @@
 
     # Steam?
     glibc
+
+   # Security
+   proton-pass
+   proton-authenticator
+   bitwarden-desktop
+   protonvpn-gui
+   protonmail-desktop
   ];
 
 }

@@ -17,11 +17,6 @@
       # Security
       syft
       grype
-      proton-pass
-      proton-authenticator
-      bitwarden-desktop
-      protonvpn-gui
-      protonmail-desktop
 
       # Static Site
       hugo
