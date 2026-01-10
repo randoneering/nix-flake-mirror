@@ -12,6 +12,7 @@
     git
     wget
     zed-editor
+    marp-cli
 
     # python
     ruff
