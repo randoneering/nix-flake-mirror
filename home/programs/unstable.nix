@@ -13,7 +13,6 @@
       obsidian
       planify
       claude-code
-      zed-editor
 
       # Security
       syft
