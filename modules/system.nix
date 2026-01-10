@@ -25,8 +25,7 @@
   nixpkgs.config.allowUnfree = true;
   # Allow electron garbage
   #
-  #nixpkgs.config.permittedInsecurePackages = ["electron-27.3.11"];
-
+  nixpkgs.config.permittedInsecurePackages = ["electron-39.2.3"];
   # Set your time zone.
   time.timeZone = "America/Boise";
 
