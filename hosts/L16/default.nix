@@ -15,7 +15,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  # Boot
   boot.initrd.luks.devices."luks-24151b73-5cda-4b95-a5b4-0be6cfc4fb42".device = "/dev/disk/by-uuid/24151b73-5cda-4b95-a5b4-0be6cfc4fb42";
   networking.hostName = "nix-l16";
   networking.networkmanager.enable = true;
