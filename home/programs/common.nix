@@ -11,7 +11,6 @@
     nfs-utils
     git
     wget
-    zed-editor
     marp-cli
     awscli2
 

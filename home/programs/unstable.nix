@@ -33,6 +33,9 @@
       # Office
       onlyoffice-desktopeditors
 
+      zed-editor
+
+
 
   ];
 }
