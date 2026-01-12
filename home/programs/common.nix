@@ -13,6 +13,7 @@
     wget
     zed-editor
     marp-cli
+    awscli2
 
     # python
     ruff
