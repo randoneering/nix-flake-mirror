@@ -13,6 +13,7 @@
     wget
     marp-cli
     awscli2
+    gh
 
     # python
     ruff
