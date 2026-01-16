@@ -14,6 +14,13 @@
     marp-cli
     awscli2
     gh
+    popsicle
+    dconf
+    freshfetch
+    gimp3
+
+    # ai
+    opencode
 
     # python
     ruff

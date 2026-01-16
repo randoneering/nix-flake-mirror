@@ -3,15 +3,10 @@
   home.packages = with pkgs.unstable; [
       # utils
       dbeaver-bin
-      popsicle
-      dconf
-      freshfetch
-      gimp3
-      opencode
+
 
       # productivity
       obsidian
-      planify
       claude-code
 
       # Security
