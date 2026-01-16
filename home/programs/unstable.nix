@@ -8,6 +8,7 @@
       # productivity
       obsidian
       claude-code
+      opencode
 
       # Security
       syft
@@ -27,7 +28,6 @@
 
       # Office
       onlyoffice-desktopeditors
-
       zed-editor
 
 
