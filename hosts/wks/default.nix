@@ -16,17 +16,17 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/nvme0n1";
-  boot.loader.grub.useOSProber = true;
-  boot.initrd.luks.devices."luks-25ac66f8-28c2-4b24-9f65-2aa0a8f0ad2c".device = "/dev/disk/by-uuid/25ac66f8-28c2-4b24-9f65-2aa0a8f0ad2c";
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/boot/crypto_keyfile.bin" = null;
-  };
-  boot.initrd.luks.devices."luks-38a8795e-d976-4853-96c2-30836c1c1106".keyFile = "/boot/crypto_keyfile.bin";
-  boot.initrd.luks.devices."luks-25ac66f8-28c2-4b24-9f65-2aa0a8f0ad2c".keyFile = "/boot/crypto_keyfile.bin";
+
+  # Boot
+  boot.initrd.luks.devices."luks-4db000c3-1115-45d2-9357-c6e83fdbd853".device = "/dev/disk/by-uuid/4db000c3-1115-45d2-9357-c6e83fdbd853";
+
+
+ # SWAP
+  boot.initrd.luks.devices."luks-1e0ef351-2fad-4271-a4e8-c8ab2a7a41ff".device = "/dev/disk/by-uuid/1e0ef351-2fad-4271-a4e8-c8ab2a7a41ff";
+
 
   # Steam
   programs.steam = {
