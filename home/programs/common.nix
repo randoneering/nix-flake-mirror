@@ -13,6 +13,7 @@
     wget
     marp-cli
     awscli2
+    google-cloud-sdk
     gh
     popsicle
     dconf
