@@ -8,7 +8,6 @@
       # productivity
       obsidian
       claude-code
-      opencode
 
       # Security
       syft
