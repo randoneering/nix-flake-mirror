@@ -19,6 +19,7 @@
     dconf
     freshfetch
     gimp3
+    gnomeExtensions.pop-shell
 
     # ai
     opencode
