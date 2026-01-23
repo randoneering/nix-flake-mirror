@@ -3,6 +3,8 @@
   home.packages = with pkgs; [
     # archives
     zip
+    gnomeExtensions.pop-shell
+
 
     # utils
     btop
@@ -19,7 +21,6 @@
     dconf
     freshfetch
     gimp3
-    gnomeExtensions.pop-shell
 
     # ai
     opencode
