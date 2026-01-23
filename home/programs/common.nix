@@ -4,7 +4,12 @@
     # archives
     zip
     gnomeExtensions.pop-shell
-
+    pop-gtk-theme
+    gtk4
+    gtk3
+    sassc
+    meson
+    libglibutil
 
     # utils
     btop
