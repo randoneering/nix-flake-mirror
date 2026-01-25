@@ -12,24 +12,21 @@
       enableFishIntegration = config.programs.fish.enable;
       enableZshIntegration = config.programs.zsh.enable;
       settings = {
-        add_newline = false;
+        add_newline = true;
         continuation_prompt = "'▶▶";
         command_timeout = 1000;
         format = lib.concatStrings [
-          " |"
-          "$hostname"
-          "$directory"
-          "$git_branch$git_commit$git_state $git_status"
+          " |/"
+          "$hostname/"
+          "$directory/"
+          "$git_branch$git_commit$git_state $git_status/"
+          "$python/"
+          "$rust/"
+          "$terraform/"
+          "$aws/"
+          "$gcp/"
+          "azure/"
           "⋙  "];
-        right_format = lib.concatStrings [
-        "$python"
-        "$rust"
-        "$terraform"
-        "$memory_usage"
-        "$aws"
-        "$custom"
-        "$status"
-        "$os"];
         directory = {
             disabled = false;
             format = "[$path](bold fg:#458588)";
@@ -69,13 +66,16 @@
         style = "#458588";
         symbol = " ";
         };
-
-        memory_usage = {
-        style = "#689d6a";
-        format = " mem [$ram( $swap)]($style)";
-        symbol = "▪▫▪ ";
+        gcp = {
+        format = " [gcp](italic) [$symbol $profile $region]($style)";
+        style = "#458588";
+        symbol = "☁️ ";
         };
-
+        azure = {
+        format = " [azure](italic) [$symbol $profile $region]($style)";
+        style = "#458588";
+        symbol = "󰠅 ";
+        };
         nix_shell = {
         format = "[$symbol nix⎪$state⎪]($style) [$name](italic dimmed white)";
         impure_msg = "[⌽](bold dimmed red)";
