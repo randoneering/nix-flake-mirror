@@ -95,17 +95,17 @@
           unknown_msg = "[◌](bold dimmed yellow)";
         };
         aws = {
-          format = "[$symbol$region]($style)";
+          format = "[$symbol  $region]($style)";
           style = "#fabd2f";
           symbol = "";
         };
         gcp = {
-          format = "[$symbol$region]($style)";
+          format = "[$symbol  $region]($style)";
           style = "#fabd2f";
           symbol = "☁️";
         };
         azure = {
-          format = "[$symbol$region]($style)";
+          format = "[$symbol  $region]($style)";
           style = "#fabd2f";
           symbol = "󰠅";
         };
