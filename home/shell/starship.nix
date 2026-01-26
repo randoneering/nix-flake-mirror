@@ -17,15 +17,20 @@
 
         # Popping and Locking color palette format
         format = lib.concatStrings [
+          "[](fg:#1d2021)"
           "$directory"
+          "[](bg:#3c3836 fg:#1d2021)"
           "$git_branch"
           "$git_status"
+          "[](fg:#3c3836 bg:#504945)"
           "$golang"
           "$rust"
           "$python"
+          "[](fg:#504945 bg:#665c54)"
           "$azure"
           "$gcp"
           "$aws"
+          "[ ](fg:#665c54 bg:#7c6f64)"
           "\n"
           "$character"
         ];
