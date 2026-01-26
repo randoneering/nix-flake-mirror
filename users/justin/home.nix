@@ -4,5 +4,6 @@
     ../../home/programs
     ../../home/shell
     ../../home/utils
+    ../../home/languages
   ];
 }

@@ -11,6 +11,7 @@
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
   };
+  environment.localBinInPath = true;
 
   # do garbage collection weekly to keep disk usage low
   nix.gc = {
