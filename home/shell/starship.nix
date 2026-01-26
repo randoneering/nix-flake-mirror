@@ -26,7 +26,6 @@
           "$git_branch"
           "$git_status"
           "[](fg:#504945 bg:#665c54)"
-          "$golang"
           "$rust"
           "$python"
           "[](fg:#665c54 bg:#7c6f64)"
@@ -114,17 +113,17 @@
         };
         aws = {
           format = " [$symbol $profile $region]($style)";
-          style = "bold #99c6ca";
+          style = "bold bg:#7c6f64 fg:#99c6ca";
           symbol = " ";
         };
-        gcp = {
+        gcloud = {
           format = " [$symbol $profile $region]($style)";
-          style = "bold #99c6ca";
+          style = "bold bg:#7c6f64 fg:#99c6ca";
           symbol = "☁️ ";
         };
         azure = {
           format = " [$symbol $profile $region]($style)";
-          style = "bold #99c6ca";
+          style = "bold bg:#7c6f64 fg:#99c6ca";
           symbol = "󰠅 ";
         };
         terraform = {
