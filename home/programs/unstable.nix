@@ -8,6 +8,7 @@
       # productivity
       obsidian
       claude-code
+      lua
 
       # Security
       syft

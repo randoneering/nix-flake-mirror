@@ -10,6 +10,5 @@
     ./atuin.nix
     ./bash.nix
     ./starship.nix
-    ./neovim.nix
   ];
 }
