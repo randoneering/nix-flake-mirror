@@ -8,6 +8,7 @@
 
   home.packages = with pkgs.unstable; [
     vimPlugins.LazyVim
+    lua
   ];
 
 }
