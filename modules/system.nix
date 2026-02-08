@@ -86,6 +86,7 @@
     wget
     curl
     git
+    nvim-pkg
   ];
 
   environment.sessionVariables = {

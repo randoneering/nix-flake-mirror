@@ -9,7 +9,6 @@
       obsidian
       claude-code
       lua
-
       # Security
       syft
       grype

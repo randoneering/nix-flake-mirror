@@ -149,16 +149,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1769428441,
-        "narHash": "sha256-aNqu8DQiu73TRRYU0hpZncCKJ/E1S8caXQZZ4G7rfxs=",
-        "owner": "nix-community",
-        "repo": "kickstart-nix.nvim",
-        "rev": "49bd28128a1b0403520bafdaf0b4ab545884541f",
+        "lastModified": 1770516955,
+        "narHash": "sha256-4Xl33VXos+rmpzxlj5On4ccCeMMSbeezphympwFZqO8=",
+        "owner": "randoneering",
+        "repo": "nvim-kickstart",
+        "rev": "6a834ef6707a2c9c7d6001807a5883eac5d269b9",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "kickstart-nix.nvim",
+        "owner": "randoneering",
+        "repo": "nvim-kickstart",
         "type": "github"
       }
     },
