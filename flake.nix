@@ -8,7 +8,6 @@
     nixpkgs-update.url = "github:nix-community/nixpkgs-update";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    kickstart-nix-nvim.url ="github:randoneering/nvim-kickstart";
   };
 
   outputs = inputs @ {
@@ -16,7 +15,6 @@
     nixpkgs,
     nixpkgs-update,
     nixpkgs-unstable,
-    kickstart-nix-nvim,
     home-manager,
     ...
   }: {
@@ -59,7 +57,6 @@
             config.allowUnfree = true;
           };
         };
-         kickstart-nix = kickstart-nix-nvim.overlays.default;
         specialArgs = {
           inherit username hostname;
         };
@@ -68,7 +65,7 @@
           inherit specialArgs;
           system = "x86-64_linux";
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable kickstart-nix ]; })
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
             ./hosts/L16/default.nix
             ./users/${username}/nixos.nix
             home-manager.nixosModules.home-manager
