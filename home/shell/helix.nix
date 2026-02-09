@@ -8,6 +8,9 @@ programs.helix = {
       insert = "bar";
       select = "underline";
     };
+    editor = {
+      mouse = true;
+    };
   };
   languages.language = [{
     name = "nix";

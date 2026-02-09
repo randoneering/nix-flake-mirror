@@ -8,6 +8,7 @@
     nixpkgs-update.url = "github:nix-community/nixpkgs-update";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nvf.url = "github:notashelf/nvf";
   };
 
   outputs = inputs @ {
@@ -16,6 +17,7 @@
     nixpkgs-update,
     nixpkgs-unstable,
     home-manager,
+    nvf,
     ...
   }: {
     nixosConfigurations = {
@@ -72,6 +74,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.sharedModules = [ nvf.homeManagerModules.default ];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;

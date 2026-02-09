@@ -11,5 +11,6 @@
     ./bash.nix
     ./starship.nix
     ./helix.nix
+    ./neovim.nix
   ];
 }
