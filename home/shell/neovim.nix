@@ -25,7 +25,7 @@
 
  vim.comments.comment-nvim.enable = true;
  # Plugins
- vim.filetree.nvimTree.enable = true;
+ vim.treesitter.enable = true;
  vim.statusline.lualine.enable = true;
  vim.telescope.enable = true;
  vim.autocomplete.nvim-cmp.enable = true;
