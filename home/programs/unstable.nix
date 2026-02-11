@@ -8,6 +8,8 @@
       # productivity
       obsidian
       claude-code
+      codex
+      opencode
       # Security
       syft
       grype

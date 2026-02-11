@@ -27,9 +27,6 @@
     freshfetch
     gimp3
 
-    # ai
-    opencode
-
     # python
     ruff
     uv
