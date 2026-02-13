@@ -10,6 +10,7 @@
       claude-code
       codex
       opencode
+      crush
       # Security
       syft
       grype
