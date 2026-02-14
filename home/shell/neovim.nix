@@ -2,9 +2,12 @@
   programs.nvf = {
     enable = true;
     settings = {
-      vim.theme.enable = true;
-      vim.theme.name = "dracula";
-      vim.theme.style = "dark";
+      vim.theme.enable = false;
+      vim.additionalRuntimePaths = [./nvim];
+      vim.luaConfigPost = ''
+        vim.o.termguicolors = true
+        vim.cmd.colorscheme("popping_and_locking")
+      '';
 
       vim.viAlias = false;
       vim.vimAlias = true;

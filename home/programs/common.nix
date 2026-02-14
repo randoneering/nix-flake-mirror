@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
 
   home.packages = with pkgs; [
     # archives
@@ -26,7 +27,7 @@
     dconf
     freshfetch
     gimp3
-
+    nmap
     # python
     ruff
     uv
@@ -50,12 +51,12 @@
     # Steam?
     glibc
 
-   # Security
-   proton-pass
-   proton-authenticator
-   bitwarden-desktop
-   protonvpn-gui
-   protonmail-desktop
+    # Security
+    proton-pass
+    proton-authenticator
+    bitwarden-desktop
+    protonvpn-gui
+    protonmail-desktop
   ];
 
 }
