@@ -84,6 +84,30 @@
 
       vim.treesitter.enable = true;
       vim.statusline.lualine.enable = true;
+      vim.statusline.lualine.setupOpts.options.theme = {
+        normal = {
+          a = {
+            fg = "#181921";
+            bg = "#fabd2f";
+            gui = "bold";
+          };
+          b = {
+            fg = "#ebdbb2";
+            bg = "#1d2021";
+          };
+          c = {
+            fg = "#a89984";
+            bg = "#181921";
+          };
+        };
+        insert = {
+          a = {
+            fg = "#181921";
+            bg = "#7ec16e";
+            gui = "bold";
+          };
+        };
+      };
       vim.telescope.enable = true;
       vim.binds.whichKey.enable = true;
       vim.utility.snacks-nvim.enable = true;
