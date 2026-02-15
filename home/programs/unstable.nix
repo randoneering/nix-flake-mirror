@@ -1,37 +1,33 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
 
   home.packages = with pkgs.unstable; [
-      # utils
-      dbeaver-bin
+    # utils
+    dbeaver-bin
+    obsidian
+    claude-code
+    opencode
+    tmux
 
+    # Security
+    syft
+    grype
+    prowler
 
-      # productivity
-      obsidian
-      claude-code
-      codex
-      opencode
-      crush
-      # Security
-      syft
-      grype
+    # Static Site
+    hugo
 
-      # Static Site
-      hugo
+    # Desktop Customization
+    gnome-tweaks
+    gnome-extension-manager
 
-      # Desktop Customization
-      gnome-tweaks
-      gnome-extension-manager
+    # Social
+    discord
+    slack
+    signal-desktop
 
-      # Social
-      discord
-      slack
-      signal-desktop
-
-      # Office
-      onlyoffice-desktopeditors
-      zed-editor
-
-
+    # Office
+    onlyoffice-desktopeditors
 
   ];
 }
