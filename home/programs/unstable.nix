@@ -8,6 +8,7 @@
     opencode
     tmux
     packer
+    openstackclient
 
     # Security
     syft
