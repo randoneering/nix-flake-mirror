@@ -34,6 +34,7 @@
 
     # nix dev
     niv
+    nixpkgs-review
 
     # IDE/Database Manager
     mongosh

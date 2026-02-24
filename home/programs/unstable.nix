@@ -5,11 +5,10 @@
     # utils
     dbeaver-bin
     obsidian
-    opencode
     tmux
     packer
     openstackclient
-
+    qemu
     # Security
     syft
     grype
