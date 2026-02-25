@@ -9,6 +9,7 @@
     packer
     openstackclient
     qemu
+    jq
     # Security
     syft
     grype
