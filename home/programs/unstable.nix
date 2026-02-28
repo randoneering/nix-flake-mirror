@@ -10,6 +10,8 @@
     openstackclient
     qemu
     jq
+    crush
+    claude-code
     # Security
     syft
     grype

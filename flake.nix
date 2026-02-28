@@ -8,6 +8,7 @@
     nixpkgs-update.url = "github:nix-community/nixpkgs-update";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
     nvf.url = "github:notashelf/nvf";
   };
 
@@ -18,6 +19,7 @@
     nixpkgs-unstable,
     home-manager,
     nvf,
+    sops-nix,
     ...
   }: {
     nixosConfigurations = {
@@ -43,7 +45,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ nvf.homeManagerModules.default ];
+              home-manager.sharedModules = [ nvf.homeManagerModules.default sops-nix.homeManagerModules.sops ];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
@@ -75,7 +77,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ nvf.homeManagerModules.default ];
+              home-manager.sharedModules = [ nvf.homeManagerModules.default sops-nix.homeManagerModules.sops ];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
@@ -104,7 +106,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ nvf.homeManagerModules.default ];
+              home-manager.sharedModules = [ nvf.homeManagerModules.default sops-nix.homeManagerModules.sops ];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
@@ -133,7 +135,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ nvf.homeManagerModules.default ];
+              home-manager.sharedModules = [ nvf.homeManagerModules.default sops-nix.homeManagerModules.sops ];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
