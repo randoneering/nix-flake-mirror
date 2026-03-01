@@ -9,6 +9,5 @@
     nixpkgs-lint
     nixpkgs-pytools
     sops
-
   ];
 }

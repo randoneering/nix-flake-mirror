@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # archives
     zip
@@ -11,7 +9,7 @@
     sassc
     meson
     libglibutil
-
+    dig
     # utils
     btop
     dpkg
@@ -59,5 +57,4 @@
     protonvpn-gui
     protonmail-desktop
   ];
-
 }

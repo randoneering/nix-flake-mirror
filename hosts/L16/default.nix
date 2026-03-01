@@ -16,7 +16,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # Boot
-  boot.initrd.luks.devices."luks-f9c32740-0c68-4913-9a0f-d26df56b3aa1".device = "/dev/disk/by-uuid/f9c32740-0c68-4913-9a0f-d26df56b3aa1";  networking.hostName = "nix-l16";
+  boot.initrd.luks.devices."luks-f9c32740-0c68-4913-9a0f-d26df56b3aa1".device = "/dev/disk/by-uuid/f9c32740-0c68-4913-9a0f-d26df56b3aa1";
+  networking.hostName = "nix-l16";
   networking.networkmanager.enable = true;
 
   # Steam

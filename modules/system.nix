@@ -4,7 +4,6 @@
   username,
   ...
 }: {
-
   home-manager.backupFileExtension = "backup";
 
   nix.settings.trusted-users = [username];
@@ -73,7 +72,6 @@
       PermitRootLogin = "no"; # disable root login
       KbdInteractiveAuthentication = false;
       PasswordAuthentication = false;
-
     };
   };
   services.fail2ban.enable = false;

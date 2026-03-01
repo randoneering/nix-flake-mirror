@@ -38,14 +38,18 @@
           inherit specialArgs;
           system = "x86_64-linux";
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ({
+              config,
+              pkgs,
+              ...
+            }: {nixpkgs.overlays = [overlay-unstable];})
             ./hosts/${hostname}/default.nix
             ./users/${username}/nixos.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ nvf.homeManagerModules.default sops-nix.homeManagerModules.sops ];
+              home-manager.sharedModules = [nvf.homeManagerModules.default sops-nix.homeManagerModules.sops];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
@@ -70,14 +74,18 @@
           inherit specialArgs;
           system = "x86-64_linux";
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ({
+              config,
+              pkgs,
+              ...
+            }: {nixpkgs.overlays = [overlay-unstable];})
             ./hosts/L16/default.nix
             ./users/${username}/nixos.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ nvf.homeManagerModules.default sops-nix.homeManagerModules.sops ];
+              home-manager.sharedModules = [nvf.homeManagerModules.default sops-nix.homeManagerModules.sops];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
@@ -99,14 +107,18 @@
           inherit specialArgs;
           system = "x86-64_linux";
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ({
+              config,
+              pkgs,
+              ...
+            }: {nixpkgs.overlays = [overlay-unstable];})
             ./hosts/lemur/default.nix
             ./users/${username}/nixos.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ nvf.homeManagerModules.default sops-nix.homeManagerModules.sops ];
+              home-manager.sharedModules = [nvf.homeManagerModules.default sops-nix.homeManagerModules.sops];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
@@ -128,14 +140,18 @@
           inherit specialArgs;
           system = "x86-64_linux";
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+            ({
+              config,
+              pkgs,
+              ...
+            }: {nixpkgs.overlays = [overlay-unstable];})
             ./hosts/wks/default.nix
             ./users/${username}/nixos.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [ nvf.homeManagerModules.default sops-nix.homeManagerModules.sops ];
+              home-manager.sharedModules = [nvf.homeManagerModules.default sops-nix.homeManagerModules.sops];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;

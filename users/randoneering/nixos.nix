@@ -3,9 +3,9 @@
   username,
   ...
 }: {
-    users.users.randoneering = {
+  users.users.randoneering = {
     isNormalUser = true;
     description = "randoneering";
-    extraGroups = [ "networkmanager" "wheel" ];
-    };
+    extraGroups = ["networkmanager" "wheel"];
+  };
 }

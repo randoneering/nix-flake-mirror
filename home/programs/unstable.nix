@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   home.packages = with pkgs.unstable; [
     # utils
     dbeaver-bin
@@ -31,6 +29,5 @@
 
     # Office
     onlyoffice-desktopeditors
-
   ];
 }

@@ -21,10 +21,8 @@
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
 
-
   # Enable networking
   networking.networkmanager.enable = true;
-
 
   # Enable NFS
   boot.supportedFilesystems = ["nfs"];
