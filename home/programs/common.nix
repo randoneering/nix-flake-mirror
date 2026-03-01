@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # archives
     zip
@@ -26,6 +27,7 @@
     freshfetch
     gimp3
     nmap
+    azure-cli
     # python
     ruff
     uv

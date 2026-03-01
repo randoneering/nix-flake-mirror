@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs.unstable; [
     # utils
     dbeaver-bin
@@ -8,7 +9,6 @@
     openstackclient
     qemu
     jq
-    crush
     claude-code
     # Security
     syft
