@@ -37,6 +37,11 @@
         };
       };
       mcp = {
+        flox = {
+          type = "local";
+          command = ["flox-mcp"];
+          enabled = true;
+        };
         neon = {
           type = "remote";
           url = "https://mcp.neon.tech/mcp";

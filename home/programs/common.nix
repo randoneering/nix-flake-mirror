@@ -1,5 +1,9 @@
 { pkgs, ... }:
-{
+let
+  floxMcpWrapper = pkgs.writeShellScriptBin "flox-mcp" ''
+    exec flox activate -r flox/flox-mcp-server -- flox-mcp "$@"
+  '';
+in {
   home.packages = with pkgs; [
     # archives
     zip
@@ -58,5 +62,6 @@
     bitwarden-desktop
     protonvpn-gui
     protonmail-desktop
+    floxMcpWrapper
   ];
 }
