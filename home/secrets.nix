@@ -1,5 +1,8 @@
-{ lib, config, ... }:
-let
+{
+  lib,
+  config,
+  ...
+}: let
   sopsFile = ../../secrets/justin.yaml;
 in
   lib.mkIf (builtins.pathExists sopsFile) {

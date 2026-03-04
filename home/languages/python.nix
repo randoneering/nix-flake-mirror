@@ -1,7 +1,5 @@
 {pkgs, ...}: {
-
   home.packages = with pkgs; [
-     python312Packages.cryptography
+    python312Packages.cryptography
   ];
-
 }

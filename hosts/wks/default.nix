@@ -19,14 +19,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-
   # Boot
   boot.initrd.luks.devices."luks-4db000c3-1115-45d2-9357-c6e83fdbd853".device = "/dev/disk/by-uuid/4db000c3-1115-45d2-9357-c6e83fdbd853";
 
-
- # SWAP
+  # SWAP
   boot.initrd.luks.devices."luks-1e0ef351-2fad-4271-a4e8-c8ab2a7a41ff".device = "/dev/disk/by-uuid/1e0ef351-2fad-4271-a4e8-c8ab2a7a41ff";
-
 
   # Steam
   programs.steam = {
@@ -82,7 +79,7 @@
         to = 11434;
       }
     ];
-    allowedUDPPortRanges =[
+    allowedUDPPortRanges = [
       {
         from = 22;
         to = 22;

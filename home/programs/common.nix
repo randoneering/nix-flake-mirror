@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-
   home.packages = with pkgs; [
     # archives
     zip
@@ -11,7 +10,7 @@
     sassc
     meson
     libglibutil
-
+    dig
     # utils
     btop
     dpkg
@@ -28,6 +27,7 @@
     freshfetch
     gimp3
     nmap
+    azure-cli
     # python
     ruff
     uv
@@ -59,5 +59,4 @@
     protonvpn-gui
     protonmail-desktop
   ];
-
 }
