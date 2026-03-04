@@ -3,7 +3,6 @@
   pkgs,
   username,
   hostname,
-  instance,
   ...
 }:
 
@@ -19,7 +18,7 @@
     enableTCPIP = true;
     settings = {
       listen_addresses = "*";
-      cluster_name = "${hostname}/${instance}";
+      cluster_name = "${hostname}/randoneering";
       ssl = true;
       ssl_ca_file = "/mnt/postgres/root.crt";
       ssl_cert_file = "/mnt/postgres/server.crt";
