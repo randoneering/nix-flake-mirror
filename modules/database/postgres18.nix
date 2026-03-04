@@ -91,8 +91,8 @@
       # type database DBuser origin-address auth-method
       local    all     all     trust
       # ipv4
-      host     all     all    10.10.1.0/24 scram-sha-256
-      hostssl  all     all    10.10.1.0/24 scram-sha-256
+      host     all     all    127.0.0.1/24 scram-sha-256
+      hostssl  all     all    127.0.0.1/24 scram-sha-256
       # ipv6
       host     all     all    ::1/128      scram-sha-256
     '';
