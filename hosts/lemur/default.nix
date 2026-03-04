@@ -5,15 +5,18 @@
   lib,
   username,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/system.nix
+    ../../modules/database/postgresql18.nix
     ../../modules/desktop/gnome/gnome.nix
     ../../modules/networking
     ./hardware-configuration.nix
   ];
 
-  boot.initrd.luks.devices."luks-1f6de9c7-37ee-491d-8639-33efc75ee9d0".device = "/dev/disk/by-uuid/1f6de9c7-37ee-491d-8639-33efc75ee9d0";
+  boot.initrd.luks.devices."luks-1f6de9c7-37ee-491d-8639-33efc75ee9d0".device =
+    "/dev/disk/by-uuid/1f6de9c7-37ee-491d-8639-33efc75ee9d0";
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -21,27 +24,38 @@
 
   # Flox Settings
   nix.settings.trusted-substituters = [
-    "https://cache.flox.dev"];
+    "https://cache.flox.dev"
+  ];
   nix.settings.trusted-public-keys = [
-    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
-
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+  ];
 
   # Enable networking
   networking.networkmanager.enable = true;
   networking.hostName = "nix-lemur";
 
   # Enable NFS
-  boot.supportedFilesystems = ["nfs"];
+  boot.supportedFilesystems = [ "nfs" ];
   services.rpcbind.enable = true; # needed for NFS
   fileSystems."/mnt/jellyfin" = {
     device = "nas.randoneering.cloud:/mnt/randoneering_prod/Jellyfin";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.after=network-online.target" "x-systemd.mount-timeout=5s"];
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.after=network-online.target"
+      "x-systemd.mount-timeout=5s"
+    ];
   };
   fileSystems."/mnt/nextcloud" = {
     device = "nas.randoneering.cloud:/mnt/randoneering_prod/NextCloud";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.after=network-online.target" "x-systemd.mount-timeout=5s"];
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.after=network-online.target"
+      "x-systemd.mount-timeout=5s"
+    ];
   };
 
   # Enable Bluetooth
