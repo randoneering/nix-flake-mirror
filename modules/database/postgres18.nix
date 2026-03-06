@@ -13,7 +13,10 @@
   services.postgresql = {
     enable = true;
     package = pkgs.unstable.postgresql_18;
-    extraPlugins = ps: [ ps.pgtap ];
+    extraPlugins = ps: [
+      ps.pgtap
+      ps.pg_stat_statements
+    ];
     ensureDatabases = [ "pgFirstAid" ];
     enableTCPIP = true;
     settings = {
@@ -65,6 +68,9 @@
       track_functions = "pl";
       stats_fetch_consistency = "cache";
       compute_query_id = "auto";
+      shared_preload_libraries = "pg_stat_statements";
+      "pg_stat_statements.max" = "10000";
+      "pg_stat_statements.track" = "all";
       #log_statement_stats = "off";
       #log_parser_stats = "off";
       #log_planner_stats = "off";
