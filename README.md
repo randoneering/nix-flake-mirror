@@ -4,20 +4,21 @@ NixOS flake for managing multiple machines with shared modules and per-host over
 
 ## What This Repository Contains
 
-- One `flake.nix` that defines 4 NixOS configurations.
-- Shared NixOS modules in `modules/`.
-- Shared Home Manager modules in `home/`.
+- One `flake.nix` with 4 NixOS configurations.
+- Shared system modules in `modules/` (desktop, networking, LLM, and database).
+- Shared Home Manager modules in `home/` (programs, shell, languages, secrets, utilities).
 - User entrypoints in `users/`.
 - Host-specific hardware and system settings in `hosts/`.
+- SOPS-managed secrets in `secrets/`.
 
 ## Hosts
 
-| Flake target | Host folder | Hostname | Primary user |
-| --- | --- | --- | --- |
-| `.#nix-station` | `hosts/nix-station` | `nix-station` | `randoneering` |
-| `.#nix-wks` | `hosts/wks` | `nix-wks` | `justin` |
-| `.#nix-lemur` | `hosts/lemur` | `nix-lemur` | `justin` |
-| `.#nix-L16` | `hosts/L16` | `nix-l16` | `justin` |
+| Flake target | Host folder | Hostname | Primary user | Notes |
+| --- | --- | --- | --- | --- |
+| `.#nix-station` | `hosts/nix-station` | `nix-station` | `randoneering` | Uses `flox` NixOS module |
+| `.#nix-wks` | `hosts/wks` | `nix-wks` | `justin` | NVIDIA + Ollama host |
+| `.#nix-lemur` | `hosts/lemur` | `nix-lemur` | `justin` | PostgreSQL 18 profile |
+| `.#nix-L16` | `hosts/L16` | `nix-l16` | `justin` | Laptop profile |
 
 ## Repository Layout
 
@@ -33,22 +34,28 @@ NixOS flake for managing multiple machines with shared modules and per-host over
 ├── modules/
 │   ├── system.nix
 │   ├── desktop/
-│   └── networking/
+│   ├── networking/
+│   ├── llm/
+│   └── database/
 ├── home/
 │   ├── core.nix
 │   ├── programs/
 │   ├── shell/
 │   ├── languages/
+│   ├── secrets.nix
 │   └── utils/
-└── users/
-    ├── justin/
-    └── randoneering/
+├── users/
+│   ├── justin/
+│   └── randoneering/
+└── secrets/
+    └── justin.yaml
 ```
 
 ## Prerequisites
 
 - NixOS with flakes enabled.
 - A user with sudo access for `nixos-rebuild`.
+- If using secrets: an age key at `~/.config/sops/age/keys.txt`.
 
 Enable flakes if needed:
 
@@ -105,7 +112,9 @@ Test activation path:
 sudo nixos-rebuild test --flake .#nix-wks
 ```
 
-## Home Manager and Neovim (nvf)
+## Home Manager and Tooling
+
+### Neovim (nvf)
 
 Neovim is configured in `home/shell/neovim.nix` through `programs.nvf`.
 
@@ -113,17 +122,35 @@ Current language blocks include:
 
 - Nix (`nixd`, `nixfmt`, extra diagnostics)
 - Python (`basedpyright`, `ruff`)
-- SQL
+- SQL (PostgreSQL dialect)
 - HCL
 - YAML
 - Go (`gopls`, `gofumpt`)
-- Rust (rust-analyzer, `rustfmt`)
+- Rust (`rust-analyzer`, `rustfmt`)
 
 Autocomplete uses `blink-cmp` with keymap preset `enter`.
 
-NVF option reference:
+### Opencode and MCP
 
-- https://nvf.notashelf.dev/options.html
+`programs.opencode` is configured in `home/programs/opencode.nix` with:
+
+- Remote Ollama provider (`https://ollama.randoneering.dev/v1`)
+- Flox MCP wrapper (`flox-mcp`)
+- DigitalOcean Apps and Databases MCP endpoints
+- Neon MCP endpoint
+
+### Secrets (sops-nix)
+
+`home/secrets.nix` enables Home Manager SOPS integration when `secrets/justin.yaml` exists.
+
+Current managed secret key:
+
+- `digitalocean_api_token`
+
+## Host Modules Added Recently
+
+- `modules/database/postgres18.nix`: PostgreSQL 18 profile with `pg_stat_statements`, SSL settings, and logging defaults.
+- `modules/llm/ollama.nix`: Ollama service module for GPU-backed local model serving.
 
 ## Updating Inputs
 
@@ -177,7 +204,4 @@ sudo nixos-rebuild switch --rollback
 - https://nix-community.github.io/home-manager/
 - https://search.nixos.org/packages
 - https://nvf.notashelf.dev/options.html
-
-## License
-
-GPL. See `LICENSE`.
+- https://github.com/Mic92/sops-nix
