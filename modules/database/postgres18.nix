@@ -13,10 +13,7 @@
   services.postgresql = {
     enable = true;
     package = pkgs.unstable.postgresql_18;
-    extraPlugins = ps: [
-      ps.pgtap
-      ps.pg_stat_statements
-    ];
+    extensions = ps: [ ps.pgtap ];
     ensureDatabases = [ "pgFirstAid" ];
     enableTCPIP = true;
     settings = {
@@ -91,8 +88,8 @@
       datestyle = "iso, mdy";
       timezone = "Etc/UTC";
       default_text_search_config = "pg_catalog.english";
+      port = 5432;
     };
-    port = 5432;
     authentication = pkgs.lib.mkOverride 10 ''
       # type database DBuser origin-address auth-method
       local    all     all     trust
