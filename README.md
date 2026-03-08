@@ -143,10 +143,6 @@ Autocomplete uses `blink-cmp` with keymap preset `enter`.
 
 `home/secrets.nix` enables Home Manager SOPS integration when `secrets/justin.yaml` exists.
 
-Current managed secret key:
-
-- `digitalocean_api_token`
-
 ## Host Modules Added Recently
 
 - `modules/database/postgres18.nix`: PostgreSQL 18 profile with `pg_stat_statements`, SSL settings, and logging defaults.
