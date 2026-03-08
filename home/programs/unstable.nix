@@ -14,7 +14,7 @@
     syft
     grype
     prowler
-
+    scorecard
     # Static Site
     hugo
 
