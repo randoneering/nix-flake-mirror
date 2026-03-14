@@ -9,6 +9,7 @@
     openstackclient
     qemu
     jq
+    nodejs
     claude-code
     # Security
     syft
