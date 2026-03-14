@@ -4,7 +4,8 @@ let
     unset PYTHONPATH PYTHONHOME PYTHONNOUSERSITE VIRTUAL_ENV
     exec flox activate -r flox/flox-mcp-server -- flox-mcp "$@"
   '';
-in {
+in
+{
   home.packages = with pkgs; [
     # archives
     zip
@@ -48,7 +49,6 @@ in {
     pgformatter
 
     # IaC
-    docker-compose
     opentofu
 
     # Configuration Management

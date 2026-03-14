@@ -38,6 +38,9 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+
+  # Enable Docker Daemon
+  virtualisation.docker.enable = true;
   # Enable 32bit
   hardware.graphics.enable32Bit = true;
   # Enable NFS
