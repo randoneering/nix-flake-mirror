@@ -11,6 +11,12 @@
     jq
     nodejs
     claude-code
+
+    # k8s
+    kubectl
+    minikube
+    docker
+    docker-compose
     # Security
     syft
     grype
