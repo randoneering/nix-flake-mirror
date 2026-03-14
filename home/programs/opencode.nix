@@ -1,4 +1,11 @@
-{pkgs, ...}: {
+{config, pkgs, ...}: {
+  home.file.".config/opencode/agents".source =
+    config.lib.file.mkOutOfStoreSymlink
+    "/home/justin/Documents/code/forgejo/nix-flake/.claude/agents";
+  home.file.".config/opencode/skills".source =
+    config.lib.file.mkOutOfStoreSymlink
+    "/home/justin/Documents/code/forgejo/nix-flake/.claude/skills";
+
   home.sessionVariables = {
     OPENCODE_OLLAMA_BASE_URL = "https://ollama.randoneering.dev/v1";
   };

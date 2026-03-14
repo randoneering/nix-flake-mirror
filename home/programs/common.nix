@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
   floxMcpWrapper = pkgs.writeShellScriptBin "flox-mcp" ''
+    unset PYTHONPATH PYTHONHOME PYTHONNOUSERSITE VIRTUAL_ENV
     exec flox activate -r flox/flox-mcp-server -- flox-mcp "$@"
   '';
 in {
