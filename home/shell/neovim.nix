@@ -1,9 +1,10 @@
-{...}: {
+{ ... }:
+{
   programs.nvf = {
     enable = true;
     settings = {
       vim.theme.enable = false;
-      vim.additionalRuntimePaths = [./nvim];
+      vim.additionalRuntimePaths = [ ./nvim ];
       vim.luaConfigPost = ''
         vim.o.termguicolors = true
         vim.cmd.colorscheme("popping_and_locking")
@@ -13,23 +14,24 @@
       vim.vimAlias = true;
       vim.globals.mapleader = " ";
 
+      vim.spellcheck.enable = true;
       vim.lsp.enable = true;
       vim.lsp.formatOnSave = true;
 
       vim.languages.python = {
         enable = true;
         lsp.enable = true;
-        lsp.servers = ["basedpyright"];
+        lsp.servers = [ "basedpyright" ];
         format.enable = true;
-        format.type = ["ruff"];
+        format.type = [ "ruff" ];
       };
 
       vim.languages.nix = {
         enable = true;
         lsp.enable = true;
-        lsp.servers = ["nixd"];
+        lsp.servers = [ "nixd" ];
         format.enable = true;
-        format.type = ["nixfmt"];
+        format.type = [ "nixfmt" ];
         extraDiagnostics.enable = true;
       };
 
@@ -51,14 +53,14 @@
         enable = true;
         lsp.enable = true;
         format.enable = true;
-        format.type = ["gofumpt"];
+        format.type = [ "gofumpt" ];
       };
 
       vim.languages.rust = {
         enable = true;
         lsp.enable = true;
         format.enable = true;
-        format.type = ["rustfmt"];
+        format.type = [ "rustfmt" ];
       };
 
       vim.languages.yaml = {
@@ -79,7 +81,15 @@
         keymap.preset = "enter";
         completion.documentation.auto_show = true;
         completion.documentation.auto_show_delay_ms = 150;
-        sources.default = ["lsp" "path" "snippets" "buffer" "emoji" "ripgrep" "spell"];
+        sources.default = [
+          "lsp"
+          "path"
+          "snippets"
+          "buffer"
+          "emoji"
+          "ripgrep"
+          "spell"
+        ];
       };
 
       vim.treesitter.enable = true;
