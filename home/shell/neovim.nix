@@ -8,6 +8,34 @@
       vim.luaConfigPost = ''
         vim.o.termguicolors = true
         vim.cmd.colorscheme("popping_and_locking")
+
+        local palette = {
+          bg = "#181921",
+          bg_alt = "#1d2021",
+          fg = "#ebdbb2",
+          muted = "#a89984",
+          gray = "#928374",
+          red_bright = "#f42c3e",
+          yellow_bright = "#fabd2f",
+          blue = "#458588",
+          blue_bright = "#99c6ca",
+          cyan_bright = "#7ec16e",
+        }
+
+        local hl = function(group, opts)
+          vim.api.nvim_set_hl(0, group, opts)
+        end
+
+        hl("SnacksDashboardNormal", { fg = palette.fg, bg = palette.bg })
+        hl("SnacksDashboardHeader", { fg = palette.yellow_bright, bold = true })
+        hl("SnacksDashboardTitle", { fg = palette.blue_bright, bold = true })
+        hl("SnacksDashboardDesc", { fg = palette.muted })
+        hl("SnacksDashboardIcon", { fg = palette.cyan_bright })
+        hl("SnacksDashboardKey", { fg = palette.yellow_bright, bold = true })
+        hl("SnacksDashboardFile", { fg = palette.fg })
+        hl("SnacksDashboardDir", { fg = palette.gray })
+        hl("SnacksDashboardFooter", { fg = palette.blue })
+        hl("SnacksDashboardSpecial", { fg = palette.red_bright })
       '';
 
       vim.viAlias = false;
