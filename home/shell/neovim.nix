@@ -94,14 +94,13 @@
         ];
       };
 
-  programs.nvf.settings = {
-    vim.snippets.luasnip = {
-      enable = true;
-      providers = [ "friendly-snippets" ]; # optional; this is the default
-      setupOpts.enable_autosnippets = true; # optional
-    };
-    # If LuaSnip is loading friendly-snippets, disable this to avoid duplicates
-    vim.autocomplete.blink-cmp.friendly-snippets.enable = false;
+      vim.snippets.luasnip = {
+        enable = true;
+        providers = [ "friendly-snippets" ];
+        setupOpts.enable_autosnippets = true;
+      };
+
+      vim.autocomplete.blink-cmp.friendly-snippets.enable = false;
 
       vim.treesitter.enable = true;
       vim.statusline.lualine.enable = true;
