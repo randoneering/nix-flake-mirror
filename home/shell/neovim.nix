@@ -49,8 +49,6 @@
         format.enable = true;
       };
 
-      vim.utility.snacks-nvim.enable = true;
-
       vim.languages.go = {
         enable = true;
         lsp.enable = true;
@@ -99,8 +97,6 @@
         providers = [ "friendly-snippets" ];
         setupOpts.enable_autosnippets = true;
       };
-
-      vim.autocomplete.blink-cmp.friendly-snippets.enable = false;
 
       vim.treesitter.enable = true;
       vim.statusline.lualine.enable = true;
