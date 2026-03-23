@@ -49,6 +49,8 @@
         format.enable = true;
       };
 
+      vim.utility.snacks-nvim.enable = true;
+
       vim.languages.go = {
         enable = true;
         lsp.enable = true;
@@ -91,6 +93,15 @@
           "spell"
         ];
       };
+
+  programs.nvf.settings = {
+    vim.snippets.luasnip = {
+      enable = true;
+      providers = [ "friendly-snippets" ]; # optional; this is the default
+      setupOpts.enable_autosnippets = true; # optional
+    };
+    # If LuaSnip is loading friendly-snippets, disable this to avoid duplicates
+    vim.autocomplete.blink-cmp.friendly-snippets.enable = false;
 
       vim.treesitter.enable = true;
       vim.statusline.lualine.enable = true;
