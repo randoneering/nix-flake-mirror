@@ -126,7 +126,19 @@
       };
       vim.telescope.enable = true;
       vim.binds.whichKey.enable = true;
-      vim.utility.snacks-nvim.enable = true;
+      vim.utility.snacks-nvim = {
+        enable = true;
+        setupOpts = {
+          dashboard = {
+            enabled = true;
+            example = "github";
+          };
+          notifier = {
+            enabled = true;
+            timeout = 3000;
+          };
+        };
+      };
     };
   };
 }
