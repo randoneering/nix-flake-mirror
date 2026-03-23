@@ -131,7 +131,6 @@
         setupOpts = {
           dashboard = {
             enabled = true;
-            example = "github";
           };
           notifier = {
             enabled = true;
