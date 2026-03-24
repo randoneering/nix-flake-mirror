@@ -42,8 +42,8 @@
       vim.vimAlias = true;
       vim.globals.mapleader = " ";
       vim.extraPackages = with pkgs; [
+        alejandra
         gofumpt
-        nixfmt-rfc-style
         nodePackages.prettier
         pgformatter
         ruff
@@ -65,7 +65,7 @@
           formatters_by_ft = {
             go = [ "gofumpt" ];
             hcl = [ "terraform_fmt" ];
-            nix = [ "nixfmt" ];
+            nix = [ "alejandra" ];
             python = [ "ruff_format" ];
             rust = [ "rustfmt" ];
             sql = [ "pg_format" ];
