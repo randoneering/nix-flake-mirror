@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.nvf = {
     enable = true;
@@ -41,25 +41,53 @@
       vim.viAlias = false;
       vim.vimAlias = true;
       vim.globals.mapleader = " ";
+      vim.extraPackages = with pkgs; [
+        gofumpt
+        nixfmt-rfc-style
+        nodePackages.prettier
+        pgformatter
+        ruff
+        rustfmt
+        terraform
+      ];
 
       vim.spellcheck.enable = true;
       vim.lsp.enable = true;
-      vim.lsp.formatOnSave = true;
+      vim.lsp.formatOnSave = false;
+
+      vim.formatter.conform-nvim = {
+        enable = true;
+        setupOpts = {
+          format_on_save = {
+            lsp_format = "fallback";
+            timeout_ms = 500;
+          };
+          formatters_by_ft = {
+            go = [ "gofumpt" ];
+            hcl = [ "terraform_fmt" ];
+            nix = [ "nixfmt" ];
+            python = [ "ruff_format" ];
+            rust = [ "rustfmt" ];
+            sql = [ "pg_format" ];
+            terraform = [ "terraform_fmt" ];
+            tfvars = [ "terraform_fmt" ];
+            yaml = [ "prettier" ];
+          };
+        };
+      };
 
       vim.languages.python = {
         enable = true;
         lsp.enable = true;
         lsp.servers = [ "basedpyright" ];
-        format.enable = true;
-        format.type = [ "ruff" ];
+        format.enable = false;
       };
 
       vim.languages.nix = {
         enable = true;
         lsp.enable = true;
         lsp.servers = [ "nixd" ];
-        format.enable = true;
-        format.type = [ "nixfmt" ];
+        format.enable = false;
         extraDiagnostics.enable = true;
       };
 
@@ -67,28 +95,26 @@
         enable = true;
         dialect = "postgres";
         lsp.enable = true;
-        format.enable = true;
+        format.enable = false;
         extraDiagnostics.enable = true;
       };
 
       vim.languages.hcl = {
         enable = true;
         lsp.enable = true;
-        format.enable = true;
+        format.enable = false;
       };
 
       vim.languages.go = {
         enable = true;
         lsp.enable = true;
-        format.enable = true;
-        format.type = [ "gofumpt" ];
+        format.enable = false;
       };
 
       vim.languages.rust = {
         enable = true;
         lsp.enable = true;
-        format.enable = true;
-        format.type = [ "rustfmt" ];
+        format.enable = false;
       };
 
       vim.languages.yaml = {

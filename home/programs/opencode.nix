@@ -1,4 +1,5 @@
-{config, pkgs, ...}: {
+{ config, pkgs, ... }:
+{
   home.sessionVariables = {
     OPENCODE_OLLAMA_BASE_URL = "https://ollama.randoneering.dev/v1";
   };
@@ -39,7 +40,7 @@
       mcp = {
         flox = {
           type = "local";
-          command = ["flox-mcp"];
+          command = [ "flox-mcp" ];
           enabled = true;
         };
         neon = {
@@ -55,14 +56,14 @@
             Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
           };
         };
-                do_droplets = {
-                 type = "remote";
-                 url = "https://droplets.mcp.digitalocean.com/mcp";
-                 enabled = true;
-                 headers = {
-                   Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
-                 };
-               };
+        do_droplets = {
+          type = "remote";
+          url = "https://droplets.mcp.digitalocean.com/mcp";
+          enabled = true;
+          headers = {
+            Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
+          };
+        };
         do_databases = {
           type = "remote";
           url = "https://databases.mcp.digitalocean.com/mcp";
@@ -71,15 +72,15 @@
             Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
           };
         };
-               do_networking = {
-                 type = "remote";
-                 url = "https://networking.mcp.digitalocean.com/mcp";
-                 enabled = true;
-                 headers = {
-                   Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
-                 };
-               };
+        do_networking = {
+          type = "remote";
+          url = "https://networking.mcp.digitalocean.com/mcp";
+          enabled = true;
+          headers = {
+            Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
+          };
+        };
       };
     };
   };
-
+}
