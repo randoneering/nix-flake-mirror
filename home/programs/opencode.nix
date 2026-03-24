@@ -1,11 +1,4 @@
 {config, pkgs, ...}: {
-  home.file.".config/opencode/agents".source =
-    config.lib.file.mkOutOfStoreSymlink
-    "/home/justin/Documents/code/forgejo/nix-flake/.claude/agents";
-  home.file.".config/opencode/skills".source =
-    config.lib.file.mkOutOfStoreSymlink
-    "/home/justin/Documents/code/forgejo/nix-flake/.claude/skills";
-
   home.sessionVariables = {
     OPENCODE_OLLAMA_BASE_URL = "https://ollama.randoneering.dev/v1";
   };
@@ -62,14 +55,14 @@
             Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
           };
         };
-        #        do_droplets = {
-        #         type = "remote";
-        #         url = "https://droplets.mcp.digitalocean.com/mcp";
-        #         enabled = true;
-        #         headers = {
-        #           Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
-        #         };
-        #       };
+                do_droplets = {
+                 type = "remote";
+                 url = "https://droplets.mcp.digitalocean.com/mcp";
+                 enabled = true;
+                 headers = {
+                   Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
+                 };
+               };
         do_databases = {
           type = "remote";
           url = "https://databases.mcp.digitalocean.com/mcp";
@@ -78,15 +71,15 @@
             Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
           };
         };
-        #       do_networking = {
-        #         type = "remote";
-        #         url = "https://networking.mcp.digitalocean.com/mcp";
-        #         enabled = true;
-        #         headers = {
-        #           Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
-        #         };
-        #       };
+               do_networking = {
+                 type = "remote";
+                 url = "https://networking.mcp.digitalocean.com/mcp";
+                 enabled = true;
+                 headers = {
+                   Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
+                 };
+               };
       };
     };
   };
-}
+
