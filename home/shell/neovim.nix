@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   programs.nvf = {
     enable = true;
@@ -54,6 +54,11 @@
       vim.spellcheck.enable = true;
       vim.lsp.enable = true;
       vim.lsp.formatOnSave = false;
+      vim.lsp.servers.sqls.on_attach = lib.mkForce (lib.generators.mkLuaInline ''
+        function(client, bufnr)
+          client.server_capabilities.execute_command = true
+        end
+      '');
 
       vim.formatter.conform-nvim = {
         enable = true;

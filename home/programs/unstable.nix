@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs.unstable; [
     # utils
     dbeaver-bin
@@ -18,8 +17,7 @@
     docker
     docker-compose
     # Security
-    syft
-    grype
+
     prowler
     scorecard
     # Static Site

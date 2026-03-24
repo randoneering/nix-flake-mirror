@@ -1,16 +1,12 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   floxMcpWrapper = pkgs.writeShellScriptBin "flox-mcp" ''
     unset PYTHONPATH PYTHONHOME PYTHONNOUSERSITE VIRTUAL_ENV
     exec flox activate -r flox/flox-mcp-server -- flox-mcp "$@"
   '';
-in
-{
+in {
   home.packages = with pkgs; [
     # archives
     zip
-    gnomeExtensions.pop-shell
-    pop-gtk-theme
     gtk4
     gtk3
     sassc
