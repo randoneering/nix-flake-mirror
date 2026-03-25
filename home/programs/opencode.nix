@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.sessionVariables = {
     OPENCODE_OLLAMA_BASE_URL = "https://ollama.randoneering.dev/v1";
   };
@@ -40,12 +43,17 @@
       mcp = {
         flox = {
           type = "local";
-          command = [ "flox-mcp" ];
+          command = ["flox-mcp"];
           enabled = true;
         };
         neon = {
           type = "remote";
           url = "https://mcp.neon.tech/mcp";
+          enabled = true;
+        };
+        nixos-mcp = {
+          type = "remote";
+          url = "https://mcp01.randoneering.dev/nixos/mcp";
           enabled = true;
         };
         do_apps = {
