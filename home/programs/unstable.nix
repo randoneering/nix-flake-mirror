@@ -10,7 +10,7 @@
     jq
     nodejs
     claude-code
-
+    zed-editor
     # k8s
     kubectl
     minikube
@@ -32,6 +32,8 @@
     slack
     signal-desktop
 
+    # database-stuff
+    duckdb
     # Office
     onlyoffice-desktopeditors
   ];
