@@ -9,11 +9,11 @@
 
   programs.opencode = {
     enable = true;
+    skills = ../opencode/skills;
+    agents = ../opencode/agents;
     package = pkgs.unstable.opencode;
     settings = {
-      autoupdate = false;
-      model = "ollama/qwen3-coder:latest";
-      small_model = "ollama/qwen3:8b";
+      autoupdate = true;
       provider = {
         ollama = {
           npm = "@ai-sdk/openai-compatible";
