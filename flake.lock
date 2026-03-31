@@ -381,6 +381,22 @@
         "type": "github"
       }
     },
+    "opencode-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774968225,
+        "narHash": "sha256-Dc0bTlBjc+kTPi0oHJV3rGVt8vbNVJIu0/9cF36omsA=",
+        "owner": "randoneering",
+        "repo": "randoneering-agent-guide",
+        "rev": "abdd176b78ffd8e4d1c4916211b19307ee46e829",
+        "type": "github"
+      },
+      "original": {
+        "owner": "randoneering",
+        "repo": "randoneering-agent-guide",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -414,6 +430,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpkgs-update": "nixpkgs-update",
         "nvf": "nvf",
+        "opencode-config": "opencode-config",
         "sops-nix": "sops-nix"
       }
     },

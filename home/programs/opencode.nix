@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  opencode-config,
   ...
 }: {
   home.sessionVariables = {
