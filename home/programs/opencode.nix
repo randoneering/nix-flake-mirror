@@ -8,11 +8,16 @@
     OPENCODE_OLLAMA_BASE_URL = "https://ollama.randoneering.dev/v1";
   };
 
+  # Symlink skills and agents from flake input directly
+
+  xdg.configFile."opencode.skills" = {
+    source = "${opencode-config}/skills";
+    recursive = true;
+  };
+
   programs.opencode = {
     enable = true;
-    skills = "${opencode-config}/skills";
     rules = "./opencode/AGENTS.md";
-    agents = "${opencode-config}/agents";
     package = pkgs.unstable.opencode;
     settings = {
       autoupdate = true;
