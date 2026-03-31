@@ -22,17 +22,11 @@
             baseURL = "https://ollama.randoneering.dev/v1";
           };
           models = {
-            "qwen3-coder:latest" = {
-              name = "Qwen3 Coder";
-            };
             "qwen3:8b" = {
               name = "Qwen3 8B";
             };
-            "qwen3:14b" = {
-              name = "Qwen3 14B";
-            };
-            "qwen3.5:27b" = {
-              name = "Qwen3.5 27B";
+            "qwen3.5:9b" = {
+              name = "Qwen3 3.5 9B";
             };
             "gpt-oss:20b" = {
               name = "GPT OSS 20B";

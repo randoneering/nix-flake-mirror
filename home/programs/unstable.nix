@@ -31,7 +31,8 @@
     discord
     slack
     signal-desktop
-
+    brave
+    androidenv.androidPkgs.platform-tools
     # database-stuff
     duckdb
     # Office
