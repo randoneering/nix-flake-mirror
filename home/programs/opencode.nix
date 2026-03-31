@@ -10,9 +10,9 @@
 
   programs.opencode = {
     enable = true;
-    skills = "${opencode-config}/skills";
+    skills = "${opencode-config}/skills/*";
     rules = "./opencode/AGENTS.md";
-    agents = "${opencode-config}/agents";
+    agents = "${opencode-config}/agents/*";
     package = pkgs.unstable.opencode;
     settings = {
       autoupdate = true;
