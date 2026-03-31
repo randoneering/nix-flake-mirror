@@ -12,6 +12,10 @@
     nvf.url = "github:notashelf/nvf";
     flox-nixpkgs.url = "github:flox/nixpkgs/stable";
     flox.url = "github:flox/flox";
+    opencode-config = {
+      url = "github:randoneering/randoneering-agent-guide";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -24,6 +28,7 @@
     flox,
     flox-nixpkgs,
     sops-nix,
+    opencode-config,
     ...
   }: {
     nixosConfigurations = {
