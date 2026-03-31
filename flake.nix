@@ -7,7 +7,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs-update.url = "github:nix-community/nixpkgs-update";
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
     nvf.url = "github:notashelf/nvf";
     flox-nixpkgs.url = "github:flox/nixpkgs/stable";
