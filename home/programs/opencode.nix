@@ -10,14 +10,19 @@
 
   # Symlink skills and agents from flake input directly
 
-  xdg.configFile."opencode.skills" = {
+  xdg.configFile."opencode/skills" = {
     source = "${opencode-config}/skills";
+    recursive = true;
+  };
+
+  xdg.configFile."opencode/agents" = {
+    source = "${opencode-config}/agents";
     recursive = true;
   };
 
   programs.opencode = {
     enable = true;
-    rules = "./opencode/AGENTS.md";
+    rules = ./opencode/AGENTS.md;
     package = pkgs.unstable.opencode;
     settings = {
       autoupdate = true;
