@@ -10,6 +10,7 @@
   programs.opencode = {
     enable = true;
     skills = ../opencode/skills;
+    rules = ../opencode/AGENTS.md;
     agents = ../opencode/agents;
     package = pkgs.unstable.opencode;
     settings = {
