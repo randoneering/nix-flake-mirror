@@ -22,7 +22,7 @@
 
   programs.opencode = {
     enable = true;
-    rules = ./opencode/AGENTS.md;
+    rules = "${opencode-config}/AGENTS.md";
     package = pkgs.unstable.opencode;
     settings = {
       autoupdate = true;
