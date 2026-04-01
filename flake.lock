@@ -156,11 +156,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774969509,
-        "narHash": "sha256-LCmfWlT3tlGVj0Q20TKqs5PBwdH3vnNsxJEhqt0wH1o=",
+        "lastModified": 1774991950,
+        "narHash": "sha256-kScKj3qJDIWuN9/6PMmgy5esrTUkYinrO5VvILik/zw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a7d2aca3f0dd952b01d8ed5c45536b40af3841eb",
+        "rev": "f2d3e04e278422c7379e067e323734f3e8c585a7",
         "type": "github"
       },
       "original": {
@@ -384,11 +384,11 @@
     "opencode-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1774968225,
-        "narHash": "sha256-Dc0bTlBjc+kTPi0oHJV3rGVt8vbNVJIu0/9cF36omsA=",
+        "lastModified": 1775008125,
+        "narHash": "sha256-E227Hpc7ZkKp/kjsLdD2buCONhEh0Hz9eqeILQkSm6c=",
         "owner": "randoneering",
         "repo": "randoneering-agent-guide",
-        "rev": "abdd176b78ffd8e4d1c4916211b19307ee46e829",
+        "rev": "d36e4d96bdace9b1706af70d0dcba60a64c14b15",
         "type": "github"
       },
       "original": {
