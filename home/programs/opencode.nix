@@ -57,15 +57,29 @@
           url = "https://mcp.neon.tech/mcp";
           enabled = true;
         };
-        nixos-mcp = {
+        mcp-nixos = {
           type = "remote";
           url = "https://mcp01.randoneering.dev/nixos/mcp";
           enabled = true;
+          headers = {
+            Authorization = "Bearer {env:MCP_NIXOS_TOKEN}";
+          };
         };
         postgres-mcp = {
           type = "remote";
           url = "https://postgres-mcp.randoneering.dev/mcp";
           enabled = true;
+          headers = {
+            Authorization = "Bearer {env:POSTGRES_MCP_TOKEN}";
+          };
+        };
+        context7 = {
+          type = "remote";
+          url = "https://context7.randoneering.dev/mcp";
+          enabled = true;
+          headers = {
+            Authorization = "Bearer {env:CONTEXT7_TOKEN}";
+          };
         };
         do_apps = {
           type = "remote";
