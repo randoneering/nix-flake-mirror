@@ -62,6 +62,11 @@
           url = "https://mcp01.randoneering.dev/nixos/mcp";
           enabled = true;
         };
+        postgres-mcp = {
+          type = "remote";
+          url = "https://postgres-mcp.randoneering.dev/mcp";
+          enabled = true;
+        };
         do_apps = {
           type = "remote";
           url = "https://apps.mcp.digitalocean.com/mcp";
