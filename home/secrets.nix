@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  sopsFile = ../../secrets/justin.yaml;
+  sopsFile = ../secrets/justin.yaml;
 in
   lib.mkIf (builtins.pathExists sopsFile) {
     sops = {
