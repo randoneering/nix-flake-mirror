@@ -14,6 +14,9 @@ in
 
       secrets = {
         digitalocean_api_token = {};
+        mcp_nixos_token = {};
+        postgres_mcp_token = {};
+        context7_token = {};
       };
     };
   }
