@@ -9,7 +9,6 @@
     qemu
     jq
     nodejs
-    claude-code
     zed-editor
     # k8s
     kubectl
