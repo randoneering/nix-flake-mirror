@@ -1,14 +1,52 @@
 {
   config,
+  lib,
   pkgs,
   opencode-config,
   ...
-}: {
+}: let
+  toOpencodeEnvSyntax = value:
+    if builtins.isAttrs value
+    then lib.mapAttrs (_: toOpencodeEnvSyntax) value
+    else if builtins.isList value
+    then map toOpencodeEnvSyntax value
+    else if builtins.isString value
+    then builtins.replaceStrings ["\${"] ["{env:"] value
+    else value;
+
+  sharedMcpServers =
+    lib.mapAttrs (
+      _: server:
+        {
+          enabled = !(server.disabled or false);
+        }
+        // (
+          if server ? url
+          then
+            {
+              type = "remote";
+              url = toOpencodeEnvSyntax server.url;
+            }
+            // lib.optionalAttrs (server ? headers) {
+              headers = toOpencodeEnvSyntax server.headers;
+            }
+          else if server ? command
+          then
+            {
+              type = "local";
+              command = toOpencodeEnvSyntax ([server.command] ++ (server.args or []));
+            }
+            // lib.optionalAttrs (server ? env) {
+              environment = toOpencodeEnvSyntax server.env;
+            }
+          else {}
+        )
+    )
+    config.programs.mcp.servers;
+in {
   home.sessionVariables = {
     OPENCODE_OLLAMA_BASE_URL = "https://ollama.randoneering.dev/v1";
   };
-
-  # Symlink skills and agents from flake input directly
 
   xdg.configFile."opencode/skills" = {
     source = "${opencode-config}/skills";
@@ -34,86 +72,19 @@
             baseURL = "https://ollama.randoneering.dev/v1";
           };
           models = {
-            "qwen3:8b" = {
-              name = "Qwen3 8B";
+            "qwen3.5:4b" = {
+              name = "Qwen3.5 4B";
             };
             "qwen3.5:9b" = {
               name = "Qwen3 3.5 9B";
             };
-            "gpt-oss:20b" = {
-              name = "GPT OSS 20B";
+            "gemma4:e4b" = {
+              name = "gemma4:e4b";
             };
           };
         };
       };
-      mcp = {
-        flox = {
-          type = "local";
-          command = ["flox-mcp"];
-          enabled = true;
-        };
-        neon = {
-          type = "remote";
-          url = "https://mcp.neon.tech/mcp";
-          enabled = true;
-        };
-        mcp-nixos = {
-          type = "remote";
-          url = "https://mcp01.randoneering.dev/nixos/mcp";
-          enabled = true;
-          headers = {
-            Authorization = "Bearer {env:MCP_NIXOS_TOKEN}";
-          };
-        };
-        postgres-mcp = {
-          type = "remote";
-          url = "https://postgres-mcp.randoneering.dev/mcp";
-          enabled = true;
-          headers = {
-            Authorization = "Bearer {env:POSTGRES_MCP_TOKEN}";
-          };
-        };
-        context7 = {
-          type = "remote";
-          url = "https://context7.randoneering.dev/mcp";
-          enabled = true;
-          headers = {
-            Authorization = "Bearer {env:CONTEXT7_TOKEN}";
-          };
-        };
-        do_apps = {
-          type = "remote";
-          url = "https://apps.mcp.digitalocean.com/mcp";
-          enabled = true;
-          headers = {
-            Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
-          };
-        };
-        do_droplets = {
-          type = "remote";
-          url = "https://droplets.mcp.digitalocean.com/mcp";
-          enabled = true;
-          headers = {
-            Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
-          };
-        };
-        do_databases = {
-          type = "remote";
-          url = "https://databases.mcp.digitalocean.com/mcp";
-          enabled = true;
-          headers = {
-            Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
-          };
-        };
-        do_networking = {
-          type = "remote";
-          url = "https://networking.mcp.digitalocean.com/mcp";
-          enabled = true;
-          headers = {
-            Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
-          };
-        };
-      };
+      mcp = sharedMcpServers;
     };
   };
 }

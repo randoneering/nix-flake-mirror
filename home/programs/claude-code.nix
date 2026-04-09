@@ -16,43 +16,43 @@
       mcp-nixos = {
         url = "https://mcp01.randoneering.dev/nixos/mcp";
         headers = {
-          Authorization = "Bearer {env:MCP_NIXOS_TOKEN}";
+          Authorization = "Bearer \${MCP_NIXOS_TOKEN}";
         };
       };
       postgres-mcp = {
         url = "https://postgres-mcp.randoneering.dev/mcp";
         headers = {
-          Authorization = "Bearer {env:POSTGRES_MCP_TOKEN}";
+          Authorization = "Bearer \${POSTGRES_MCP_TOKEN}";
         };
       };
       context7 = {
         url = "https://context7.randoneering.dev/mcp";
         headers = {
-          Authorization = "Bearer {env:CONTEXT7_TOKEN}";
+          Authorization = "Bearer \${CONTEXT7_TOKEN}";
         };
       };
       do_apps = {
         url = "https://apps.mcp.digitalocean.com/mcp";
         headers = {
-          Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
+          Authorization = "\${DIGITALOCEAN_API_TOKEN}";
         };
       };
       do_droplets = {
         url = "https://droplets.mcp.digitalocean.com/mcp";
         headers = {
-          Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
+          Authorization = "\${DIGITALOCEAN_API_TOKEN}";
         };
       };
       do_databases = {
         url = "https://databases.mcp.digitalocean.com/mcp";
         headers = {
-          Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
+          Authorization = "\${DIGITALOCEAN_API_TOKEN}";
         };
       };
       do_networking = {
         url = "https://networking.mcp.digitalocean.com/mcp";
         headers = {
-          Authorization = "{env:DIGITALOCEAN_API_TOKEN}";
+          Authorization = "\${DIGITALOCEAN_API_TOKEN}";
         };
       };
     };
