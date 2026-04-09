@@ -75,8 +75,8 @@ in {
             "qwen3.5:4b" = {
               name = "Qwen3.5 4B";
             };
-            "qwen3.5:9b" = {
-              name = "Qwen3 3.5 9B";
+            "gemma4:e2b" = {
+              name = "gemma4:e2b";
             };
             "gemma4:e4b" = {
               name = "gemma4:e4b";
