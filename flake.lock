@@ -384,11 +384,11 @@
     "opencode-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1775705201,
-        "narHash": "sha256-UQWTOsWCggeLAzcbiJR39UwxYoH2KQxJcaFDR39fzZk=",
+        "lastModified": 1775784905,
+        "narHash": "sha256-zowS/QFSG7N1/bflHMN51a68USRNkI+ER+wAIlXn7nc=",
         "owner": "randoneering",
         "repo": "randoneering-agent-guide",
-        "rev": "5924c1f0f3c1217afa598d984d9030edb82e664e",
+        "rev": "3a92d0bef4fec1c55ea7d62c7a89fd8358b768fc",
         "type": "github"
       },
       "original": {
