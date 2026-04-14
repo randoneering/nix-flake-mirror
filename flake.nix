@@ -100,7 +100,7 @@
                 pkgs,
                 ...
               }: {
-                nixpkgs.overlays = [overlay-unstable];
+                nixpkgs.overlays = [overlay-unstable overlay-local];
               }
             )
             ./hosts/L16/default.nix
