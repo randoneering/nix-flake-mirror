@@ -1,6 +1,6 @@
 {
   pkgs,
-  opencode-config,
+  agent-config,
   ...
 }: {
   programs.mcp = {
@@ -63,8 +63,8 @@
     package = pkgs.unstable.claude-code;
     enableMcpIntegration = true;
 
-    memory.source = "${opencode-config}/AGENTS.md";
-    agentsDir = "${opencode-config}/agents";
-    skillsDir = "${opencode-config}/skills";
+    memory.source = "${agent-config}/AGENTS.md";
+    agentsDir = "${agent-config}/agents";
+    skillsDir = "${agent-config}/skills";
   };
 }

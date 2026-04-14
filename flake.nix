@@ -12,7 +12,7 @@
     nvf.url = "github:notashelf/nvf";
     flox-nixpkgs.url = "github:flox/nixpkgs/stable";
     flox.url = "github:flox/flox";
-    opencode-config = {
+    agent-config = {
       url = "github:randoneering/randoneering-agent-guide";
       flake = false;
     };
@@ -28,7 +28,7 @@
     flox,
     flox-nixpkgs,
     sops-nix,
-    opencode-config,
+    agent-config,
     ...
   }: {
     nixosConfigurations = {
@@ -82,6 +82,9 @@
             system = prev.stdenv.hostPlatform.system;
             config.allowUnfree = true;
           };
+        };
+        overlay-local = final: prev: {
+          pi-agent = final.callPackage ./pkgs/pi-agent {};
         };
         specialArgs = {
           inherit username hostname;

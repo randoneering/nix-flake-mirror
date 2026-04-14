@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  opencode-config,
+  agent-config,
   ...
 }: let
   toOpencodeEnvSyntax = value:
@@ -49,18 +49,18 @@ in {
   };
 
   xdg.configFile."opencode/skills" = {
-    source = "${opencode-config}/skills";
+    source = "${agent-config}/skills";
     recursive = true;
   };
 
   xdg.configFile."opencode/agents" = {
-    source = "${opencode-config}/agents";
+    source = "${agent-config}/agents";
     recursive = true;
   };
 
   programs.opencode = {
     enable = true;
-    rules = "${opencode-config}/AGENTS.md";
+    rules = "${agent-config}/AGENTS.md";
     package = pkgs.unstable.opencode;
     settings = {
       autoupdate = true;
