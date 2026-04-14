@@ -3,11 +3,11 @@
     "agent-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1776109926,
-        "narHash": "sha256-qDGLZSh+vEWDC4mrFUd7zTmISMC4lDXLtPN5Db5HNvA=",
+        "lastModified": 1776134492,
+        "narHash": "sha256-LmvduCjM2P1X3MRV7SSefkE43M/G9lir7Y64/DjjyZ4=",
         "owner": "randoneering",
         "repo": "randoneering-agent-guide",
-        "rev": "45663f1616289c44d75db2ddbb39470e3c7b95b3",
+        "rev": "5403e9fb70aef0cfac86188f5e50b845193e8494",
         "type": "github"
       },
       "original": {
