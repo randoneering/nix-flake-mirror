@@ -1,6 +1,0 @@
-{
-  "skills": [
-    "../.claude/skills",
-    "-../.agents/skills/find-skills"
-  ]
-}
