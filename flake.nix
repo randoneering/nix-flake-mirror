@@ -83,9 +83,6 @@
             config.allowUnfree = true;
           };
         };
-        overlay-local = final: prev: {
-          pi-agent = final.callPackage ./pkgs/pi-agent {};
-        };
         specialArgs = {
           inherit username hostname;
         };
@@ -100,7 +97,7 @@
                 pkgs,
                 ...
               }: {
-                nixpkgs.overlays = [overlay-unstable overlay-local];
+                nixpkgs.overlays = [overlay-unstable];
               }
             )
             ./hosts/L16/default.nix

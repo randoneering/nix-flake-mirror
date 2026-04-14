@@ -37,8 +37,5 @@
       duckdb
       # Office
       onlyoffice-desktopeditors
-    ]
-    ++ [
-      pkgs.pi-agent
     ];
 }
