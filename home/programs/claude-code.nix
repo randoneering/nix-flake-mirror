@@ -1,8 +1,29 @@
 {
+  config,
+  lib,
   pkgs,
   agent-config,
   ...
-}: {
+}: let
+  sharedMcpServers = lib.mapAttrs (
+    _: server:
+      (lib.optionalAttrs (server ? url) {
+        type = "http";
+        url = server.url;
+      })
+      // (lib.optionalAttrs (server ? headers) {
+        headers = server.headers;
+      })
+      // (lib.optionalAttrs (server ? command) {
+        type = "stdio";
+        command = server.command;
+        args = server.args or [];
+      })
+      // (lib.optionalAttrs (server ? env) {
+        env = server.env;
+      })
+  ) config.programs.mcp.servers;
+in {
   programs.mcp = {
     enable = true;
 
@@ -61,7 +82,7 @@
   programs.claude-code = {
     enable = true;
     package = pkgs.unstable.claude-code;
-    enableMcpIntegration = true;
+    mcpServers = sharedMcpServers;
 
     memory.source = "${agent-config}/AGENTS.md";
     agentsDir = "${agent-config}/agents";
