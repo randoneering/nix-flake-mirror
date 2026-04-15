@@ -19,5 +19,22 @@ in
         context7_token = {};
         ollama_api_key = {};
       };
+
+      templates."pi-agent-models.json" = {
+        path = "${config.home.homeDirectory}/.pi/agent/models.json";
+        content = builtins.toJSON {
+          providers = {
+            ollama = {
+              baseUrl = "https://ollama.randoneering.dev/v1";
+              api = "openai-completions";
+              apiKey = config.sops.placeholder.ollama_api_key;
+              models = [
+                {id = "qwen3.5:4b";}
+                {id = "gemma4:e2b";}
+              ];
+            };
+          };
+        };
+      };
     };
   }

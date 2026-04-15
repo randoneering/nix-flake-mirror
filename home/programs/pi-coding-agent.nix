@@ -18,20 +18,7 @@ in {
         source = "${agent-config}/skills";
         recursive = true;
       };
-      ".pi/agent/models.json".text = builtins.toJSON {
-        providers = {
-          ollama = {
-            baseUrl = "https://ollama.randoneering.dev/v1";
-            api = "openai-completions";
-            apiKey = "\${OLLAMA_API_KEY}";
-            models = [
-              {"id" = "qwen3.5:4b";}
-              {"id" = "gemma4:e2b";}
-            ];
-          };
-        };
-      };
-      ".pi/agent/settings.json".text = builtins.toJSON {
+".pi/agent/settings.json".text = builtins.toJSON {
         defaultProvider = "ollama";
         model = "qwen3.5:4b";
       };
