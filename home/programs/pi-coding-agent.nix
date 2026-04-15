@@ -3,9 +3,6 @@
   agent-config,
   ...
 }: let
-  promptsDir = agent-config + "/prompts";
-  themesDir = agent-config + "/themes";
-
   # Build pi-web-access extension with node_modules included
   # so that symlinked .ts files can resolve their dependencies.
   piWebAccess = pkgs.buildNpmPackage {
@@ -42,16 +39,6 @@ in {
       };
     }
     // (
-      if builtins.pathExists promptsDir
-      then {
-        ".pi/agent/prompts" = {
-          source = promptsDir;
-          recursive = true;
-        };
-      }
-      else {}
-    )
-    // (
       if builtins.pathExists extensionsDir
       then {
         ".pi/agent/extensions" = {
@@ -60,15 +47,6 @@ in {
         };
       }
       else {}
-    )
-    // (
-      if builtins.pathExists themesDir
-      then {
-        ".pi/agent/themes" = {
-          source = themesDir;
-          recursive = true;
-        };
-      }
-      else {}
+      )     
     );
 }
