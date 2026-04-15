@@ -8,6 +8,7 @@
   mcpNixosTokenPath = lib.attrByPath ["sops" "secrets" "mcp_nixos_token" "path"] null config;
   postgresMcpTokenPath = lib.attrByPath ["sops" "secrets" "postgres_mcp_token" "path"] null config;
   context7TokenPath = lib.attrByPath ["sops" "secrets" "context7_token" "path"] null config;
+  ollamaApiKeyPath = lib.attrByPath ["sops" "secrets" "ollama_api_key" "path"] null config;
 in {
   programs.fish = {
     enable = true;
@@ -35,6 +36,11 @@ in {
       + lib.optionalString (context7TokenPath != null) ''
         if test -f "${context7TokenPath}"
           set -gx CONTEXT7_TOKEN (string trim (cat "${context7TokenPath}"))
+        end
+      ''
+      + lib.optionalString (ollamaApiKeyPath != null) ''
+        if test -f "${ollamaApiKeyPath}"
+          set -gx OLLAMA_API_KEY (string trim (cat "${ollamaApiKeyPath}"))
         end
       '';
   };

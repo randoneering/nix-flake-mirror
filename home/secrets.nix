@@ -17,6 +17,7 @@ in
         mcp_nixos_token = {};
         postgres_mcp_token = {};
         context7_token = {};
+        ollama_api_key = {};
       };
     };
   }
