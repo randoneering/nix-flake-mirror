@@ -3,11 +3,11 @@
     "agent-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1776195741,
-        "narHash": "sha256-hhTEIbwYU1/QstF/8R/quUiT+ip45aYu9r88BvVN3pI=",
+        "lastModified": 1776224280,
+        "narHash": "sha256-0COuYNpa1bmXtBgua5NeKiPwIVAL+E3q+fPkFlqSj80=",
         "owner": "randoneering",
         "repo": "randoneering-agent-guide",
-        "rev": "17df66683c32bd4b013bbc9b3f7c256b2e1eff3e",
+        "rev": "f43c7b76aef63dd2906f0010e6a22a36151f7881",
         "type": "github"
       },
       "original": {
@@ -114,11 +114,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1776177638,
-        "narHash": "sha256-+tFn6bWvoUhKf3W80usGihs/QUE3IAp/Si2UlY21BVQ=",
+        "lastModified": 1776204627,
+        "narHash": "sha256-RNolVk8bEa9qtIqSfdcIzikalR67uu0ituUp8wqMzOM=",
         "owner": "flox",
         "repo": "flox",
-        "rev": "ab92efdde80248082deaf8f228adfb04589d5bcb",
+        "rev": "a4335b84ca6769b29c08e4babb158f113f127332",
         "type": "github"
       },
       "original": {
