@@ -18,10 +18,12 @@ in {
       recursive = true;
     };
     ".pi/agent/models.json".text = builtins.toJSON {
-      ollama = {
-        baseUrl = "https://ollama.randoneering.dev/v1";
-        apiType = "openai-completions";
-        models = ["qwen3.5:4b" "gemma4:e2b"];
+      providers = {
+        ollama = {
+          baseUrl = "https://ollama.randoneering.dev/v1";
+          apiType = "openai-completions";
+          models = ["qwen3.5:4b" "gemma4:e2b"];
+        };
       };
     };
     ".pi/agent/settings.json".text = builtins.toJSON {
