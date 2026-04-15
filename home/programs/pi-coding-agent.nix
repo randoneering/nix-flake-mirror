@@ -22,6 +22,7 @@ in {
         ollama = {
           baseUrl = "https://ollama.randoneering.dev/v1";
           apiType = "openai-completions";
+          apiKey = "ollama";
           models = [
             {id = "qwen3.5:4b";}
             {id = "gemma4:e2b";}
