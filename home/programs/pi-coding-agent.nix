@@ -4,8 +4,26 @@
   ...
 }: let
   promptsDir = agent-config + "/prompts";
-  extensionsDir = agent-config + "/extensions";
   themesDir = agent-config + "/themes";
+
+  # Build pi-web-access extension with node_modules included
+  # so that symlinked .ts files can resolve their dependencies.
+  piWebAccess = pkgs.buildNpmPackage {
+    pname = "pi-web-access";
+    version = "0.10.6";
+    src = agent-config + "/extensions/pi-web-access";
+    npmDepsHash = "sha256-zwH9ba5M6wRtyTdpi/7To/ZzkQfNvgO8CxdpGCeB8Vo=";
+    dontNpmBuild = true;
+    installPhase = ''
+      mkdir -p $out
+      cp -r . $out/
+    '';
+  };
+
+  extensionsDir = pkgs.runCommand "pi-agent-extensions" {} ''
+    mkdir -p $out/pi-web-access
+    cp -r ${piWebAccess}/* $out/pi-web-access/
+  '';
 in {
   home.packages = [
     pkgs.unstable."pi-coding-agent"
