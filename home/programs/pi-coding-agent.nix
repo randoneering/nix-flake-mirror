@@ -23,8 +23,8 @@ in {
           baseUrl = "https://ollama.randoneering.dev/v1";
           apiType = "openai-completions";
           models = [
-            {name = "qwen3.5:4b";}
-            {name = "gemma4:e2b";}
+            {id = "qwen3.5:4b";}
+            {id = "gemma4:e2b";}
           ];
         };
       };
