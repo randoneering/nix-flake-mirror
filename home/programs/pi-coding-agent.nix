@@ -5,6 +5,7 @@
   pi-theme,
   pi-subagents,
   pi-web-access,
+  pi-mcp-adapter,
   ...
 }: let
   piWebAccess = pkgs.buildNpmPackage {
@@ -19,11 +20,25 @@
     '';
   };
 
+  piMcpAdapter = pkgs.buildNpmPackage {
+    pname = "pi-mcp-adapter";
+    version = "2.4.0";
+    src = pi-mcp-adapter;
+    npmDepsHash = lib.fakeHash;
+    dontNpmBuild = true;
+    installPhase = ''
+      mkdir -p $out
+      cp -r . $out/
+    '';
+  };
+
   extensionsDir = pkgs.runCommand "pi-agent-extensions" {} ''
     mkdir -p $out/pi-web-access
     cp -r ${piWebAccess}/* $out/pi-web-access/
     mkdir -p $out/pi-subagents
     cp -r ${pi-subagents}/* $out/pi-subagents/
+    mkdir -p $out/pi-mcp-adapter
+    cp -r ${piMcpAdapter}/* $out/pi-mcp-adapter/
   '';
 in {
   home.packages = [

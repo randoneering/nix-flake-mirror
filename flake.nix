@@ -28,6 +28,10 @@
       url = "github:nicobailon/pi-web-access";
       flake = false;
     };
+    pi-mcp-adapter = {
+      url = "github:nicobailon/pi-mcp-adapter";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
