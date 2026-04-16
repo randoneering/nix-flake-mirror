@@ -20,6 +20,19 @@ in
         ollama_api_key = {};
       };
 
+      templates."opencode.json" = {
+        path = "${config.home.homeDirectory}/.config/opencode/opencode.json";
+        content = builtins.toJSON {
+          provider = {
+            ollama = {
+              options = {
+                apiKey = config.sops.placeholder.ollama_api_key;
+              };
+            };
+          };
+        };
+      };
+
       templates."pi-agent-models.json" = {
         path = "${config.home.homeDirectory}/.pi/agent/models.json";
         content = builtins.toJSON {
