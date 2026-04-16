@@ -5,6 +5,7 @@
   agent-config,
   ...
 }: let
+  # Check if sops secrets are available
   toOpencodeEnvSyntax = value:
     if builtins.isAttrs value
     then lib.mapAttrs (_: toOpencodeEnvSyntax) value
@@ -70,6 +71,7 @@ in {
           name = "Ollama (remote)";
           options = {
             baseURL = "https://ollama.randoneering.dev/v1";
+            apiKey = config.sops.placeholder.ollama_api_key;
           };
           models = {
             "qwen3.5:4b" = {
