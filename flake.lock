@@ -361,6 +361,22 @@
     },
     "nixpkgs_5": {
       "locked": {
+        "lastModified": 1775710090,
+        "narHash": "sha256-ar3rofg+awPB8QXDaFJhJ2jJhu+KqN/PRCXeyuXR76E=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "4c1018dae018162ec878d42fec712642d214fdfa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_6": {
+      "locked": {
         "lastModified": 1775888245,
         "narHash": "sha256-nwASzrRDD1JBEu/o8ekKYEXm/oJW6EMCzCRdrwcLe90=",
         "owner": "NixOS",
@@ -500,6 +516,7 @@
         "pi-subagents": "pi-subagents",
         "pi-theme": "pi-theme",
         "pi-web-access": "pi-web-access",
+        "sidra": "sidra",
         "sops-nix": "sops-nix"
       }
     },
@@ -536,9 +553,27 @@
         "type": "github"
       }
     },
-    "sops-nix": {
+    "sidra": {
       "inputs": {
         "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1776088309,
+        "narHash": "sha256-a/IICxRlGeb+KrwFA6bHuiL7nI/kAtbQ5+676PF5Cag=",
+        "owner": "wimpysworld",
+        "repo": "sidra",
+        "rev": "bc0cb57cbdf43aad656cfe44f0a1b2e2222e5dd8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wimpysworld",
+        "repo": "sidra",
+        "type": "github"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "lastModified": 1776119890,
