@@ -6,6 +6,5 @@
     ../../home/shell
     ../../home/utils
     ../../home/languages
-    ./pi.nix
   ];
 }

@@ -16,22 +16,6 @@
       url = "github:randoneering/randoneering-agent-guide";
       flake = false;
     };
-    pi-theme = {
-      url = "github:randoneering/popping-and-locking-pi-theme";
-      flake = false;
-    };
-    pi-subagents = {
-      url = "github:nicobailon/pi-subagents";
-      flake = false;
-    };
-    pi-web-access = {
-      url = "github:nicobailon/pi-web-access";
-      flake = false;
-    };
-    pi-mcp-adapter = {
-      url = "github:nicobailon/pi-mcp-adapter";
-      flake = false;
-    };
     sidra.url = "github:wimpysworld/sidra";
   };
 
