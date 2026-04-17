@@ -32,6 +32,7 @@
       url = "github:nicobailon/pi-mcp-adapter";
       flake = false;
     };
+    sidra.url = "github:wimpysworld/sidra";
   };
 
   outputs = inputs @ {

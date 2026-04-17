@@ -1,5 +1,11 @@
-{pkgs, ...}: {
-  home.packages = with pkgs.unstable;
+{
+  pkgs,
+  sidra,
+  ...
+}: {
+  home.packages =
+    [sidra.packages.${pkgs.stdenv.hostPlatform.system}.default]
+    ++ (with pkgs.unstable;
     [
       # utils
       dbeaver-bin
@@ -37,5 +43,5 @@
       duckdb
       # Office
       onlyoffice-desktopeditors
-    ];
+    ]);
 }
