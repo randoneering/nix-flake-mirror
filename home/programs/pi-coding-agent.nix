@@ -12,7 +12,7 @@
     pname = "pi-web-access";
     version = "0.10.6";
     src = pi-web-access;
-    npmDepsHash = lib.fakeHash;
+    npmDepsHash = "sha256-zau3eaJoa8pE3A5COXwyTLSesoePgYqrnRCg3SMSarw=";
     dontNpmBuild = true;
     installPhase = ''
       mkdir -p $out
@@ -24,7 +24,7 @@
     pname = "pi-mcp-adapter";
     version = "2.4.0";
     src = pi-mcp-adapter;
-    npmDepsHash = lib.fakeHash;
+    npmDepsHash = "sha256-9P71EDq++Bmez3QDEbOL+PCtCFI2ajxy345stBOBp8k=";
     dontNpmBuild = true;
     installPhase = ''
       mkdir -p $out
