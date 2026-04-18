@@ -79,8 +79,8 @@ in {
             "gemma4:e2b" = {
               name = "gemma4:e2b";
             };
-            "gemma4:e4b" = {
-              name = "gemma4:e4b";
+            "qwen3.5:9b" = {
+              name = "qwen3.5:9b";
             };
           };
         };
