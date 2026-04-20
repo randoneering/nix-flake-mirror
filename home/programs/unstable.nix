@@ -5,8 +5,7 @@
 }: {
   home.packages =
     [sidra.packages.${pkgs.stdenv.hostPlatform.system}.default]
-    ++ (with pkgs.unstable;
-    [
+    ++ (with pkgs.unstable; [
       # utils
       dbeaver-bin
       obsidian
@@ -17,6 +16,7 @@
       jq
       nodejs
       zed-editor
+      bootdev-cli
       # k8s
       kubectl
       minikube
