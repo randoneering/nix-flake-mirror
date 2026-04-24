@@ -14,7 +14,7 @@
       recursive = true;
     };
     ".pi/agent/agents" = {
-      source = "${agent-config}/agents";
+      source = "${agent-config}/pi-agent/agents";
       recursive = true;
     };
     ".pi/agent/settings.json".text = builtins.toJSON {
