@@ -17,6 +17,7 @@
       nodejs
       zed-editor
       bootdev-cli
+      go
       # k8s
       kubectl
       minikube
