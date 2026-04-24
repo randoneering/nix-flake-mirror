@@ -98,14 +98,21 @@
 in {
   home.packages = [wrappedPiPackage];
 
+  home.activation.piAgentsFlatten = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    pi_agents_dir="$HOME/.pi/agent/agents"
+    mkdir -p "$pi_agents_dir"
+    # Remove stale flat agent files from previous runs
+    find "$pi_agents_dir" -maxdepth 1 -name '*.md' -delete
+    # Flatten all categorised agent files into the top level
+    find "${agent-config}/pi-agent/agents" -name '*.md' | while read -r f; do
+      ln -sf "$f" "$pi_agents_dir/$(basename "$f")"
+    done
+  '';
+
   home.file = {
     ".pi/agent/AGENTS.md".source = "${agent-config}/AGENTS.md";
     ".pi/agent/skills" = {
       source = "${agent-config}/skills";
-      recursive = true;
-    };
-    ".pi/agent/agents" = {
-      source = "${agent-config}/pi-agent/agents";
       recursive = true;
     };
     ".pi/agent/settings.json".text = settingsJson;
