@@ -75,6 +75,8 @@
       rm "$out/bin/pi"
       makeWrapper "${piPackage}/bin/pi" "$out/bin/pi" \
         --set-default PI_SKIP_VERSION_CHECK 1 \
+        --run 'export NPM_CONFIG_PREFIX="$HOME/.pi/agent/npm-global"' \
+        --run 'export PATH="$HOME/.pi/agent/npm-global/bin:$PATH"' \
         --run 'read_secret() {
           local secret_name="$1"
           local secret_path="$2"
