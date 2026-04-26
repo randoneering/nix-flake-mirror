@@ -16,17 +16,14 @@
       jq
       nodejs
       zed-editor
-      bootdev-cli
       go
       # k8s
       kubectl
-      minikube
       docker
       docker-compose
       # Security
-
       prowler
-      scorecard
+
       # Static Site
       hugo
 
@@ -37,9 +34,7 @@
       # Social
       discord
       slack
-      signal-desktop
       brave
-      androidenv.androidPkgs.platform-tools
       # database-stuff
       duckdb
       # Office
