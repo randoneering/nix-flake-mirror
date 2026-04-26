@@ -16,6 +16,11 @@
       jq
       nodejs
       zed-editor
+<<<<<<< HEAD
+=======
+      bootdev-cli
+      lmstudio
+>>>>>>> 1138ba5093849886ab7e043be7b90767e4775ebd
       go
       # k8s
       kubectl

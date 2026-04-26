@@ -66,6 +66,21 @@ in {
     settings = {
       autoupdate = true;
       provider = {
+        lmstudio = {
+          npm = "@ai-sdk/openai-compatible";
+          name = "LM Studio (remote)";
+          options = {
+            baseURL = "https://lmstudio.randoneering.dev/v1";
+          };
+          models = {
+            "google/gemma-4-e4b" = {
+              name = "Gemma 4 E4B";
+            };
+            "qwen3.5-9b-claude-4.6-opus-reasoning-distilled-v2" = {
+              name = "Qwen3.5 9B (Opus Distilled)";
+            };
+          };
+        };
         ollama = {
           npm = "@ai-sdk/openai-compatible";
           name = "Ollama (remote)";

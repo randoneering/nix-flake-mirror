@@ -37,6 +37,15 @@ in
         path = "${config.home.homeDirectory}/.pi/agent/models.json";
         content = builtins.toJSON {
           providers = {
+            lmstudio = {
+              baseUrl = "https://lmstudio.randoneering.dev/v1";
+              api = "openai-completions";
+              apiKey = "lm-studio";
+              models = [
+                {id = "google/gemma-4-e4b";}
+                {id = "qwen3.5-9b-claude-4.6-opus-reasoning-distilled-v2";}
+              ];
+            };
             ollama = {
               baseUrl = "https://ollama.randoneering.dev/v1";
               api = "openai-completions";
