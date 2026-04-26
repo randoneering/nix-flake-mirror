@@ -17,6 +17,7 @@
       nodejs
       zed-editor
       bootdev-cli
+      lmstudio
       go
       # k8s
       kubectl
