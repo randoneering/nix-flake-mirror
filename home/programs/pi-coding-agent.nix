@@ -98,6 +98,30 @@
 in {
   home.packages = [wrappedPiPackage];
 
+  home.activation.piModelsJson = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p "$HOME/.pi/agent"
+    ${lib.optionalString (ollamaApiKeyPath != null) ''
+      ollama_key="$(< "${ollamaApiKeyPath}")"
+      ${pkgs.jq}/bin/jq -n --arg key "$ollama_key" '
+        {
+          providers: {
+            lmstudio: {
+              api: "openai-completions",
+              apiKey: "lm-studio",
+              baseUrl: "https://lmstudio.randoneering.dev/v1",
+              models: [{id: "google/gemma-4-e4b"}, {id: "qwen3.5-9b-claude-4.6-opus-reasoning-distilled-v2"}]
+            },
+            ollama: {
+              api: "openai-completions",
+              apiKey: $key,
+              baseUrl: "https://ollama.randoneering.dev/v1",
+              models: [{id: "qwen3.5:4b"}, {id: "gemma4:e2b"}]
+            }
+          }
+        }' > "$HOME/.pi/agent/models.json"
+    ''}
+  '';
+
   home.activation.piAgentsFlatten = lib.hm.dag.entryAfter ["writeBoundary"] ''
     pi_agents_dir="$HOME/.pi/agent/agents"
     mkdir -p "$pi_agents_dir"
