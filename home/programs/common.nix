@@ -20,7 +20,6 @@ in {
     nfs-utils
     git
     wget
-    marp-cli
     awscli2
     google-cloud-sdk
     gh
@@ -56,7 +55,6 @@ in {
     # Security
     proton-pass
     proton-authenticator
-    bitwarden-desktop
     protonvpn-gui
     protonmail-desktop
     floxMcpWrapper

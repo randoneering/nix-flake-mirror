@@ -16,18 +16,19 @@
       jq
       nodejs
       zed-editor
+<<<<<<< HEAD
+=======
       bootdev-cli
       lmstudio
+>>>>>>> 1138ba5093849886ab7e043be7b90767e4775ebd
       go
       # k8s
       kubectl
-      minikube
       docker
       docker-compose
       # Security
-
       prowler
-      scorecard
+
       # Static Site
       hugo
 
@@ -38,9 +39,7 @@
       # Social
       discord
       slack
-      signal-desktop
       brave
-      androidenv.androidPkgs.platform-tools
       # database-stuff
       duckdb
       # Office
