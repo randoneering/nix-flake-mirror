@@ -114,11 +114,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1778018365,
-        "narHash": "sha256-eZBtsAxOIU4gIi6t/zasr+AmvVH5yfm4Z9D8z5P2DPY=",
+        "lastModified": 1778068805,
+        "narHash": "sha256-TqCPmZs0A8M5xNqgk3pzXyU02/9akapYjlYi1M6n8J0=",
         "owner": "flox",
         "repo": "flox",
-        "rev": "f13b99056f4a2049b0eb897af6f3bde33cd08a52",
+        "rev": "ecf6d758f5ebe0212d88c558ff6b46c6bddf7532",
         "type": "github"
       },
       "original": {
@@ -401,11 +401,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1777963724,
-        "narHash": "sha256-DM3sF8ikMrqPGapSOpYYtwqfYMU/xDaP/UzmmdC0lgI=",
+        "lastModified": 1778049651,
+        "narHash": "sha256-EC5pBiLcP/EVmYWldJRNfkChCqF9rkeTnTs8t9Cs+ZY=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "5dc8f3a34cf46d98f6a0073368adc2746b854cf6",
+        "rev": "88dbbad1f44efe3d2c18903e2c7542452f7bdfd6",
         "type": "github"
       },
       "original": {
@@ -490,11 +490,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1778009480,
-        "narHash": "sha256-1TVooIteIpPda1Sjv81Xcg4XnYfpOytL5mnsMWtee6I=",
+        "lastModified": 1778090423,
+        "narHash": "sha256-EdjUyxtqmb3r9+ufwHSoU7C1KFAI4KltXQWmbVoH4Cg=",
         "owner": "wimpysworld",
         "repo": "sidra",
-        "rev": "2c4e7fa82ca6e2bfcba0cd790aaf6a27109ec1d9",
+        "rev": "0be0e9fb0edcbe0d37b08f1f785e242990b60187",
         "type": "github"
       },
       "original": {
