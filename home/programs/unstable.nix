@@ -18,6 +18,9 @@
       zed-editor
       lmstudio
       go
+      # Rust
+      rustup
+      cargo
       jetbrains.rust-rover
       # k8s
       kubectl
