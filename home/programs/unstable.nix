@@ -18,6 +18,7 @@
       zed-editor
       lmstudio
       go
+      jetbrains.rust-rover
       # k8s
       kubectl
       docker
