@@ -9,4 +9,10 @@
     enableFishIntegration = true;
     enableBashIntegration = true;
   };
+
+  programs.kitty = {
+    enable = true;
+    package = pkgs.unstable.kitty;
+    extraConfig = builtins.readFile ./themes/popping-and-locking.conf;
+  };
 }
