@@ -17,8 +17,14 @@
       nodejs
       zed-editor
       lmstudio
+
+      # Go
       go
-      # k8s
+      # Rust
+      rustup
+      jetbrains.rust-rover
+
+      # k8s/Containers
       kubectl
       docker
       docker-compose
@@ -35,7 +41,7 @@
       # Social
       discord
       slack
-      brave
+
       # database-stuff
       duckdb
       # Office
