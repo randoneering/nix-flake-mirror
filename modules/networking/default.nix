@@ -1,6 +1,6 @@
 {
   imports = [
     ./tailscale.nix
-    ./wireguard.nix
+    ./networkmanager-wireguard.nix
   ];
 }
