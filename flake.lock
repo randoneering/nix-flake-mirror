@@ -490,11 +490,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1778090423,
-        "narHash": "sha256-EdjUyxtqmb3r9+ufwHSoU7C1KFAI4KltXQWmbVoH4Cg=",
+        "lastModified": 1778098449,
+        "narHash": "sha256-mzH9W9VOAbJf61XiYtPa/rALPbFVcFs/3OkmLp14nYs=",
         "owner": "wimpysworld",
         "repo": "sidra",
-        "rev": "0be0e9fb0edcbe0d37b08f1f785e242990b60187",
+        "rev": "0f8863f622fd346328afefe1b4093df77a5bc1b2",
         "type": "github"
       },
       "original": {

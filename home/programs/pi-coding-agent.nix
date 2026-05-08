@@ -47,8 +47,8 @@
       "npm:@samfp/pi-memory"
       "git:github.com/randoneering/popping-and-locking-pi-theme"
     ];
-    defaultProvider = "ollama";
-    defaultModel = "qwen3.5:4b";
+    defaultProvider = "openai-codex";
+    defaultModel = "gpt-5.4";
     defaultThinkingLevel = "medium";
     theme = "popping-and-locking";
   };
