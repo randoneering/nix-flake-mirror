@@ -20,10 +20,8 @@
 
       # Go
       go
-      # Rust
-      rustup
-      jetbrains.rust-rover
-
+      # JavaScript
+      pnpm
       # k8s/Containers
       kubectl
       docker
