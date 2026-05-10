@@ -22,6 +22,7 @@
       go
       # JavaScript
       pnpm
+      biome
       # k8s/Containers
       kubectl
       docker

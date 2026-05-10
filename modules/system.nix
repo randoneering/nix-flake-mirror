@@ -45,6 +45,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  programs.nix-ld.enable = true;
+
   fonts = {
     packages = with pkgs; [
       # nerdfonts

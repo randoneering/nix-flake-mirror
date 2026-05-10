@@ -5,7 +5,13 @@
   agent-config,
   ...
 }: let
-  # Check if sops secrets are available
+  digitaloceanTokenPath = lib.attrByPath ["sops" "secrets" "digitalocean_api_token" "path"] null config;
+  mcpNixosTokenPath = lib.attrByPath ["sops" "secrets" "mcp_nixos_token" "path"] null config;
+  postgresMcpTokenPath = lib.attrByPath ["sops" "secrets" "postgres_mcp_token" "path"] null config;
+  context7TokenPath = lib.attrByPath ["sops" "secrets" "context7_token" "path"] null config;
+
+  opencodePackage = pkgs.unstable.opencode;
+
   toOpencodeEnvSyntax = value:
     if builtins.isAttrs value
     then lib.mapAttrs (_: toOpencodeEnvSyntax) value
@@ -44,11 +50,42 @@
         )
     )
     config.programs.mcp.servers;
-in {
-  home.sessionVariables = {
-    OPENCODE_OLLAMA_BASE_URL = "https://ollama.randoneering.dev/v1";
-  };
 
+  secretExports = lib.concatStringsSep " \\\n        " (
+    lib.filter (value: value != "") [
+      (lib.optionalString (digitaloceanTokenPath != null) "--run 'export DIGITALOCEAN_API_TOKEN=\"$(read_secret DIGITALOCEAN_API_TOKEN \"${digitaloceanTokenPath}\")\"'")
+      (lib.optionalString (mcpNixosTokenPath != null) "--run 'export MCP_NIXOS_TOKEN=\"$(read_secret MCP_NIXOS_TOKEN \"${mcpNixosTokenPath}\")\"'")
+      (lib.optionalString (postgresMcpTokenPath != null) "--run 'export POSTGRES_MCP_TOKEN=\"$(read_secret POSTGRES_MCP_TOKEN \"${postgresMcpTokenPath}\")\"'")
+      (lib.optionalString (context7TokenPath != null) "--run 'export CONTEXT7_TOKEN=\"$(read_secret CONTEXT7_TOKEN \"${context7TokenPath}\")\"'")
+    ]
+  );
+
+  wrappedOpencodePackage = pkgs.symlinkJoin {
+    name = "${opencodePackage.name}-with-runtime-secrets";
+    paths = [opencodePackage];
+    nativeBuildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      rm "$out/bin/opencode"
+      makeWrapper "${opencodePackage}/bin/opencode" "$out/bin/opencode" \
+        --run 'read_secret() {
+          local secret_name="$1"
+          local secret_path="$2"
+          local value
+          if [ ! -r "$secret_path" ]; then
+            printf "opencode: required secret %s is missing or unreadable: %s\n" "$secret_name" "$secret_path" >&2
+            exit 1
+          fi
+          value="$(<"$secret_path")"
+          if [ -z "$value" ]; then
+            printf "opencode: required secret %s is empty: %s\n" "$secret_name" "$secret_path" >&2
+            exit 1
+          fi
+          printf "%s" "$value"
+        }' \
+        ${secretExports}
+    '';
+  };
+in {
   xdg.configFile."opencode/skills" = {
     source = "${agent-config}/skills";
     recursive = true;
@@ -62,44 +99,9 @@ in {
   programs.opencode = {
     enable = true;
     rules = "${agent-config}/AGENTS.md";
-    package = pkgs.unstable.opencode;
+    package = wrappedOpencodePackage;
     settings = {
       autoupdate = true;
-      provider = {
-        lmstudio = {
-          npm = "@ai-sdk/openai-compatible";
-          name = "LM Studio (remote)";
-          options = {
-            baseURL = "https://lmstudio.randoneering.dev/v1";
-          };
-          models = {
-            "google/gemma-4-e4b" = {
-              name = "Gemma 4 E4B";
-            };
-            "qwen3.5-9b-claude-4.6-opus-reasoning-distilled-v2" = {
-              name = "Qwen3.5 9B (Opus Distilled)";
-            };
-          };
-        };
-        ollama = {
-          npm = "@ai-sdk/openai-compatible";
-          name = "Ollama (remote)";
-          options = {
-            baseURL = "https://ollama.randoneering.dev/v1";
-          };
-          models = {
-            "qwen3.5:4b" = {
-              name = "Qwen3.5 4B";
-            };
-            "gemma4:e2b" = {
-              name = "gemma4:e2b";
-            };
-            "qwen3.5:9b" = {
-              name = "qwen3.5:9b";
-            };
-          };
-        };
-      };
       mcp = sharedMcpServers;
     };
   };

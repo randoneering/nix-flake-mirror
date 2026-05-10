@@ -134,9 +134,9 @@ Autocomplete uses `blink-cmp` with keymap preset `enter`.
 
 `programs.opencode` is configured in `home/programs/opencode.nix` with:
 
-- Remote Ollama provider (`https://ollama.randoneering.dev/v1`)
+- Same shared MCP server set as Pi via `programs.mcp.servers`
+- Runtime secret exports for env-backed MCP auth
 - Flox MCP wrapper (`flox-mcp`)
-- DigitalOcean Apps and Databases MCP endpoints
 - Neon MCP endpoint
 
 ### Secrets (sops-nix)
