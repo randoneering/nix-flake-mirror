@@ -17,7 +17,7 @@
       nodejs
       zed-editor
       lmstudio
-
+      atuin-desktop
       # Go
       go
       # JavaScript
@@ -27,6 +27,7 @@
       kubectl
       docker
       docker-compose
+      talosctl
       # Security
       prowler
 
