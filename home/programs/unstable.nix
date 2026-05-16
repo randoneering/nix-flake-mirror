@@ -28,6 +28,7 @@
       docker
       docker-compose
       talosctl
+      omnictl
       # Security
       prowler
 
