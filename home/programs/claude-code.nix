@@ -46,6 +46,20 @@ in {
           Authorization = "Bearer \${POSTGRES_MCP_TOKEN}";
         };
       };
+      quackit = {
+        command = "uvx";
+        args = [
+          "--from"
+          "git+https://github.com/randoneering/quackit-mcp@v0.1.4"
+          "quackit"
+          "serve"
+          "--transport"
+          "stdio"
+        ];
+        env = {
+          QUACKIT_DATABASE_URL = "\${QUACKIT_DATABASE_URL}";
+        };
+      };
       context7 = {
         url = "https://context7.randoneering.dev/mcp";
         headers = {
