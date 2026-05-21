@@ -29,6 +29,9 @@
       docker-compose
       talosctl
       omnictl
+      helm
+      kustomize
+      k9s
       # Security
       prowler
 
