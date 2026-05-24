@@ -7,19 +7,19 @@
       vim.additionalRuntimePaths = [ ./nvim ];
       vim.luaConfigPost = ''
         vim.o.termguicolors = true
-        vim.cmd.colorscheme("popping_and_locking")
+        vim.cmd.colorscheme("catppuccin")
 
         local palette = {
-          bg = "#181921",
-          bg_alt = "#1d2021",
-          fg = "#ebdbb2",
-          muted = "#a89984",
-          gray = "#928374",
-          red_bright = "#f42c3e",
-          yellow_bright = "#fabd2f",
-          blue = "#458588",
-          blue_bright = "#99c6ca",
-          cyan_bright = "#7ec16e",
+          bg = "#1e1e2e",
+          bg_alt = "#181825",
+          fg = "#cdd6f4",
+          muted = "#bac2de",
+          gray = "#9399b2",
+          red_bright = "#f38ba8",
+          yellow_bright = "#f9e2af",
+          blue = "#89b4fa",
+          blue_bright = "#b4befe",
+          cyan_bright = "#94e2d5",
         }
 
         local hl = function(group, opts)
@@ -129,6 +129,24 @@
 
       vim.comments.comment-nvim.enable = true;
       vim.git.enable = true;
+      vim.extraPlugins = {
+        catppuccin = {
+          package = pkgs.vimPlugins.catppuccin-nvim;
+          setup = "require('catppuccin').setup({ flavour = 'mocha' })";
+        };
+        telescope-luasnip = {
+          package = pkgs.vimUtils.buildVimPlugin {
+            pname = "telescope-luasnip.nvim";
+            version = "2022-09-18";
+            src = pkgs.fetchFromGitHub {
+              owner = "benfowler";
+              repo = "telescope-luasnip.nvim";
+              rev = "07a2a2936a7557404c782dba021ac0a03165b343";
+              sha256 = "0wvp334pwrn5q81ynq6af37fg1b1r8k8ji9fzdm4xdz32gd1ayzm";
+            };
+          };
+        };
+      };
 
       vim.autocomplete.enableSharedCmpSources = true;
       vim.autocomplete.blink-cmp.enable = true;
@@ -162,23 +180,23 @@
       vim.statusline.lualine.setupOpts.options.theme = {
         normal = {
           a = {
-            fg = "#181921";
-            bg = "#fabd2f";
+            fg = "#1e1e2e";
+            bg = "#89b4fa";
             gui = "bold";
           };
           b = {
-            fg = "#ebdbb2";
-            bg = "#1d2021";
+            fg = "#cdd6f4";
+            bg = "#181825";
           };
           c = {
-            fg = "#a89984";
-            bg = "#181921";
+            fg = "#bac2de";
+            bg = "#1e1e2e";
           };
         };
         insert = {
           a = {
-            fg = "#181921";
-            bg = "#7ec16e";
+            fg = "#1e1e2e";
+            bg = "#a6e3a1";
             gui = "bold";
           };
         };

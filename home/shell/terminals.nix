@@ -3,7 +3,7 @@
     enable = true;
     package = pkgs.unstable.ghostty;
     settings = {
-      theme = "Popping And Locking";
+      theme = "Catppuccin Mocha";
       shell-integration-features = "sudo";
     };
     enableFishIntegration = true;
@@ -13,6 +13,6 @@
   programs.kitty = {
     enable = true;
     package = pkgs.unstable.kitty;
-    extraConfig = builtins.readFile ./themes/popping-and-locking.conf;
+    extraConfig = builtins.readFile "${pkgs.kitty-themes}/share/kitty-themes/themes/Catppuccin-Mocha.conf";
   };
 }

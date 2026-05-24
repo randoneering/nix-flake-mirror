@@ -45,12 +45,12 @@
       "npm:pi-web-access"
       "npm:pi-caveman"
       "npm:@samfp/pi-memory"
-      "git:github.com/randoneering/popping-and-locking-pi-theme"
+      "git:github.com/joelhooks/pi-theme-catppuccin-mocha"
     ];
     defaultProvider = "openai-codex";
     defaultModel = "gpt-5.4";
     defaultThinkingLevel = "medium";
-    theme = "popping-and-locking";
+    theme = "catppuccin-mocha";
   };
 
   mcpJson = builtins.toJSON {
