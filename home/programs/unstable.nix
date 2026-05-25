@@ -28,7 +28,7 @@
     docker-compose
     talosctl
     omnictl
-    helm
+    kubernetes-helm
     kustomize
     k9s
     # Security
