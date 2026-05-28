@@ -3,6 +3,7 @@
     unset PYTHONPATH PYTHONHOME PYTHONNOUSERSITE VIRTUAL_ENV
     exec flox activate -r flox/flox-mcp-server -- flox-mcp "$@"
   '';
+  orchestramcp = pkgs.callPackage ../../pkgs/orchestra-mcp {};
 in {
   home.packages = with pkgs; [
     # archives
@@ -58,6 +59,7 @@ in {
     protonvpn-gui
     protonmail-desktop
     floxMcpWrapper
+    orchestramcp
   ];
 
   # Proton's Electron launchers do not consistently advertise a desktop class

@@ -90,6 +90,12 @@ in {
           Authorization = "\${DIGITALOCEAN_API_TOKEN}";
         };
       };
+      orchestra = {
+        command = "orchestra-mcp";
+        env = {
+          ORCHESTRA_API_KEY = "\${ORCHESTRA_API_KEY}";
+        };
+      };
     };
   };
 

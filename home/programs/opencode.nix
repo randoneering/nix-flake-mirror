@@ -10,6 +10,7 @@
   postgresMcpTokenPath = lib.attrByPath ["sops" "secrets" "postgres_mcp_token" "path"] null config;
   context7TokenPath = lib.attrByPath ["sops" "secrets" "context7_token" "path"] null config;
   quackitDatabaseUrlPath = lib.attrByPath ["sops" "secrets" "quackit_database_url" "path"] null config;
+  orchestraApiKeyPath = lib.attrByPath ["sops" "secrets" "orchestra_api_key" "path"] null config;
 
   opencodePackage = pkgs.unstable.opencode;
 
@@ -59,6 +60,7 @@
       (lib.optionalString (postgresMcpTokenPath != null) "--run 'export POSTGRES_MCP_TOKEN=\"$(read_secret POSTGRES_MCP_TOKEN \"${postgresMcpTokenPath}\")\"'")
       (lib.optionalString (context7TokenPath != null) "--run 'export CONTEXT7_TOKEN=\"$(read_secret CONTEXT7_TOKEN \"${context7TokenPath}\")\"'")
       (lib.optionalString (quackitDatabaseUrlPath != null) "--run 'export QUACKIT_DATABASE_URL=\"$(read_secret QUACKIT_DATABASE_URL \"${quackitDatabaseUrlPath}\")\"'")
+      (lib.optionalString (orchestraApiKeyPath != null) "--run 'export ORCHESTRA_API_KEY=\"$(read_secret ORCHESTRA_API_KEY \"${orchestraApiKeyPath}\")\"'")
     ]
   );
 

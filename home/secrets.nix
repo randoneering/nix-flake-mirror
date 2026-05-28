@@ -24,6 +24,8 @@ in
         ollama_api_key = {};
       } // lib.optionalAttrs (lib.hasInfix "quackit_database_url:" sopsFileContents) {
         quackit_database_url = {};
+      } // lib.optionalAttrs (lib.hasInfix "orchestra_api_key:" sopsFileContents) {
+        orchestra_api_key = {};
       };
 
       templates."pi-agent-models.json" = {
