@@ -31,6 +31,7 @@
     kubernetes-helm
     kustomize
     k9s
+    headlamp
     # Security
     prowler
 
