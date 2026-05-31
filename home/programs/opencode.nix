@@ -104,7 +104,16 @@ in {
     package = wrappedOpencodePackage;
     settings = {
       autoupdate = true;
+      model = "lmstudio/gemma-4-e4b";
       mcp = sharedMcpServers;
+      provider.lmstudio = {
+        api = "openai";
+        options = {
+          baseURL = "http://localhost:1234/v1";
+          apiKey = "lm-studio";
+        };
+        models."gemma-4-e4b".id = "google/gemma-4-e4b";
+      };
     };
   };
 }
