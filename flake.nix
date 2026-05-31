@@ -115,7 +115,7 @@
             }
           ];
         };
-      nix-wks = let
+      wks = let
         username = "justin";
         hostname = "wks";
         overlay-unstable = final: prev: {
