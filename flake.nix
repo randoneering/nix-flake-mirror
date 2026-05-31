@@ -33,48 +33,6 @@
     ...
   }: {
     nixosConfigurations = {
-      nix-station = let
-        username = "randoneering";
-        hostname = "nix-station";
-        overlay-unstable = final: prev: {
-          unstable = import nixpkgs-unstable {
-            system = prev.stdenv.hostPlatform.system;
-            config.allowUnfree = true;
-          };
-        };
-        specialArgs = {inherit username hostname;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-          modules = [
-            (
-              {
-                config,
-                pkgs,
-                ...
-              }: {
-                nixpkgs.overlays = [overlay-unstable];
-              }
-            )
-            ./hosts/${hostname}/default.nix
-            ./users/${username}/nixos.nix
-            inputs.flox.nixosModules.flox
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.sharedModules = [
-                nvf.homeManagerModules.default
-                sops-nix.homeManagerModules.sops
-              ];
-
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home.nix;
-            }
-          ];
-        };
-
       nix-L16 = let
         username = "justin";
         hostname = "nix-l16";
@@ -159,7 +117,7 @@
         };
       nix-wks = let
         username = "justin";
-        hostname = "nix-wks";
+        hostname = "wks";
         overlay-unstable = final: prev: {
           unstable = import nixpkgs-unstable {
             system = prev.stdenv.hostPlatform.system;

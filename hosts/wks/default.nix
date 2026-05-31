@@ -20,10 +20,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Boot
-  boot.initrd.luks.devices."luks-4db000c3-1115-45d2-9357-c6e83fdbd853".device = "/dev/disk/by-uuid/4db000c3-1115-45d2-9357-c6e83fdbd853";
-
-  # SWAP
-  boot.initrd.luks.devices."luks-1e0ef351-2fad-4271-a4e8-c8ab2a7a41ff".device = "/dev/disk/by-uuid/1e0ef351-2fad-4271-a4e8-c8ab2a7a41ff";
+  boot.initrd.luks.devices."luks-e795a919-6fdc-42e4-b35d-1ed2eb10e962".device = "/dev/disk/by-uuid/e795a919-6fdc-42e4-b35d-1ed2eb10e962";
 
   # Steam
   programs.steam = {
@@ -35,6 +32,7 @@
   # Networking
   networking.hostName = "nix-wks";
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
   # Enable 32bit
   hardware.graphics.enable32Bit = true;
   # Enable NFS
@@ -49,11 +47,6 @@
     device = "nas.randoneering.cloud:/mnt/randoneering_prod/NextCloud";
     fsType = "nfs";
     options = ["x-systemd.automount" "noauto" "x-systemd.after=network-online.target" "x-systemd.mount-timeout=5s"];
-  };
-  fileSystems."/mnt/steam" = {
-    device = "/dev/disk/by-partuuid/adaea7d6-aa45-49ed-ba8c-4162bd3ea5e5";
-    fsType = "ext4";
-    options = ["nofail"];
   };
   networking.firewall = {
     enable = true;
@@ -78,6 +71,10 @@
         from = 11434;
         to = 11434;
       }
+      {
+        from = 1234;
+        to = 1234;
+      }
     ];
     allowedUDPPortRanges = [
       {
@@ -100,11 +97,15 @@
         from = 11434;
         to = 11434;
       }
+      {
+        from = 1234;
+        to = 1234;
+      }
     ];
   };
 
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }
