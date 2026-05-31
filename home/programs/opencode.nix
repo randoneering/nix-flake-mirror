@@ -92,12 +92,10 @@
 in {
   xdg.configFile."opencode/skills" = {
     source = "${agent-config}/skills";
-    recursive = true;
   };
 
   xdg.configFile."opencode/agents" = {
     source = "${agent-config}/agents";
-    recursive = true;
   };
 
   programs.opencode = {
