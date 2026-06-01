@@ -24,6 +24,11 @@
       })
   ) config.programs.mcp.servers;
 in {
+  home.file = {
+    ".claude/agents".source = "${agent-config}/agents";
+    ".claude/skills".source = "${agent-config}/skills";
+  };
+
   programs.mcp = {
     enable = true;
 
@@ -105,7 +110,5 @@ in {
     mcpServers = sharedMcpServers;
 
     context = "${agent-config}/AGENTS.md";
-    agentsDir = "${agent-config}/agents";
-    skills = "${agent-config}/skills";
   };
 }
