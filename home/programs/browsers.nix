@@ -8,11 +8,19 @@
     firefox = {
       enable = true;
       configPath = ".mozilla/firefox";
-      profiles.${username} = {};
+      profiles.${username} = {
+        extensions = {
+          force = true;
+        };
+      };
     };
     librewolf = {
       enable = true;
-      profiles.${username} = {};
+      profiles.${username} = {
+        extensions = {
+          force = true;
+        };
+      };
     };
   };
 }
