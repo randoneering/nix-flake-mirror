@@ -48,7 +48,7 @@
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
-          system = "x86-64_linux";
+          system = "x86_64-linux";
           modules = [
             (
               {
@@ -88,7 +88,7 @@
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
-          system = "x86-64_linux";
+          system = "x86_64-linux";
           modules = [
             (
               {
@@ -128,7 +128,7 @@
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
-          system = "x86-64_linux";
+          system = "x86_64-linux";
           modules = [
             (
               {

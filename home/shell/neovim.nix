@@ -44,7 +44,7 @@
       vim.extraPackages = with pkgs; [
         alejandra
         gofumpt
-        nodePackages.prettier
+        prettier
         pgformatter
         ruff
         rustfmt

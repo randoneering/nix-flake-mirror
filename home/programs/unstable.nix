@@ -14,7 +14,7 @@
     jq
     nodejs
     zed-editor
-    sidra.packages.${pkgs.system}.default
+    sidra.packages.${pkgs.stdenv.hostPlatform.system}.default
     lmstudio
     atuin-desktop
     # Go

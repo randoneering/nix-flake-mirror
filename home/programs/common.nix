@@ -41,7 +41,7 @@ in {
     # IDE/Database Manager
     mongosh
     postgresql
-    mysql80
+    mysql84
     pgformatter
 
     # IaC
@@ -56,7 +56,7 @@ in {
     # Security
     proton-pass
     proton-authenticator
-    protonvpn-gui
+    proton-vpn
     protonmail-desktop
     floxMcpWrapper
     orchestramcp

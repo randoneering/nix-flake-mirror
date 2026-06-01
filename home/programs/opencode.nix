@@ -106,7 +106,7 @@ in {
 
   programs.opencode = {
     enable = true;
-    rules = "${agent-config}/AGENTS.md";
+    context = "${agent-config}/AGENTS.md";
     package = wrappedOpencodePackage;
     settings = toOpencodeEnvSyntax {
       autoupdate = true;

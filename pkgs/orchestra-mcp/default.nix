@@ -1,6 +1,18 @@
 { lib, fetchFromGitHub, python312Packages, runtimeShell }:
 
-python312Packages.buildPythonPackage rec {
+let
+  py = python312Packages.overrideScope (
+    final: prev: {
+      cfn-lint = prev.cfn-lint.overridePythonAttrs (_: {
+        doCheck = false;
+      });
+      inquirer = prev.inquirer.overridePythonAttrs (_: {
+        doCheck = false;
+      });
+    }
+  );
+in
+py.buildPythonPackage rec {
   pname = "orchestramcp";
   version = "0.1.0";
 
@@ -12,8 +24,8 @@ python312Packages.buildPythonPackage rec {
   };
 
   pyproject = true;
-  nativeBuildInputs = [ python312Packages.hatchling ];
-  propagatedBuildInputs = with python312Packages; [ fastmcp httpx pydantic ];
+  nativeBuildInputs = [ py.hatchling ];
+  propagatedBuildInputs = with py; [ fastmcp httpx pydantic ];
 
   pythonImportsCheck = [ "orchestramcp" ];
   doCheck = false;
@@ -22,7 +34,7 @@ python312Packages.buildPythonPackage rec {
     mkdir -p $out/bin
     cat > $out/bin/orchestra-mcp <<'EOF'
     #!${runtimeShell}
-    exec ${python312Packages.python.interpreter}/bin/python -m orchestramcp "$@"
+    exec ${py.python.interpreter}/bin/python -m orchestramcp "$@"
     EOF
     chmod +x $out/bin/orchestra-mcp
   '';

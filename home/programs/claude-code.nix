@@ -104,8 +104,8 @@ in {
     package = pkgs.unstable.claude-code;
     mcpServers = sharedMcpServers;
 
-    memory.source = "${agent-config}/AGENTS.md";
+    context = "${agent-config}/AGENTS.md";
     agentsDir = "${agent-config}/agents";
-    skillsDir = "${agent-config}/skills";
+    skills = "${agent-config}/skills";
   };
 }
