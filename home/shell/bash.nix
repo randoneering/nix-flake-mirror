@@ -11,7 +11,6 @@
   context7TokenPath = lib.attrByPath ["sops" "secrets" "context7_token" "path"] null config;
   lmstudioApiKeyPath = lib.attrByPath ["sops" "secrets" "lmstudio_api_key" "path"] null config;
   quackitDatabaseUrlPath = lib.attrByPath ["sops" "secrets" "quackit_database_url" "path"] null config;
-  ollamaApiKeyPath = lib.attrByPath ["sops" "secrets" "ollama_api_key" "path"] null config;
   orchestraApiKeyPath = lib.attrByPath ["sops" "secrets" "orchestra_api_key" "path"] null config;
 in {
   programs.bash = {
@@ -50,11 +49,6 @@ in {
       + lib.optionalString (quackitDatabaseUrlPath != null) ''
         if [ -f "${quackitDatabaseUrlPath}" ]; then
           export QUACKIT_DATABASE_URL="$(<"${quackitDatabaseUrlPath}")"
-        fi
-      ''
-      + lib.optionalString (ollamaApiKeyPath != null) ''
-        if [ -f "${ollamaApiKeyPath}" ]; then
-          export OLLAMA_API_KEY="$(<"${ollamaApiKeyPath}")"
         fi
       ''
       + lib.optionalString (orchestraApiKeyPath != null) ''

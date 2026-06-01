@@ -48,6 +48,14 @@
     fsType = "nfs";
     options = ["x-systemd.automount" "noauto" "x-systemd.after=network-online.target" "x-systemd.mount-timeout=5s"];
   };
+
+  services.llama-cpp = {
+    enable = true;
+    host = "10.10.1.232";
+    modelPath = "/srv/models/gemma-4-e4b.gguf";
+    openFirewall = true;
+  };
+
   networking.firewall = {
     enable = true;
     allowedTCPPortRanges = [

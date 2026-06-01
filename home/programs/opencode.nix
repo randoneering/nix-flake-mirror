@@ -110,13 +110,12 @@ in {
     package = wrappedOpencodePackage;
     settings = toOpencodeEnvSyntax {
       autoupdate = true;
-      model = "lmstudio/gemma-4-e4b";
+      model = "llama.cpp/gemma-4-e4b";
       mcp = sharedMcpServers;
-      provider.lmstudio = {
+      provider.llama-cpp = {
         api = "openai";
         options = {
-          baseURL = "http://10.10.1.232:1234/v1";
-          apiKey = "\${LMSTUDIO_API_KEY}";
+          baseURL = "http://10.10.1.232:8090/v1";
         };
         models = {
           "gemma-4-e4b".id = "google/gemma-4-e4b";

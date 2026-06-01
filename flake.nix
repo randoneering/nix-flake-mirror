@@ -8,6 +8,8 @@
     nixpkgs-update.url = "github:nix-community/nixpkgs-update";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    catppuccin.url = "github:catppuccin/nix/release-26.05";
+    catppuccin.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     nvf.url = "github:notashelf/nvf";
     flox-nixpkgs.url = "github:flox/nixpkgs/stable";
@@ -25,13 +27,27 @@
     nixpkgs-update,
     nixpkgs-unstable,
     home-manager,
+    catppuccin,
     nvf,
     flox,
     flox-nixpkgs,
     sops-nix,
     agent-config,
     ...
-  }: {
+  }: let
+    nixosCatppuccinPath = ./modules/desktop/catppuccin.nix;
+    homeCatppuccinPath = ./home/theme/catppuccin.nix;
+
+    nixosCatppuccinModule =
+      if builtins.pathExists nixosCatppuccinPath
+      then nixosCatppuccinPath
+      else {};
+
+    homeCatppuccinModule =
+      if builtins.pathExists homeCatppuccinPath
+      then homeCatppuccinPath
+      else {};
+  in {
     nixosConfigurations = {
       nix-L16 = let
         username = "justin";
@@ -59,6 +75,8 @@
                 nixpkgs.overlays = [overlay-unstable];
               }
             )
+            catppuccin.nixosModules.catppuccin
+            nixosCatppuccinModule
             ./hosts/L16/default.nix
             ./users/${username}/nixos.nix
             home-manager.nixosModules.home-manager
@@ -68,6 +86,8 @@
               home-manager.sharedModules = [
                 nvf.homeManagerModules.default
                 sops-nix.homeManagerModules.sops
+                catppuccin.homeModules.catppuccin
+                homeCatppuccinModule
               ];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
@@ -99,6 +119,8 @@
                 nixpkgs.overlays = [overlay-unstable];
               }
             )
+            catppuccin.nixosModules.catppuccin
+            nixosCatppuccinModule
             ./hosts/lemur/default.nix
             ./users/${username}/nixos.nix
             home-manager.nixosModules.home-manager
@@ -108,6 +130,8 @@
               home-manager.sharedModules = [
                 nvf.homeManagerModules.default
                 sops-nix.homeManagerModules.sops
+                catppuccin.homeModules.catppuccin
+                homeCatppuccinModule
               ];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
@@ -139,6 +163,8 @@
                 nixpkgs.overlays = [overlay-unstable];
               }
             )
+            catppuccin.nixosModules.catppuccin
+            nixosCatppuccinModule
             ./hosts/wks/default.nix
             ./users/${username}/nixos.nix
             home-manager.nixosModules.home-manager
@@ -148,6 +174,8 @@
               home-manager.sharedModules = [
                 nvf.homeManagerModules.default
                 sops-nix.homeManagerModules.sops
+                catppuccin.homeModules.catppuccin
+                homeCatppuccinModule
               ];
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
