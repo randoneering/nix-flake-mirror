@@ -93,7 +93,7 @@
   };
 in {
   home.activation.removeLegacyOpencodeConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    rm -f "$HOME/.config/opencode/opencode.json"
+    rm -f "$HOME/.config/opencode/config.json"
   '';
 
   xdg.configFile."opencode/skills" = {

@@ -52,7 +52,7 @@
   services.llama-cpp = {
     enable = true;
     host = "10.10.1.232";
-    modelPath = "/srv/models/gemma-4-e4b.gguf";
+    modelPath = "/srv/models/gemma-4-E4B-it-UD-Q4_K_XL.gguf";
     openFirewall = true;
   };
 
