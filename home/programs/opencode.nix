@@ -115,7 +115,7 @@ in {
       provider.lmstudio = {
         api = "openai";
         options = {
-          baseURL = "http://localhost:1234/v1";
+          baseURL = "http://10.10.1.232:1234/v1";
           apiKey = "\${LMSTUDIO_API_KEY}";
         };
         models = {

@@ -9,6 +9,7 @@
   mcpNixosTokenPath = lib.attrByPath ["sops" "secrets" "mcp_nixos_token" "path"] null config;
   postgresMcpTokenPath = lib.attrByPath ["sops" "secrets" "postgres_mcp_token" "path"] null config;
   context7TokenPath = lib.attrByPath ["sops" "secrets" "context7_token" "path"] null config;
+  lmstudioApiKeyPath = lib.attrByPath ["sops" "secrets" "lmstudio_api_key" "path"] null config;
   ollamaApiKeyPath = lib.attrByPath ["sops" "secrets" "ollama_api_key" "path"] null config;
   orchestraApiKeyPath = lib.attrByPath ["sops" "secrets" "orchestra_api_key" "path"] null config;
 
@@ -48,10 +49,38 @@
       "npm:@samfp/pi-memory"
       "git:github.com/joelhooks/pi-theme-catppuccin-mocha"
     ];
-    defaultProvider = "openai-codex";
-    defaultModel = "gpt-5.4";
+    defaultProvider = "lmstudio";
+    defaultModel = "google/gemma-4-e4b";
     defaultThinkingLevel = "medium";
     theme = "catppuccin-mocha";
+  };
+
+  modelsJson = builtins.toJSON {
+    providers = {
+      lmstudio = {
+        baseUrl = "http://10.10.1.232:1234/v1";
+        api = "openai-completions";
+        apiKey = "$LMSTUDIO_API_KEY";
+        models = [
+          {id = "google/gemma-4-e4b";}
+          {id = "qwen3.5-9b";}
+        ];
+      };
+      ollama = {
+        baseUrl = "http://10.10.1.232:11434/v1";
+        api = "openai-completions";
+        apiKey = "$OLLAMA_API_KEY";
+        compat = {
+          supportsDeveloperRole = false;
+          supportsReasoningEffort = false;
+        };
+        models = [
+          {id = "qwen3.5:4b";}
+          {id = "gemma4:e2b";}
+          {id = "qwen3.5:9b";}
+        ];
+      };
+    };
   };
 
   mcpJson = builtins.toJSON {
@@ -64,6 +93,7 @@
       (lib.optionalString (mcpNixosTokenPath != null) "--run 'export MCP_NIXOS_TOKEN=\"$(read_secret MCP_NIXOS_TOKEN \"${mcpNixosTokenPath}\")\"'")
       (lib.optionalString (postgresMcpTokenPath != null) "--run 'export POSTGRES_MCP_TOKEN=\"$(read_secret POSTGRES_MCP_TOKEN \"${postgresMcpTokenPath}\")\"'")
       (lib.optionalString (context7TokenPath != null) "--run 'export CONTEXT7_TOKEN=\"$(read_secret CONTEXT7_TOKEN \"${context7TokenPath}\")\"'")
+      (lib.optionalString (lmstudioApiKeyPath != null) "--run 'export LMSTUDIO_API_KEY=\"$(read_secret LMSTUDIO_API_KEY \"${lmstudioApiKeyPath}\")\"'")
       (lib.optionalString (ollamaApiKeyPath != null) "--run 'export OLLAMA_API_KEY=\"$(read_secret OLLAMA_API_KEY \"${ollamaApiKeyPath}\")\"'")
       (lib.optionalString (orchestraApiKeyPath != null) "--run 'export ORCHESTRA_API_KEY=\"$(read_secret ORCHESTRA_API_KEY \"${orchestraApiKeyPath}\")\"'")
     ]
@@ -118,6 +148,7 @@ in {
       recursive = true;
     };
     ".pi/agent/settings.json".text = settingsJson;
+    ".pi/agent/models.json".text = modelsJson;
     ".pi/agent/mcp.json".text = mcpJson;
   };
 }
