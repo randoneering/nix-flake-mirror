@@ -34,7 +34,7 @@ in {
 
     contextSize = mkOption {
       type = types.int;
-      default = 64000;
+      default = 128000;
       description = "Context window passed to llama-server";
     };
 
