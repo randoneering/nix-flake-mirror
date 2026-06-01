@@ -24,6 +24,9 @@ in
           context7_token = {};
           ollama_api_key = {};
         }
+        // lib.optionalAttrs (lib.hasInfix "lmstudio_api_key:" sopsFileContents) {
+          lmstudio_api_key = {};
+        }
         // lib.optionalAttrs (lib.hasInfix "quackit_database_url:" sopsFileContents) {
           quackit_database_url = {};
         }

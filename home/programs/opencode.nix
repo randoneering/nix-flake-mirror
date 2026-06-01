@@ -9,6 +9,7 @@
   mcpNixosTokenPath = lib.attrByPath ["sops" "secrets" "mcp_nixos_token" "path"] null config;
   postgresMcpTokenPath = lib.attrByPath ["sops" "secrets" "postgres_mcp_token" "path"] null config;
   context7TokenPath = lib.attrByPath ["sops" "secrets" "context7_token" "path"] null config;
+  lmstudioApiKeyPath = lib.attrByPath ["sops" "secrets" "lmstudio_api_key" "path"] null config;
   quackitDatabaseUrlPath = lib.attrByPath ["sops" "secrets" "quackit_database_url" "path"] null config;
   orchestraApiKeyPath = lib.attrByPath ["sops" "secrets" "orchestra_api_key" "path"] null config;
 
@@ -59,6 +60,7 @@
       (lib.optionalString (mcpNixosTokenPath != null) "--run 'export MCP_NIXOS_TOKEN=\"$(read_secret MCP_NIXOS_TOKEN \"${mcpNixosTokenPath}\")\"'")
       (lib.optionalString (postgresMcpTokenPath != null) "--run 'export POSTGRES_MCP_TOKEN=\"$(read_secret POSTGRES_MCP_TOKEN \"${postgresMcpTokenPath}\")\"'")
       (lib.optionalString (context7TokenPath != null) "--run 'export CONTEXT7_TOKEN=\"$(read_secret CONTEXT7_TOKEN \"${context7TokenPath}\")\"'")
+      (lib.optionalString (lmstudioApiKeyPath != null) "--run 'export LMSTUDIO_API_KEY=\"$(read_secret LMSTUDIO_API_KEY \"${lmstudioApiKeyPath}\")\"'")
       (lib.optionalString (quackitDatabaseUrlPath != null) "--run 'export QUACKIT_DATABASE_URL=\"$(read_secret QUACKIT_DATABASE_URL \"${quackitDatabaseUrlPath}\")\"'")
       (lib.optionalString (orchestraApiKeyPath != null) "--run 'export ORCHESTRA_API_KEY=\"$(read_secret ORCHESTRA_API_KEY \"${orchestraApiKeyPath}\")\"'")
     ]
@@ -90,6 +92,10 @@
     '';
   };
 in {
+  home.activation.removeLegacyOpencodeConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    rm -f "$HOME/.config/opencode/opencode.json"
+  '';
+
   xdg.configFile."opencode/skills" = {
     source = "${agent-config}/skills";
   };
@@ -102,7 +108,7 @@ in {
     enable = true;
     rules = "${agent-config}/AGENTS.md";
     package = wrappedOpencodePackage;
-    settings = {
+    settings = toOpencodeEnvSyntax {
       autoupdate = true;
       model = "lmstudio/gemma-4-e4b";
       mcp = sharedMcpServers;
@@ -110,9 +116,12 @@ in {
         api = "openai";
         options = {
           baseURL = "http://localhost:1234/v1";
-          apiKey = "lm-studio";
+          apiKey = "\${LMSTUDIO_API_KEY}";
         };
-        models."gemma-4-e4b".id = "google/gemma-4-e4b";
+        models = {
+          "gemma-4-e4b".id = "google/gemma-4-e4b";
+          "qwen3.5-9b".id = "qwen3.5-9b";
+        };
       };
     };
   };
