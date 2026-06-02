@@ -136,7 +136,6 @@ Autocomplete uses `blink-cmp` with keymap preset `enter`.
 
 - Same shared MCP server set as Pi via `programs.mcp.servers`
 - Runtime secret exports for env-backed MCP auth
-- Flox MCP wrapper (`flox-mcp`)
 - Neon MCP endpoint
 
 ### Secrets (sops-nix)

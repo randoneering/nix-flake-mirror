@@ -5,13 +5,10 @@
   agent-config,
   ...
 }: let
-  digitaloceanTokenPath = lib.attrByPath ["sops" "secrets" "digitalocean_api_token" "path"] null config;
   mcpNixosTokenPath = lib.attrByPath ["sops" "secrets" "mcp_nixos_token" "path"] null config;
-  postgresMcpTokenPath = lib.attrByPath ["sops" "secrets" "postgres_mcp_token" "path"] null config;
   context7TokenPath = lib.attrByPath ["sops" "secrets" "context7_token" "path"] null config;
   lmstudioApiKeyPath = lib.attrByPath ["sops" "secrets" "lmstudio_api_key" "path"] null config;
   quackitDatabaseUrlPath = lib.attrByPath ["sops" "secrets" "quackit_database_url" "path"] null config;
-  orchestraApiKeyPath = lib.attrByPath ["sops" "secrets" "orchestra_api_key" "path"] null config;
 
   opencodePackage = pkgs.unstable.opencode;
 
@@ -56,13 +53,10 @@
 
   secretExports = lib.concatStringsSep " \\\n        " (
     lib.filter (value: value != "") [
-      (lib.optionalString (digitaloceanTokenPath != null) "--run 'export DIGITALOCEAN_API_TOKEN=\"$(read_secret DIGITALOCEAN_API_TOKEN \"${digitaloceanTokenPath}\")\"'")
       (lib.optionalString (mcpNixosTokenPath != null) "--run 'export MCP_NIXOS_TOKEN=\"$(read_secret MCP_NIXOS_TOKEN \"${mcpNixosTokenPath}\")\"'")
-      (lib.optionalString (postgresMcpTokenPath != null) "--run 'export POSTGRES_MCP_TOKEN=\"$(read_secret POSTGRES_MCP_TOKEN \"${postgresMcpTokenPath}\")\"'")
       (lib.optionalString (context7TokenPath != null) "--run 'export CONTEXT7_TOKEN=\"$(read_secret CONTEXT7_TOKEN \"${context7TokenPath}\")\"'")
       (lib.optionalString (lmstudioApiKeyPath != null) "--run 'export LMSTUDIO_API_KEY=\"$(read_secret LMSTUDIO_API_KEY \"${lmstudioApiKeyPath}\")\"'")
       (lib.optionalString (quackitDatabaseUrlPath != null) "--run 'export QUACKIT_DATABASE_URL=\"$(read_secret QUACKIT_DATABASE_URL \"${quackitDatabaseUrlPath}\")\"'")
-      (lib.optionalString (orchestraApiKeyPath != null) "--run 'export ORCHESTRA_API_KEY=\"$(read_secret ORCHESTRA_API_KEY \"${orchestraApiKeyPath}\")\"'")
     ]
   );
 

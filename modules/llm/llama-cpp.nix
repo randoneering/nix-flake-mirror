@@ -124,7 +124,6 @@ in {
 
     systemd.services.llama-cpp = {
       description = "llama.cpp OpenAI-compatible server";
-      after = [ "network-online.target" ];
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {

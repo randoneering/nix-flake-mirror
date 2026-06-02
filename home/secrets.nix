@@ -18,9 +18,7 @@ in
 
       secrets =
         {
-          digitalocean_api_token = {};
           mcp_nixos_token = {};
-          postgres_mcp_token = {};
           context7_token = {};
         }
         // lib.optionalAttrs (lib.hasInfix "lmstudio_api_key:" sopsFileContents) {
@@ -28,9 +26,6 @@ in
         }
         // lib.optionalAttrs (lib.hasInfix "quackit_database_url:" sopsFileContents) {
           quackit_database_url = {};
-        }
-        // lib.optionalAttrs (lib.hasInfix "orchestra_api_key:" sopsFileContents) {
-          orchestra_api_key = {};
         };
     };
   }
