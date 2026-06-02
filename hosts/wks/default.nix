@@ -52,7 +52,7 @@
   services.llama-cpp = {
     enable = true;
     host = "10.10.1.232";
-    activeModel = "qwen2.5-coder-7b";
+    activeModel = "gemma-4-e4b";
     models = {
       gemma-4-e4b = {
         alias = "google/gemma-4-e4b";
