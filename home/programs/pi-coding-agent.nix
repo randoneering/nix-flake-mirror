@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  agent-config,
   ...
 }: let
   mcpNixosTokenPath = lib.attrByPath ["sops" "secrets" "mcp_nixos_token" "path"] null config;
@@ -15,22 +14,24 @@
     if server.disabled or false
     then null
     else if server ? url
-    then {
-      url = server.url;
-      auth = false;
-      directTools = true;
-    }
-    // lib.optionalAttrs (server ? headers) {
-      headers = server.headers;
-    }
+    then
+      {
+        url = server.url;
+        auth = false;
+        directTools = true;
+      }
+      // lib.optionalAttrs (server ? headers) {
+        headers = server.headers;
+      }
     else if server ? command
-    then {
-      command = server.command;
-      args = server.args or [];
-    }
-    // lib.optionalAttrs (server ? env) {
-      env = server.env;
-    }
+    then
+      {
+        command = server.command;
+        args = server.args or [];
+      }
+      // lib.optionalAttrs (server ? env) {
+        env = server.env;
+      }
     else null;
 
   piMcpServers = lib.filterAttrs (_: server: server != null) (lib.mapAttrs (_: toPiMcpServer) config.programs.mcp.servers);
@@ -108,26 +109,4 @@
   };
 in {
   home.packages = [wrappedPiPackage];
-
-  home.activation.piAgentsFlatten = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    pi_agents_dir="$HOME/.pi/agent/agents"
-    mkdir -p "$pi_agents_dir"
-    # Remove stale flat agent files from previous runs
-    find "$pi_agents_dir" -maxdepth 1 -name '*.md' -delete
-    # Flatten all categorised agent files into the top level
-    find "${agent-config}/pi-agent/agents" -name '*.md' | while read -r f; do
-      ln -sf "$f" "$pi_agents_dir/$(basename "$f")"
-    done
-  '';
-
-  home.file = {
-    ".pi/agent/AGENTS.md".source = "${agent-config}/AGENTS.md";
-    ".pi/agent/skills" = {
-      source = "${agent-config}/skills";
-      recursive = true;
-    };
-    ".pi/agent/settings.json".text = settingsJson;
-    ".pi/agent/models.json".text = modelsJson;
-    ".pi/agent/mcp.json".text = mcpJson;
-  };
 }

@@ -52,15 +52,4 @@
     # Office
     onlyoffice-desktopeditors
   ];
-
-  home.file = {
-    ".config/zed/settings.json".text = builtins.toJSON {
-      theme = "Catppuccin Mocha";
-    };
-
-    ".config/zed/themes/catppuccin-mauve.json".source = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/catppuccin/zed/b54cb81708d06912d50e6bb9fd2fd2103b9dda25/themes/catppuccin-mauve.json";
-      sha256 = "0snziczwv7qgbp3qls59v7h56i9h03a88kvv813fd27q7zxvkk1d";
-    };
-  };
 }

@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  agent-config,
   ...
 }: let
   mcpNixosTokenPath = lib.attrByPath ["sops" "secrets" "mcp_nixos_token" "path"] null config;
@@ -86,21 +85,8 @@
     '';
   };
 in {
-  home.activation.removeLegacyOpencodeConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    rm -f "$HOME/.config/opencode/config.json"
-  '';
-
-  xdg.configFile."opencode/skills" = {
-    source = "${agent-config}/skills";
-  };
-
-  xdg.configFile."opencode/agents" = {
-    source = "${agent-config}/agents";
-  };
-
   programs.opencode = {
     enable = true;
-    context = "${agent-config}/AGENTS.md";
     package = wrappedOpencodePackage;
     settings = toOpencodeEnvSyntax {
       autoupdate = true;

@@ -82,7 +82,7 @@ in {
           contextSize = mkOption {
             type = types.nullOr types.int;
             default = null;
-            example = 32768;
+            example = 128000;
             description = "Optional context window override for this preset. Null uses services.llama-cpp.contextSize.";
           };
 

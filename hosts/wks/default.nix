@@ -52,7 +52,7 @@
   services.llama-cpp = {
     enable = true;
     host = "10.10.1.232";
-    activeModel = "gemma-4-e4b";
+    activeModel = "qwen2.5-coder-7b";
     models = {
       gemma-4-e4b = {
         alias = "google/gemma-4-e4b";
@@ -62,7 +62,7 @@
       "qwen2.5-coder-7b" = {
         alias = "qwen2.5-coder-7b";
         modelPath = "/srv/models/Qwen2.5-Coder-7B-Instruct-Q6_K.gguf";
-        contextSize = 32768;
+        contextSize = 128000;
       };
       "qwen2.5-vl-3b" = {
         alias = "qwen2.5-vl-3b";
