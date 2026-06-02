@@ -6,6 +6,26 @@
 }: let
   cfg = config.services.llama-cpp;
   inherit (lib) mkEnableOption mkIf mkOption types;
+  selectedModel =
+    if cfg.activeModel == null || ! lib.hasAttr cfg.activeModel cfg.models
+    then null
+    else cfg.models.${cfg.activeModel};
+  activeModelPath =
+    if selectedModel == null
+    then cfg.modelPath
+    else selectedModel.modelPath;
+  activeAlias =
+    if selectedModel == null
+    then cfg.alias
+    else selectedModel.alias;
+  activeContextSize =
+    if selectedModel == null || selectedModel.contextSize == null
+    then cfg.contextSize
+    else selectedModel.contextSize;
+  activeExtraArgs =
+    if selectedModel == null
+    then cfg.extraArgs
+    else cfg.extraArgs ++ selectedModel.extraArgs;
 in {
   disabledModules = ["services/misc/llama-cpp.nix"];
 
@@ -31,9 +51,50 @@ in {
     };
 
     modelPath = mkOption {
-      type = types.either types.path types.str;
+      type = types.nullOr (types.either types.path types.str);
+      default = null;
       example = "/srv/models/gemma-4-e4b.gguf";
       description = "Path to the externally managed GGUF model file to serve";
+    };
+
+    activeModel = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      example = "gemma-4-e4b";
+      description = "Name of the model preset from services.llama-cpp.models to serve. Null uses modelPath and alias directly.";
+    };
+
+    models = mkOption {
+      type = types.attrsOf (types.submodule {
+        options = {
+          modelPath = mkOption {
+            type = types.either types.path types.str;
+            example = "/srv/models/gemma-4-e4b.gguf";
+            description = "Path to this preset's externally managed GGUF model file.";
+          };
+
+          alias = mkOption {
+            type = types.str;
+            example = "google/gemma-4-e4b";
+            description = "Model alias exposed in the OpenAI-compatible API when this preset is active.";
+          };
+
+          contextSize = mkOption {
+            type = types.nullOr types.int;
+            default = null;
+            example = 32768;
+            description = "Optional context window override for this preset. Null uses services.llama-cpp.contextSize.";
+          };
+
+          extraArgs = mkOption {
+            type = types.listOf types.str;
+            default = [];
+            description = "Extra llama-server arguments appended when this preset is active.";
+          };
+        };
+      });
+      default = {};
+      description = "Named GGUF model presets. Set activeModel to choose which preset llama-server serves.";
     };
 
     alias = mkOption {
@@ -125,6 +186,17 @@ in {
   };
 
   config = mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.activeModel == null || lib.hasAttr cfg.activeModel cfg.models;
+        message = "services.llama-cpp.activeModel must name an entry in services.llama-cpp.models.";
+      }
+      {
+        assertion = activeModelPath != null;
+        message = "services.llama-cpp.modelPath must be set unless services.llama-cpp.activeModel selects a model preset.";
+      }
+    ];
+
     networking.firewall.allowedTCPPorts = lib.optional cfg.openFirewall cfg.port;
 
     systemd.services.llama-cpp = {
@@ -139,11 +211,11 @@ in {
             "--port"
             (toString cfg.port)
             "--model"
-            (toString cfg.modelPath)
+            (toString activeModelPath)
             "--alias"
-            cfg.alias
+            activeAlias
             "--ctx-size"
-            (toString cfg.contextSize)
+            (toString activeContextSize)
             "--n-gpu-layers"
             (toString cfg.nGpuLayers)
             "--threads"
@@ -177,7 +249,7 @@ in {
           ++ lib.optional cfg.mlock "--mlock"
           ++ lib.optional (cfg.numa != null) "--numa"
           ++ lib.optional (cfg.numa != null) cfg.numa
-          ++ cfg.extraArgs);
+          ++ activeExtraArgs);
         Restart = "always";
         RestartSec = 5;
         StateDirectory = "llama-cpp";

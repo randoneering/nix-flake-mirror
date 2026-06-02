@@ -59,6 +59,8 @@
         models = [
           {id = "google/gemma-4-e4b";}
           {id = "qwen3.5-9b";}
+          {id = "qwen2.5-coder-7b";}
+          {id = "qwen2.5-vl-3b";}
         ];
       };
     };

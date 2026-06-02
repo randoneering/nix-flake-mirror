@@ -52,7 +52,28 @@
   services.llama-cpp = {
     enable = true;
     host = "10.10.1.232";
-    modelPath = "/srv/models/gemma-4-E4B-it-UD-Q4_K_XL.gguf";
+    activeModel = "gemma-4-e4b";
+    models = {
+      gemma-4-e4b = {
+        alias = "google/gemma-4-e4b";
+        modelPath = "/srv/models/gemma-4-E4B-it-UD-Q4_K_XL.gguf";
+        contextSize = 128000;
+      };
+      "qwen2.5-coder-7b" = {
+        alias = "qwen2.5-coder-7b";
+        modelPath = "/srv/models/Qwen2.5-Coder-7B-Instruct-Q6_K.gguf";
+        contextSize = 32768;
+      };
+      "qwen2.5-vl-3b" = {
+        alias = "qwen2.5-vl-3b";
+        modelPath = "/srv/models/Qwen2.5-VL-3B-Instruct-Q8_0.gguf";
+        contextSize = 128000;
+        extraArgs = [
+          "--mmproj"
+          "/srv/models/Qwen2.5-VL-3B-mmproj-BF16.gguf"
+        ];
+      };
+    };
     openFirewall = true;
   };
 
