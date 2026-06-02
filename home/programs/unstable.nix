@@ -5,6 +5,7 @@
 }: {
   home.packages = with pkgs.unstable; [
     # utils
+    llmfit
     dbeaver-bin
     obsidian
     tmux

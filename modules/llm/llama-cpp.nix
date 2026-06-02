@@ -1,16 +1,20 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.services.llama-cpp;
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  disabledModules = [ "services/misc/llama-cpp.nix" ];
+  disabledModules = ["services/misc/llama-cpp.nix"];
 
   options.services.llama-cpp = {
     enable = mkEnableOption "llama.cpp OpenAI-compatible server";
 
     package = mkOption {
       type = types.package;
-      default = pkgs.llama-cpp.override { cudaSupport = true; };
+      default = pkgs.llama-cpp.override {cudaSupport = true;};
       description = "llama.cpp package providing llama-server (default: CUDA-enabled)";
     };
 
@@ -34,7 +38,7 @@ in {
 
     alias = mkOption {
       type = types.str;
-      default = "llama.cpp/gemma4";
+      default = "google/gemma-4-e4b";
       description = "Model alias exposed in the OpenAI-compatible API";
     };
 
@@ -83,15 +87,16 @@ in {
     };
 
     numa = mkOption {
-      type = types.nullOr (types.enum [ "distribute" "isolate" "numactl" ]);
+      type = types.nullOr (types.enum ["distribute" "isolate" "numactl"]);
       default = null;
       description = "NUMA optimizations for multi-socket systems";
     };
 
     chatTemplate = mkOption {
-      type = types.str;
-      default = "gemma";
-      description = "Chat template (model-specific). Required for Gemma 4 to avoid garbled output";
+      type = types.nullOr types.str;
+      default = null;
+      example = "gemma";
+      description = "Optional chat template override. Null uses the template embedded in GGUF metadata";
     };
 
     jinja = mkOption {
@@ -108,7 +113,7 @@ in {
 
     extraArgs = mkOption {
       type = types.listOf types.str;
-      default = [ ];
+      default = [];
       description = "Extra command-line arguments for llama-server";
     };
 
@@ -124,37 +129,50 @@ in {
 
     systemd.services.llama-cpp = {
       description = "llama.cpp OpenAI-compatible server";
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
 
       serviceConfig = {
         ExecStart = lib.escapeShellArgs ([
-          "${cfg.package}/bin/llama-server"
-          "--host"
-          cfg.host
-          "--port"
-          (toString cfg.port)
-          "--model"
-          (toString cfg.modelPath)
-          "--alias"
-          cfg.alias
-          "--ctx-size"
-          (toString cfg.contextSize)
-          "--n-gpu-layers"
-          (toString cfg.nGpuLayers)
-          "--threads"
-          (toString cfg.threads)
-          "--cont-batching"
-          "--metrics"
-          "--flash-attn"
-          (if cfg.flashAttention then "on" else "off")
-          "-ctk"
-          cfg.cacheTypeK
-          "-ctv"
-          cfg.cacheTypeV
-        ] ++ lib.optionals cfg.jinja [ "--jinja" ]
+            "${cfg.package}/bin/llama-server"
+            "--host"
+            cfg.host
+            "--port"
+            (toString cfg.port)
+            "--model"
+            (toString cfg.modelPath)
+            "--alias"
+            cfg.alias
+            "--ctx-size"
+            (toString cfg.contextSize)
+            "--n-gpu-layers"
+            (toString cfg.nGpuLayers)
+            "--threads"
+            (toString cfg.threads)
+            "--cont-batching"
+            "--metrics"
+            "--flash-attn"
+            (
+              if cfg.flashAttention
+              then "on"
+              else "off"
+            )
+            "-ctk"
+            cfg.cacheTypeK
+            "-ctv"
+            cfg.cacheTypeV
+          ]
+          ++ lib.optionals cfg.jinja ["--jinja"]
+          ++ lib.optionals (cfg.chatTemplate != null) [
+            "--chat-template"
+            cfg.chatTemplate
+          ]
           ++ [
             "--reasoning"
-            (if cfg.reasoning then "on" else "off")
+            (
+              if cfg.reasoning
+              then "on"
+              else "off"
+            )
           ]
           ++ lib.optional cfg.mlock "--mlock"
           ++ lib.optional (cfg.numa != null) "--numa"
