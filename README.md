@@ -1,202 +1,62 @@
 # Randoneering's Multi-System Nix Flake
 
-NixOS flake for managing multiple machines with shared modules and per-host overrides.
+This flake manages my various computing environments, providing a unified way to configure different machines while allowing for necessary host-specific customizations.
 
-## What This Repository Contains
+## The Philosophy
 
-- One `flake.nix` with 4 NixOS configurations.
-- Shared system modules in `modules/` (desktop, networking, LLM, and database).
-- Shared Home Manager modules in `home/` (programs, shell, languages, secrets, utilities).
-- User entrypoints in `users/`.
-- Host-specific hardware and system settings in `hosts/`.
-- SOPS-managed secrets in `secrets/`.
+My approach here is to treat each machine not as a standalone box, but as a specific instantiation of a shared, well-defined system. We pull in shared logic—like networking setups, my favorite editors, and database tooling—into central modules. Then, we apply tailored overrides in the host configuration to make each machine feel uniquely suited to its purpose.
+
+## What's in This Repository?
+
+This repository serves as my central configuration hub, containing:
+
+*   **`flake.nix`**: The root of the system, tying everything together.
+*   **`modules/`**: The shared brain. Here lives the generalized configuration for system features (like `desktop`, `llm`, `database`).
+*   **`home/`**: My digital toolkit. This handles personal settings like shell configurations, preferred programming environments (Python, Rust, etc.), and secret management via Home Manager.
+*   **`hosts/`**: The body of the system. These folders define *what* each specific machine is—the NixOS target, the hardware profile, the user context.
+*   **`secrets/`**: Keeping things private. Configuration data that needs to be encrypted is managed here using SOPS.
 
 ## Hosts
 
-| Flake target | Host folder | Hostname | Primary user | Notes |
-| --- | --- | --- | --- | --- |
-| `.#nix-station` | `hosts/nix-station` | `nix-station` | `randoneering` | Uses `flox` NixOS module |
-| `.#nix-wks` | `hosts/wks` | `nix-wks` | `justin` | NVIDIA + Ollama host |
-| `.#nix-lemur` | `hosts/lemur` | `nix-lemur` | `justin` | PostgreSQL 18 profile |
-| `.#nix-L16` | `hosts/L16` | `nix-l16` | `justin` | Laptop profile |
+I've defined several specific environments for different tasks:
 
-## Repository Layout
+| Environment Name | Folder | Purpose/Notes |
+| :--- | :--- | :--- |
+| `nix-wks` | `hosts/wks` | The primary workstation, configured for NVIDIA acceleration and local LLM serving (llama.cpp). |
+| `nix-lemur` | `hosts/lemur` | My travel machine and one of my favorite laptops (system76 lemur pro |
+| `nix-L16` | `hosts/L16` | My portible workstation (lenovo L16 Gen1) |
+
+## Flake Structure
+
+The architecture is designed for clarity and reuse:
 
 ```text
 .
 ├── flake.nix
 ├── flake.lock
-├── hosts/
+├── hosts/              # Defines specific machine instances (e.g., wks, lemur)
 │   ├── nix-station/
 │   ├── wks/
 │   ├── lemur/
 │   └── L16/
-├── modules/
+├── modules/            # Reusable system components (e.g., llm, database)
 │   ├── system.nix
 │   ├── desktop/
 │   ├── networking/
 │   ├── llm/
 │   └── database/
-├── home/
+├── home/               # User-specific configurations (e.g., programs, shell)
 │   ├── core.nix
 │   ├── programs/
 │   ├── shell/
 │   ├── languages/
 │   ├── secrets.nix
 │   └── utils/
-├── users/
+├── users/              # User-specific profiles
 │   ├── justin/
 │   └── randoneering/
-└── secrets/
+└── secrets/            # Encrypted sensitive data
     └── justin.yaml
 ```
 
-## Prerequisites
 
-- NixOS with flakes enabled.
-- A user with sudo access for `nixos-rebuild`.
-- If using secrets: an age key at `~/.config/sops/age/keys.txt`.
-
-Enable flakes if needed:
-
-```nix
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
-```
-
-Apply:
-
-```bash
-sudo nixos-rebuild switch
-```
-
-## Quick Start
-
-Clone and inspect outputs:
-
-```bash
-git clone <repo-url> ~/nix-flake
-cd ~/nix-flake
-nix flake show
-```
-
-Switch a host:
-
-```bash
-sudo nixos-rebuild switch --flake .#nix-station
-# or
-sudo nixos-rebuild switch --flake .#nix-wks
-# or
-sudo nixos-rebuild switch --flake .#nix-lemur
-# or
-sudo nixos-rebuild switch --flake .#nix-L16
-```
-
-## Common Workflow
-
-Check evaluation before switching:
-
-```bash
-nix flake check
-nix eval '.#nixosConfigurations."nix-wks".config.system.build.toplevel.drvPath'
-```
-
-Build without activating:
-
-```bash
-sudo nixos-rebuild build --flake .#nix-wks
-```
-
-Test activation path:
-
-```bash
-sudo nixos-rebuild test --flake .#nix-wks
-```
-
-## Home Manager and Tooling
-
-### Neovim (nvf)
-
-Neovim is configured in `home/shell/neovim.nix` through `programs.nvf`.
-
-Current language blocks include:
-
-- Nix (`nixd`, `nixfmt`, extra diagnostics)
-- Python (`basedpyright`, `ruff`)
-- SQL (PostgreSQL dialect)
-- HCL
-- YAML
-- Go (`gopls`, `gofumpt`)
-- Rust (`rust-analyzer`, `rustfmt`)
-
-Autocomplete uses `blink-cmp` with keymap preset `enter`.
-
-### Opencode and MCP
-
-`programs.opencode` is configured in `home/programs/opencode.nix` with:
-
-- Same shared MCP server set as Pi via `programs.mcp.servers`
-- Runtime secret exports for env-backed MCP auth
-- Neon MCP endpoint
-
-### Secrets (sops-nix)
-
-`home/secrets.nix` enables Home Manager SOPS integration when `secrets/justin.yaml` exists.
-
-## Host Modules Added Recently
-
-- `modules/database/postgres18.nix`: PostgreSQL 18 profile with `pg_stat_statements`, SSL settings, and logging defaults.
-- `modules/llm/ollama.nix`: Ollama service module for GPU-backed local model serving.
-
-## Updating Inputs
-
-Update all inputs:
-
-```bash
-nix flake update
-```
-
-Update one input:
-
-```bash
-nix flake lock --update-input nixpkgs
-```
-
-After updates, rebuild the host you changed:
-
-```bash
-sudo nixos-rebuild switch --flake .#nix-wks
-```
-
-## Troubleshooting
-
-Check flake structure:
-
-```bash
-nix flake show
-```
-
-Show traces on rebuild errors:
-
-```bash
-sudo nixos-rebuild switch --flake .#nix-wks --show-trace --print-build-logs
-```
-
-List system generations:
-
-```bash
-sudo nixos-rebuild list-generations
-```
-
-Rollback to previous generation:
-
-```bash
-sudo nixos-rebuild switch --rollback
-```
-
-## Resources
-
-- https://nixos.wiki/wiki/Flakes
-- https://nix-community.github.io/home-manager/
-- https://search.nixos.org/packages
-- https://nvf.notashelf.dev/options.html
-- https://github.com/Mic92/sops-nix
