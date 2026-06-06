@@ -5,21 +5,23 @@
     settings = {
       vim.theme.enable = false;
       vim.additionalRuntimePaths = [ ./nvim ];
-      vim.luaConfigPost = ''
+      vim.luaConfigPost = let
+        headerContent = builtins.readFile ./nvim/dashboard-header.lua;
+      in ''
         vim.o.termguicolors = true
-        vim.cmd.colorscheme("catppuccin")
+        vim.cmd.colorscheme("tokyonight")
 
         local palette = {
-          bg = "#1e1e2e",
-          bg_alt = "#181825",
-          fg = "#cdd6f4",
-          muted = "#bac2de",
-          gray = "#9399b2",
-          red_bright = "#f38ba8",
-          yellow_bright = "#f9e2af",
-          blue = "#89b4fa",
-          blue_bright = "#b4befe",
-          cyan_bright = "#94e2d5",
+          bg = "#1a1b26",
+          bg_alt = "#16161e",
+          fg = "#a9b1d6",
+          muted = "#565f89",
+          gray = "#565f89",
+          red_bright = "#f7768e",
+          yellow_bright = "#e0af68",
+          blue = "#7aa2f7",
+          blue_bright = "#bb9af7",
+          cyan_bright = "#7dcfff",
         }
 
         local hl = function(group, opts)
@@ -36,6 +38,12 @@
         hl("SnacksDashboardDir", { fg = palette.gray })
         hl("SnacksDashboardFooter", { fg = palette.blue })
         hl("SnacksDashboardSpecial", { fg = palette.red_bright })
+
+        do
+          local d = require("snacks").config.dashboard
+          d.preset = d.preset or {}
+          d.preset.header = ${headerContent}
+        end
       '';
 
       vim.viAlias = false;
@@ -130,9 +138,9 @@
       vim.comments.comment-nvim.enable = true;
       vim.git.enable = true;
       vim.extraPlugins = {
-        catppuccin = {
-          package = pkgs.vimPlugins.catppuccin-nvim;
-          setup = "require('catppuccin').setup({ flavour = 'mocha' })";
+        tokyonight = {
+          package = pkgs.vimPlugins.tokyonight-nvim;
+          setup = "require('tokyonight').setup({ style = 'night' })";
         };
         telescope-luasnip = {
           package = pkgs.vimUtils.buildVimPlugin {
@@ -180,23 +188,23 @@
       vim.statusline.lualine.setupOpts.options.theme = {
         normal = {
           a = {
-            fg = "#1e1e2e";
-            bg = "#89b4fa";
+            fg = "#1a1b26";
+            bg = "#7aa2f7";
             gui = "bold";
           };
           b = {
-            fg = "#cdd6f4";
-            bg = "#181825";
+            fg = "#a9b1d6";
+            bg = "#16161e";
           };
           c = {
-            fg = "#bac2de";
-            bg = "#1e1e2e";
+            fg = "#565f89";
+            bg = "#1a1b26";
           };
         };
         insert = {
           a = {
-            fg = "#1e1e2e";
-            bg = "#a6e3a1";
+            fg = "#1a1b26";
+            bg = "#9ece6a";
             gui = "bold";
           };
         };
