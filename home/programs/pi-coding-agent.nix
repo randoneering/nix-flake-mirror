@@ -36,6 +36,10 @@
 
   piMcpServers = lib.filterAttrs (_: server: server != null) (lib.mapAttrs (_: toPiMcpServer) config.programs.mcp.servers);
 
+  # Matches the llama-server instance on 10.10.1.232:11434
+  llamaBaseUrl = "http://10.10.1.232:8090/v1";
+  llamaApiKey = "llamacpp";
+
   settingsJson = builtins.toJSON {
     enableInstallTelemetry = false;
     packages = [
@@ -47,7 +51,7 @@
       "git:github.com/joelhooks/pi-theme-catppuccin-mocha"
     ];
     defaultProvider = "llama-cpp";
-    defaultModel = "google/gemma-4-e4b";
+    defaultModel = null;
     defaultThinkingLevel = "medium";
     theme = "catppuccin-mocha";
   };
@@ -55,13 +59,27 @@
   modelsJson = builtins.toJSON {
     providers = {
       llama-cpp = {
-        baseUrl = "http://10.10.1.232:8090/v1";
+        baseUrl = llamaBaseUrl;
         api = "openai-completions";
+        apiKey = llamaApiKey;
+        compat = {
+          supportsDeveloperRole = false;
+          supportsReasoningEffort = false;
+        };
         models = [
-          {id = "google/gemma-4-e4b";}
-          {id = "qwen3.5-9b";}
-          {id = "qwen2.5-coder-7b";}
-          {id = "qwen2.5-vl-3b";}
+          {
+            id = "google/gemma-4-e4b";
+            name = "Gemma 4 e4b (llama.cpp remote)";
+            contextWindow = 131072;
+            maxTokens = 16384;
+            input = ["text"];
+            cost = {
+              input = 0;
+              output = 0;
+              cacheRead = 0;
+              cacheWrite = 0;
+            };
+          }
         ];
       };
     };
@@ -109,4 +127,5 @@
   };
 in {
   home.packages = [wrappedPiPackage];
+  home.file.".pi/agent/models.json".text = modelsJson;
 }

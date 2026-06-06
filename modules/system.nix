@@ -70,10 +70,13 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
+    openFirewall = true;
+    allowSFTP = true;
     settings = {
       PermitRootLogin = "no"; # disable root login
       KbdInteractiveAuthentication = false;
       PasswordAuthentication = false;
+      AllowUsers = ["justin" "randoneering"];
     };
   };
   services.fail2ban.enable = false;
