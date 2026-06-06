@@ -65,6 +65,8 @@
         compat = {
           supportsDeveloperRole = false;
           supportsReasoningEffort = false;
+          maxTokensField = "max_tokens";
+          thinkingFormat = "qwen-chat-template";
         };
         models = [
           {
