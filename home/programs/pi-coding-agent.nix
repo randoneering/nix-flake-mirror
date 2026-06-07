@@ -47,8 +47,7 @@
       "npm:pi-mcp-adapter"
       "npm:pi-web-access"
       "npm:pi-caveman"
-      "npm:@samfp/pi-memory"
-      "git:github.com/joelhooks/pi-theme-catppuccin-mocha"
+      "npm:context-mode"
     ];
     defaultProvider = "llama-cpp";
     defaultModel = null;
@@ -60,7 +59,7 @@
     providers = {
       llama-cpp = {
         baseUrl = llamaBaseUrl;
-        api = "openai-completions";
+        api = "openai";
         apiKey = llamaApiKey;
         compat = {
           supportsDeveloperRole = false;

@@ -58,6 +58,62 @@
         rustfmt
         terraform
       ];
+      vim.extraPlugins = {
+        tokyonight = {
+          package = pkgs.vimPlugins.tokyonight-nvim;
+          setup = "require('tokyonight').setup({ style = 'night' })";
+        };
+        telescope-luasnip = {
+          package = pkgs.vimUtils.buildVimPlugin {
+            pname = "telescope-luasnip.nvim";
+            version = "2022-09-18";
+            src = pkgs.fetchFromGitHub {
+              owner = "benfowler";
+              repo = "telescope-luasnip.nvim";
+              rev = "07a2a2936a7557404c782dba021ac0a03165b343";
+              sha256 = "0wvp334pwrn5q81ynq6af37fg1b1r8k8ji9fzdm4xdz32gd1ayzm";
+            };
+          };
+        };
+        pi-nvim = {
+          package = pkgs.vimUtils.buildVimPlugin {
+            pname = "pi-nvim";
+            version = "2026-06-06";
+            src = pkgs.fetchFromGitHub {
+              owner = "pablopunk";
+              repo = "pi.nvim";
+              rev = "4ba6db0dd30406995a2e46e4f1ae39377e66e733";
+              sha256 = "sha256-z1gN1TKQKrM8dMh8rQMaAtGgi4ELV21WgswJBVyXulE=";
+            };
+          };
+        };
+        smear-cursor = {
+          package = pkgs.vimUtils.buildVimPlugin {
+            pname = "smear-cursor.nvim";
+            version = "2026-06-06";
+            src = pkgs.fetchFromGitHub {
+              owner = "sphamba";
+              repo = "smear-cursor.nvim";
+              rev = "9e9378d6ee34bb3782e0e8c63d9ec8ca618b479b";
+              sha256 = "sha256-hL0lXzkFxR7qiXzStrmY+gR+ql/A6PR8eCV310gEaGs=";
+            };
+          };
+          setup = "require('smear_cursor').setup {}";
+        };
+      };
+
+      vim.treesitter.enable = true;
+
+      vim.snippets.luasnip = {
+        enable = true;
+        providers = [ "friendly-snippets" ];
+        setupOpts.enable_autosnippets = true;
+      };
+
+      vim.autocomplete.blink-cmp = {
+        enable = true;
+        friendly-snippets.enable = true;
+      };
 
       vim.spellcheck.enable = true;
       vim.lsp.enable = true;
@@ -137,80 +193,6 @@
 
       vim.comments.comment-nvim.enable = true;
       vim.git.enable = true;
-      vim.extraPlugins = {
-        tokyonight = {
-          package = pkgs.vimPlugins.tokyonight-nvim;
-          setup = "require('tokyonight').setup({ style = 'night' })";
-        };
-        telescope-luasnip = {
-          package = pkgs.vimUtils.buildVimPlugin {
-            pname = "telescope-luasnip.nvim";
-            version = "2022-09-18";
-            src = pkgs.fetchFromGitHub {
-              owner = "benfowler";
-              repo = "telescope-luasnip.nvim";
-              rev = "07a2a2936a7557404c782dba021ac0a03165b343";
-              sha256 = "0wvp334pwrn5q81ynq6af37fg1b1r8k8ji9fzdm4xdz32gd1ayzm";
-            };
-          };
-        };
-      };
-
-      vim.autocomplete.enableSharedCmpSources = true;
-      vim.autocomplete.blink-cmp.enable = true;
-      vim.autocomplete.blink-cmp.friendly-snippets.enable = true;
-      vim.autocomplete.blink-cmp.sourcePlugins.emoji.enable = true;
-      vim.autocomplete.blink-cmp.sourcePlugins.ripgrep.enable = true;
-      vim.autocomplete.blink-cmp.sourcePlugins.spell.enable = true;
-      vim.autocomplete.blink-cmp.setupOpts = {
-        keymap.preset = "enter";
-        completion.documentation.auto_show = true;
-        completion.documentation.auto_show_delay_ms = 150;
-        sources.default = [
-          "lsp"
-          "path"
-          "snippets"
-          "buffer"
-          "emoji"
-          "ripgrep"
-          "spell"
-        ];
-      };
-
-      vim.snippets.luasnip = {
-        enable = true;
-        providers = [ "friendly-snippets" ];
-        setupOpts.enable_autosnippets = true;
-      };
-
-      vim.treesitter.enable = true;
-      vim.statusline.lualine.enable = true;
-      vim.statusline.lualine.setupOpts.options.theme = {
-        normal = {
-          a = {
-            fg = "#1a1b26";
-            bg = "#7aa2f7";
-            gui = "bold";
-          };
-          b = {
-            fg = "#a9b1d6";
-            bg = "#16161e";
-          };
-          c = {
-            fg = "#565f89";
-            bg = "#1a1b26";
-          };
-        };
-        insert = {
-          a = {
-            fg = "#1a1b26";
-            bg = "#9ece6a";
-            gui = "bold";
-          };
-        };
-      };
-      vim.telescope.enable = true;
-      vim.binds.whichKey.enable = true;
       vim.utility.snacks-nvim = {
         enable = true;
         setupOpts = {
