@@ -5,8 +5,7 @@
   lib,
   username,
   ...
-}:
-{
+}: {
   imports = [
     ../../modules/system.nix
     ../../modules/database/postgres18.nix
@@ -15,19 +14,13 @@
     ./hardware-configuration.nix
   ];
 
-  boot.initrd.luks.devices."luks-1f6de9c7-37ee-491d-8639-33efc75ee9d0".device =
-    "/dev/disk/by-uuid/1f6de9c7-37ee-491d-8639-33efc75ee9d0";
+  boot.initrd.luks.devices."luks-1f6de9c7-37ee-491d-8639-33efc75ee9d0".device = "/dev/disk/by-uuid/1f6de9c7-37ee-491d-8639-33efc75ee9d0";
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Flox Settings
-  nix.settings.trusted-substituters = [
-    "https://cache.flox.dev"
-  ];
   nix.settings.trusted-public-keys = [
-    "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs="
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
 
@@ -36,7 +29,7 @@
   networking.hostName = "nix-lemur";
 
   # Enable NFS
-  boot.supportedFilesystems = [ "nfs" ];
+  boot.supportedFilesystems = ["nfs"];
   services.rpcbind.enable = true; # needed for NFS
   fileSystems."/mnt/jellyfin" = {
     device = "nas.randoneering.cloud:/mnt/randoneering_prod/Jellyfin";

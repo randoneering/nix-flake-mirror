@@ -11,6 +11,8 @@
     sops-nix.url = "github:Mic92/sops-nix";
     nvf.url = "github:notashelf/nvf";
     sidra.url = "github:wimpysworld/sidra";
+    devenv.url = "github:cachix/devenv";
+    deploy-rs.url = "github:serokell/deploy-rs";
   };
 
   outputs = inputs @ {
@@ -21,8 +23,54 @@
     home-manager,
     nvf,
     sops-nix,
+    devenv,
+    deploy-rs,
     ...
-  }: {
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    packages.${system} = {
+      devenv = devenv.packages.${system}.devenv;
+      deploy-rs = deploy-rs.packages.${system}.deploy-rs;
+    };
+
+    devShells.${system}.default = pkgs.mkShell {
+      packages = with pkgs; [
+        devenv.packages.${system}.devenv
+        deploy-rs.packages.${system}.deploy-rs
+      ];
+    };
+
+    deploy.nodes = {
+      nix-L16 = {
+        hostname = "nix-L16";
+        sshUser = "justin";
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.nix-L16;
+        };
+      };
+      nix-lemur = {
+        hostname = "nix-lemur";
+        sshUser = "justin";
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.nix-lemur;
+        };
+      };
+      wks = {
+        hostname = "wks";
+        sshUser = "justin";
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.wks;
+        };
+      };
+    };
+
+    checks.${system} = deploy-rs.lib.${system}.deployChecks self.deploy;
+
     nixosConfigurations = {
       nix-L16 = let
         username = "justin";
