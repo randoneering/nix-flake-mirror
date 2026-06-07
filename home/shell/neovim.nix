@@ -110,9 +110,61 @@
         setupOpts.enable_autosnippets = true;
       };
 
+      vim.autocomplete.enableSharedCmpSources = true;
       vim.autocomplete.blink-cmp = {
         enable = true;
         friendly-snippets.enable = true;
+        sourcePlugins = {
+          emoji.enable = true;
+          ripgrep.enable = true;
+          spell.enable = true;
+        };
+        setupOpts = {
+          keymap.preset = "enter";
+          completion.documentation = {
+            auto_show = true;
+            auto_show_delay_ms = 150;
+          };
+          sources.default = [
+            "lsp"
+            "path"
+            "snippets"
+            "buffer"
+            "emoji"
+            "ripgrep"
+            "spell"
+          ];
+        };
+      };
+
+      vim.telescope.enable = true;
+      vim.binds.whichKey.enable = true;
+      vim.statusline.lualine = {
+        enable = true;
+        setupOpts.options.theme = {
+          normal = {
+            a = {
+              fg = "#1a1b26";
+              bg = "#7aa2f7";
+              gui = "bold";
+            };
+            b = {
+              fg = "#a9b1d6";
+              bg = "#16161e";
+            };
+            c = {
+              fg = "#565f89";
+              bg = "#1a1b26";
+            };
+          };
+          insert = {
+            a = {
+              fg = "#1a1b26";
+              bg = "#9ece6a";
+              gui = "bold";
+            };
+          };
+        };
       };
 
       vim.spellcheck.enable = true;
