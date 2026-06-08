@@ -53,6 +53,7 @@
       nerd-fonts.symbols-only # symbols icon only
       nerd-fonts.fira-code
       nerd-fonts.hack
+      noto-fonts-color-emoji
     ];
 
     # use fonts specified by user rather than default ones
