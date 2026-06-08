@@ -26,6 +26,44 @@
     if selectedModel == null
     then cfg.extraArgs
     else cfg.extraArgs ++ selectedModel.extraArgs;
+
+  templateContent =
+    if cfg.chatTemplateFile != null
+    then builtins.readFile cfg.chatTemplateFile
+    else if cfg.chatTemplate != null
+    then cfg.chatTemplate
+    else null;
+
+  serverPackage = cfg.package;
+
+  llamaServerWrapper = pkgs.writeShellScript "llama-server-wrapper" ''
+    exec "${serverPackage}/bin/llama-server" \
+      --host "${cfg.host}" \
+      --port "${toString cfg.port}" \
+      --model "${toString activeModelPath}" \
+      --alias "${activeAlias}" \
+      --ctx-size "${toString activeContextSize}" \
+      --n-gpu-layers "${toString cfg.nGpuLayers}" \
+      --threads "${toString cfg.threads}" \
+      --cont-batching \
+      --metrics \
+      --flash-attn "${if cfg.flashAttention then "on" else "off"}" \
+      -ctk "${cfg.cacheTypeK}" \
+      -ctv "${cfg.cacheTypeV}" \
+      ${lib.optionalString cfg.jinja "--jinja"} \
+      ${
+      if templateContent != null
+      then ''--chat-template "$(cat <<'LLAMA_TEMPLATE_EOF'
+${templateContent}
+LLAMA_TEMPLATE_EOF
+)"''
+      else ""
+    } \
+      --reasoning "${if cfg.reasoning then "on" else "off"}" \
+      ${lib.optionalString cfg.mlock "--mlock"} \
+      ${lib.optionalString (cfg.numa != null) "--numa ${cfg.numa}"} \
+      ${toString activeExtraArgs}
+  '';
 in {
   disabledModules = ["services/misc/llama-cpp.nix"];
 
@@ -157,7 +195,14 @@ in {
       type = types.nullOr types.str;
       default = null;
       example = "gemma";
-      description = "Optional chat template override. Null uses the template embedded in GGUF metadata";
+      description = "Optional chat template (Jinja string). Null uses the template embedded in GGUF metadata";
+    };
+
+    chatTemplateFile = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      example = /srv/models/chat-template.jinja;
+      description = "File containing a custom Jinja chat template. Takes precedence over chatTemplate when set.";
     };
 
     jinja = mkOption {
@@ -204,52 +249,7 @@ in {
       wantedBy = ["multi-user.target"];
 
       serviceConfig = {
-        ExecStart = lib.escapeShellArgs ([
-            "${cfg.package}/bin/llama-server"
-            "--host"
-            cfg.host
-            "--port"
-            (toString cfg.port)
-            "--model"
-            (toString activeModelPath)
-            "--alias"
-            activeAlias
-            "--ctx-size"
-            (toString activeContextSize)
-            "--n-gpu-layers"
-            (toString cfg.nGpuLayers)
-            "--threads"
-            (toString cfg.threads)
-            "--cont-batching"
-            "--metrics"
-            "--flash-attn"
-            (
-              if cfg.flashAttention
-              then "on"
-              else "off"
-            )
-            "-ctk"
-            cfg.cacheTypeK
-            "-ctv"
-            cfg.cacheTypeV
-          ]
-          ++ lib.optionals cfg.jinja ["--jinja"]
-          ++ lib.optionals (cfg.chatTemplate != null) [
-            "--chat-template"
-            cfg.chatTemplate
-          ]
-          ++ [
-            "--reasoning"
-            (
-              if cfg.reasoning
-              then "on"
-              else "off"
-            )
-          ]
-          ++ lib.optional cfg.mlock "--mlock"
-          ++ lib.optional (cfg.numa != null) "--numa"
-          ++ lib.optional (cfg.numa != null) cfg.numa
-          ++ activeExtraArgs);
+        ExecStart = "${llamaServerWrapper}";
         Restart = "always";
         RestartSec = 5;
         StateDirectory = "llama-cpp";

@@ -59,7 +59,7 @@
     providers = {
       llama-cpp = {
         baseUrl = llamaBaseUrl;
-        api = "openai";
+        api = "openai-completions";
         apiKey = llamaApiKey;
         compat = {
           supportsDeveloperRole = false;
@@ -69,8 +69,8 @@
         };
         models = [
           {
-            id = "google/gemma-4-e4b";
-            name = "Gemma 4 e4b (llama.cpp remote)";
+            id = "qwen2.5-coder-7b-awq";
+            name = "Qwen 2.5 Coder 7B AWQ (llama.cpp remote)";
             contextWindow = 131072;
             maxTokens = 16384;
             input = ["text"];
