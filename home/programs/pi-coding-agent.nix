@@ -40,21 +40,6 @@
   llamaBaseUrl = "http://10.10.1.232:8090/v1";
   llamaApiKey = "llamacpp";
 
-  settingsJson = builtins.toJSON {
-    enableInstallTelemetry = false;
-    packages = [
-      "npm:pi-subagents"
-      "npm:pi-mcp-adapter"
-      "npm:pi-web-access"
-      "npm:pi-caveman"
-      "npm:context-mode"
-    ];
-    defaultProvider = "llama-cpp";
-    defaultModel = null;
-    defaultThinkingLevel = "medium";
-    theme = "catppuccin-mocha";
-  };
-
   modelsJson = builtins.toJSON {
     providers = {
       llama-cpp = {
@@ -86,8 +71,59 @@
     };
   };
 
+  # Read MCP servers from opencode's config (which lives outside nix store)
+  # and merge with the filesystem server. Servers shared across agents.
+  extraMcpServers = {
+    filesystem = {
+      command = "npx";
+      args = ["-y" "@modelcontextprotocol/server-filesystem" "/home/justin"];
+    };
+    context7 = {
+      url = "https://context7.randoneering.dev/mcp";
+      auth = false;
+      directTools = true;
+      headers = {
+        Authorization = "Bearer \${CONTEXT7_TOKEN}";
+      };
+    };
+    mcp-nixos = {
+      url = "https://mcp01.randoneering.dev/nixos/mcp";
+      auth = false;
+      directTools = true;
+      headers = {
+        Authorization = "Bearer \${MCP_NIXOS_TOKEN}";
+      };
+    };
+    quackit = {
+      command = "uvx";
+      args = ["--from" "git+https://github.com/randoneering/quackit-mcp@v0.1.4" "quackit" "serve" "--transport" "stdio"];
+      env = {
+        QUACKIT_DATABASE_URL = "\${QUACKIT_DATABASE_URL}";
+      };
+    };
+  };
+
+  mcpServersAll = piMcpServers // extraMcpServers;
+
   mcpJson = builtins.toJSON {
-    mcpServers = piMcpServers;
+    mcpServers = mcpServersAll;
+  };
+
+  piPackages = [
+    "npm:pi-subagents"
+    "npm:pi-mcp-adapter"
+    "npm:pi-web-access"
+    "npm:pi-caveman"
+    "npm:context-mode"
+  ];
+
+  settingsJson = builtins.toJSON {
+    enableInstallTelemetry = false;
+    packages = piPackages;
+    defaultProvider = "llama-cpp";
+    defaultModel = null;
+    defaultThinkingLevel = "medium";
+    theme = "catppuccin-mocha";
   };
 
   secretExports = lib.concatStringsSep " \\\n        " (
@@ -128,5 +164,8 @@
   };
 in {
   home.packages = [wrappedPiPackage];
+  home.file.".pi/agent/settings.json".text = settingsJson;
   home.file.".pi/agent/models.json".text = modelsJson;
+  home.file.".pi/agent/mcp.json".text = mcpJson;
+  home.file.".pi/agent/AGENTS.md".text = builtins.readFile ./pi-coding-agent-agents.md;
 }
