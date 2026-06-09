@@ -13,6 +13,7 @@
     sidra.url = "github:wimpysworld/sidra";
     devenv.url = "github:cachix/devenv";
     deploy-rs.url = "github:serokell/deploy-rs";
+    llama-cpp-src.url = "github:ggml-org/llama.cpp";
   };
 
   outputs = inputs @ {
@@ -25,6 +26,7 @@
     sops-nix,
     devenv,
     deploy-rs,
+    llama-cpp-src,
     ...
   }: let
     system = "x86_64-linux";
@@ -163,7 +165,7 @@
             config.allowUnfree = true;
           };
         };
-        specialArgs = {inherit username hostname;};
+        specialArgs = {inherit username hostname llama-cpp-src;};
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;

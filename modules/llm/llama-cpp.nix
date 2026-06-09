@@ -50,7 +50,7 @@
       --flash-attn "${if cfg.flashAttention then "on" else "off"}" \
       -ctk "${cfg.cacheTypeK}" \
       -ctv "${cfg.cacheTypeV}" \
-      ${lib.optionalString cfg.jinja "--jinja"} \
+      ${if cfg.jinja then "--jinja" else "--no-jinja"} \
       ${
       if templateContent != null
       then ''--chat-template "$(cat <<'LLAMA_TEMPLATE_EOF'

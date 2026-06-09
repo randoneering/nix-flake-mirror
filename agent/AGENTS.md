@@ -147,6 +147,31 @@ MCP Servers Configured (pi-coding agent):
   - neon (url MCP)
   - postgres-mcp (url MCP)
 
+## LLM Server: llama.cpp
+
+### Active Model
+- **Model:** Qwen 2.5 Coder 7B Instruct (q4_k_m GGUF, 4.7GB)
+- **Location:** `/srv/models/qwen2.5-coder-7b-instruct-q4_k_m.gguf`
+- **Server:** `llama-server` on `10.10.1.232:8090`
+- **Build:** Built from `github:ggml-org/llama.cpp` master (b9600+), with CUDA support
+
+### Function Calling
+Proper OpenAI-compatible `tool_calls` support is configured. Two things were needed:
+
+1. **llama.cpp from master** — nixpkgs b9190/b9503 lack the Generic tool call output parser. The flake builds from a `llama-cpp-src` input via `overrideAttrs` in `hosts/wks/default.nix`. Version is pinned to `"9600"` (numeric for C++ compat).
+
+2. **Custom chat template** at `modules/llm/qwen-tool-template.jinja` — the GGUF's built-in template uses `{{\"name\"` Jinja2 escaping inside strings, which llama.cpp's PEG parser doesn't handle (outputs `{{` literally). The custom template puts the JSON example **outside** string expressions:
+   ```
+   {{ "\n<tool_call>\n" }}{"name": ...}{{ "\n</tool_call>\n" }}
+   ```
+   Also updated to use `<response><function call>` XML format matching the model's actual training.
+
+### Key Files
+- `hosts/wks/default.nix` — `services.llama-cpp` config, `llamaCppMaster` derivation
+- `modules/llm/llama-cpp.nix` — llama-cpp NixOS module (wrapper script, options)
+- `modules/llm/qwen-tool-template.jinja` — corrected tool-use chat template
+- `flake.nix` — defines `llama-cpp-src` input for master builds
+
 ---
 Edit Tool Usage:
 The edit tool requires a `path` (string) and `edits` array with `{oldText, newText}` objects.
