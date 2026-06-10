@@ -90,7 +90,7 @@ in {
     package = wrappedOpencodePackage;
     settings = toOpencodeEnvSyntax {
       autoupdate = true;
-      model = "llama.cpp/qwen2.5-coder-7b-awq";
+      model = "llama.cpp/qwen3.5-9b";
       mcp = sharedMcpServers;
       provider.llama-cpp = {
         api = "openai";

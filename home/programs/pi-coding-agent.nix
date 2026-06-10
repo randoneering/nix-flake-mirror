@@ -54,8 +54,8 @@
         };
         models = [
           {
-            id = "qwen2.5-coder-7b-awq";
-            name = "Qwen 2.5 Coder 7B AWQ (llama.cpp remote)";
+            id = "qwen3.5-9b";
+            name = "Qwen 3.5 9B (llama.cpp remote)";
             contextWindow = 131072;
             maxTokens = 16384;
             input = ["text"];

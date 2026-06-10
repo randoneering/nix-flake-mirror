@@ -59,9 +59,9 @@ in {
   services.llama-cpp = {
     enable = true;
     host = "10.10.1.232";
-    activeModel = "qwen2.5-coder-7b-awq";
+    activeModel = "qwen3.5-9b";
     jinja = true;
-    chatTemplateFile = ../../modules/llm/qwen-tool-template.jinja;
+    threads = 16;
     package = llamaCppMaster;
     models = {
       gemma-4-e4b = {
@@ -78,6 +78,11 @@ in {
         alias = "qwen2.5-coder-7b-awq";
         modelPath = "/srv/models/qwen2.5-coder-7b-instruct-q4_k_m.gguf";
         contextSize = 128000;
+      };
+      "qwen3.5-9b" = {
+        alias = "qwen3.5-9b";
+        modelPath = "/srv/models/Qwen3.5-9B-UD-Q5_K_XL.gguf";
+        contextSize = 131072;
       };
       "qwen2.5-vl-3b" = {
         alias = "qwen2.5-vl-3b";
