@@ -11,7 +11,6 @@
     sops-nix.url = "github:Mic92/sops-nix";
     nvf.url = "github:notashelf/nvf";
     sidra.url = "github:wimpysworld/sidra";
-    devenv.url = "github:cachix/devenv";
     deploy-rs.url = "github:serokell/deploy-rs";
     llama-cpp-src.url = "github:ggml-org/llama.cpp";
   };
@@ -24,7 +23,6 @@
     home-manager,
     nvf,
     sops-nix,
-    devenv,
     deploy-rs,
     llama-cpp-src,
     ...
@@ -33,13 +31,11 @@
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     packages.${system} = {
-      devenv = devenv.packages.${system}.devenv;
       deploy-rs = deploy-rs.packages.${system}.deploy-rs;
     };
 
     devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [
-        devenv.packages.${system}.devenv
         deploy-rs.packages.${system}.deploy-rs
       ];
     };

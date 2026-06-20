@@ -1,10 +1,13 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   programs.nvf = {
     enable = true;
     settings = {
       vim.theme.enable = false;
-      vim.additionalRuntimePaths = [ ./nvim ];
+      vim.additionalRuntimePaths = [./nvim];
       vim.luaConfigPost = let
         headerContent = builtins.readFile ./nvim/dashboard-header.lua;
       in ''
@@ -106,7 +109,7 @@
 
       vim.snippets.luasnip = {
         enable = true;
-        providers = [ "friendly-snippets" ];
+        providers = ["friendly-snippets"];
         setupOpts.enable_autosnippets = true;
       };
 
@@ -184,15 +187,15 @@
             timeout_ms = 500;
           };
           formatters_by_ft = {
-            go = [ "gofumpt" ];
-            hcl = [ "terraform_fmt" ];
-            nix = [ "alejandra" ];
-            python = [ "ruff_format" ];
-            rust = [ "rustfmt" ];
-            sql = [ "pg_format" ];
-            terraform = [ "terraform_fmt" ];
-            tfvars = [ "terraform_fmt" ];
-            yaml = [ "prettier" ];
+            go = ["gofumpt"];
+            hcl = ["terraform_fmt"];
+            nix = ["alejandra"];
+            python = ["ruff_format"];
+            rust = ["rustfmt"];
+            sql = ["pg_format"];
+            terraform = ["terraform_fmt"];
+            tfvars = ["terraform_fmt"];
+            yaml = ["prettier"];
           };
         };
       };
@@ -200,22 +203,14 @@
       vim.languages.python = {
         enable = true;
         lsp.enable = true;
-        lsp.servers = [ "basedpyright" ];
+        lsp.servers = ["basedpyright"];
         format.enable = false;
       };
 
       vim.languages.nix = {
         enable = true;
         lsp.enable = true;
-        lsp.servers = [ "nixd" ];
-        format.enable = false;
-        extraDiagnostics.enable = true;
-      };
-
-      vim.languages.sql = {
-        enable = true;
-        dialect = "postgres";
-        lsp.enable = true;
+        lsp.servers = ["nixd"];
         format.enable = false;
         extraDiagnostics.enable = true;
       };
@@ -251,7 +246,7 @@
           dashboard = {
             enabled = true;
             sections = [
-              { section = "header"; }
+              {section = "header";}
               {
                 section = "keys";
                 gap = 1;
@@ -268,3 +263,4 @@
     };
   };
 }
+

@@ -5,6 +5,7 @@
 }: {
   home.packages = with pkgs.unstable; [
     # utils
+    devenv
     llmfit
     dbeaver-bin
     obsidian
