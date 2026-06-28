@@ -12,6 +12,7 @@ in {
   programs.fish = {
     enable = true;
     package = pkgs.unstable.fish;
+    generateCompletions = false;
     interactiveShellInit =
       ''
         eval ssh-agent
