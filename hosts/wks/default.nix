@@ -7,7 +7,7 @@
   llamaCppMaster = (pkgs.unstable.llama-cpp.override {cudaSupport = true;}).overrideAttrs (old: {
     src = llama-cpp-src;
     version = "9600";
-    npmDepsHash = "sha256-pjdbI6NcZRlJVd62xhgbLhWrwFYwgsIwjORqvo1+VD8=";
+    npmDepsHash = "sha256-X1DZgmhS/zHTqDT5zq0kywwntthcJ9vRXeqyO3zz6UU=";
   });
 in {
   imports = [
