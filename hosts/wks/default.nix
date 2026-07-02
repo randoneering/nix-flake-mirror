@@ -59,7 +59,7 @@ in {
   services.llama-cpp = {
     enable = true;
     host = "10.10.1.232";
-    activeModel = "qwen3.5-9b";
+    activeModel = "gemma-4-12b";
     jinja = true;
     threads = 16;
     package = llamaCppMaster;
@@ -68,6 +68,11 @@ in {
         alias = "google/gemma-4-e4b";
         modelPath = "/srv/models/gemma-4-E4B-it-UD-Q4_K_XL.gguf";
         contextSize = 128000;
+      };
+      "gemma-4-12b" = {
+        alias = "google/gemma-4-12b";
+        modelPath = "/srv/models/gemma-4-12b-it-UD-Q4_K_XL.gguf";
+        contextSize = 256000;
       };
       "qwen2.5-coder-7b" = {
         alias = "qwen2.5-coder-7b";

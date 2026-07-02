@@ -54,6 +54,19 @@
         };
         models = [
           {
+            id = "gemma-4-12b";
+            name = "Gemma 4 12B (llama.cpp remote)";
+            contextWindow = 256000;
+            maxTokens = 16384;
+            input = ["text"];
+            cost = {
+              input = 0;
+              output = 0;
+              cacheRead = 0;
+              cacheWrite = 0;
+            };
+          }
+          {
             id = "qwen3.5-9b";
             name = "Qwen 3.5 9B (llama.cpp remote)";
             contextWindow = 131072;

@@ -90,7 +90,7 @@ in {
     package = wrappedOpencodePackage;
     settings = toOpencodeEnvSyntax {
       autoupdate = true;
-      model = "llama.cpp/qwen3.5-9b";
+      model = "llama.cpp/gemma-4-12b";
       mcp = sharedMcpServers;
       provider.llama-cpp = {
         api = "openai";
@@ -99,6 +99,7 @@ in {
         };
         models = {
           "gemma-4-e4b".id = "google/gemma-4-e4b";
+          "gemma-4-12b".id = "google/gemma-4-12b";
           "qwen3.5-9b".id = "qwen3.5-9b";
           "qwen2.5-coder-7b".id = "qwen2.5-coder-7b";
           "qwen2.5-coder-7b-awq".id = "qwen2.5-coder-7b-awq";
